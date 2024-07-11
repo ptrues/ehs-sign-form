@@ -1,156 +1,167 @@
-EHS Sign Form Application
-Overview
+
+# EHS Sign Form Application
+
+## Overview
+
 The EHS Sign Form application is a web-based tool for generating laboratory hazard information signs. Users can fill out a form to input contact information, select laboratory hazards, and generate a PDF sign in either horizontal or vertical orientation.
 
-Features
-Input and manage contact information for primary, alternate, and principal investigator contacts.
-Select laboratory hazards from a predefined list.
-Generate a PDF of the sign in horizontal or vertical orientation.
-Automatically adjust text formatting and handle form validation.
-Dependencies
+## Features
+
+- Input and manage contact information for primary, alternate, and principal investigator contacts.
+- Select laboratory hazards from a predefined list.
+- Generate a PDF of the sign in horizontal or vertical orientation.
+- Automatically adjust text formatting and handle form validation.
+
+## Dependencies
+
 The application relies on several Python packages and external libraries to function correctly:
 
-Flask
-WeasyPrint
-datetime
+- Flask
+- WeasyPrint
+- datetime
+
 Additionally, for WeasyPrint to function correctly, you must have the GTK and related libraries installed on your system.
 
-Installation
-Prerequisites
-Python 3.8 or higher
-Pip (Python package installer)
-Steps
-Clone the Repository
+## Installation
 
-Bash:
+### Prerequisites
 
-bash
-Copy code
-git clone https://github.com/your-username/ehs-sign-form.git
-cd ehs-sign-form
-PowerShell:
+- Python 3.8 or higher
+- Pip (Python package installer)
 
-powershell
-Copy code
-git clone https://github.com/your-username/ehs-sign-form.git
-cd ehs-sign-form
-Set Up Virtual Environment
+### Steps
 
-Bash:
+1. **Clone the Repository**
 
-bash
-Copy code
-python -m venv venv
-PowerShell:
+   **Bash:**
+   ```bash
+   git clone https://github.com/your-username/ehs-sign-form.git
+   cd ehs-sign-form
+   ```
 
-powershell
-Copy code
-python -m venv venv
-Activate the Virtual Environment
+   **PowerShell:**
+   ```powershell
+   git clone https://github.com/your-username/ehs-sign-form.git
+   cd ehs-sign-form
+   ```
 
-On Windows:
+2. **Set Up Virtual Environment**
 
-Bash:
+   **Bash:**
+   ```bash
+   python -m venv venv
+   ```
 
-bash
-Copy code
-source venv/Scripts/activate
-PowerShell:
+   **PowerShell:**
+   ```powershell
+   python -m venv venv
+   ```
 
-powershell
-Copy code
-.\venv\Scripts\activate
-On macOS/Linux:
+3. **Activate the Virtual Environment**
 
-Bash:
+   - On Windows:
 
-bash
-Copy code
-source venv/bin/activate
-Install Python Dependencies
+     **Bash:**
+     ```bash
+     source venv/Scripts/activate
+     ```
 
-Bash:
+     **PowerShell:**
+     ```powershell
+     .env\Scriptsctivate
+     ```
 
-bash
-Copy code
-pip install -r requirements.txt
-PowerShell:
+   - On macOS/Linux:
 
-powershell
-Copy code
-pip install -r requirements.txt
-Install GTK and Related Libraries
+     **Bash:**
+     ```bash
+     source venv/bin/activate
+     ```
 
-For Windows users, you can use MSYS2 to install the necessary libraries:
+4. **Install Python Dependencies**
 
-Download and install MSYS2 from msys2.org.
+   **Bash:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Open the MSYS2 MinGW 64-bit terminal and run the following commands:
+   **PowerShell:**
+   ```powershell
+   pip install -r requirements.txt
+   ```
 
-Bash:
+5. **Install GTK and Related Libraries**
 
-bash
-Copy code
-pacman -Syu
-pacman -S mingw-w64-x86_64-gtk3 mingw-w64-x86_64-cairo mingw-w64-x86_64-gdk-pixbuf2 mingw-w64-x86_64-pango
-PowerShell (within MSYS2 MinGW 64-bit terminal):
+   For Windows users, you can use MSYS2 to install the necessary libraries:
 
-powershell
-Copy code
-pacman -Syu
-pacman -S mingw-w64-x86_64-gtk3 mingw-w64-x86_64-cairo mingw-w64-x86_64-gdk-pixbuf2 mingw-w64-x86_64-pango
-Ensure MSYS2 paths are included in your system's PATH environment variable:
+   - Download and install MSYS2 from [msys2.org](https://www.msys2.org/).
+   - Open the MSYS2 MinGW 64-bit terminal and run the following commands:
 
-Bash:
+     **Bash:**
+     ```bash
+     pacman -Syu
+     pacman -S mingw-w64-x86_64-gtk3 mingw-w64-x86_64-cairo mingw-w64-x86_64-gdk-pixbuf2 mingw-w64-x86_64-pango
+     ```
 
-bash
-Copy code
-export PATH=/c/msys64/mingw64/bin:$PATH
-PowerShell:
+     **PowerShell (within MSYS2 MinGW 64-bit terminal):**
+     ```powershell
+     pacman -Syu
+     pacman -S mingw-w64-x86_64-gtk3 mingw-w64-x86_64-cairo mingw-w64-x86_64-gdk-pixbuf2 mingw-w64-x86_64-pango
+     ```
 
-powershell
-Copy code
-set PATH=C:\msys64\mingw64\bin;%PATH%
-Usage
-Run the Application
+   - Ensure MSYS2 paths are included in your system's PATH environment variable:
 
-Bash:
+     **Bash:**
+     ```bash
+     export PATH=/c/msys64/mingw64/bin:$PATH
+     ```
 
-bash
-Copy code
-flask run
-PowerShell:
+     **PowerShell:**
+     ```powershell
+     set PATH=C:\msys64\mingw64\bin;%PATH%
+     ```
 
-powershell
-Copy code
-flask run
-Alternatively, you can run the application using the python command:
+## Usage
 
-Bash:
+1. **Run the Application**
 
-bash
-Copy code
-python signapp.py
-PowerShell:
+   **Bash:**
+   ```bash
+   flask run
+   ```
 
-powershell
-Copy code
-python signapp.py
-Access the Application
+   **PowerShell:**
+   ```powershell
+   flask run
+   ```
 
-Open your web browser and navigate to http://127.0.0.1:5000.
+   Alternatively, you can run the application using the `python` command:
 
-Fill Out the Form
+   **Bash:**
+   ```bash
+   python signapp.py
+   ```
 
-Enter the required information in the form fields. Select the hazards present in your laboratory. Choose the desired orientation for the PDF sign (horizontal or vertical).
+   **PowerShell:**
+   ```powershell
+   python signapp.py
+   ```
 
-Generate the PDF
+2. **Access the Application**
 
-Click the submit button. The application will process the form data and generate a PDF sign with the specified information.
+   Open your web browser and navigate to `http://127.0.0.1:5000`.
 
-Directory Structure
-scss
-Copy code
+3. **Fill Out the Form**
+
+   Enter the required information in the form fields. Select the hazards present in your laboratory. Choose the desired orientation for the PDF sign (horizontal or vertical).
+
+4. **Generate the PDF**
+
+   Click the submit button. The application will process the form data and generate a PDF sign with the specified information.
+
+## Directory Structure
+
+```
 ehs-sign-form/
 │
 ├── static/
@@ -172,12 +183,17 @@ ehs-sign-form/
 ├── app.py
 ├── requirements.txt
 └── README.md
-Requirements File
-Here’s an example requirements.txt file that lists the necessary Python packages:
+```
 
-makefile
-Copy code
+## Requirements File
+
+Here’s an example `requirements.txt` file that lists the necessary Python packages:
+
+```
 Flask==3.0.3
 WeasyPrint==62.3
-Contact Information
+```
+
+## Contact Information
+
 For questions, issues, or contributions, please contact [prtruesdell@gmail.com].
