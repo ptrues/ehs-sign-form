@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <h1>{{ title }}</h1>
+
+    <p class="custom-sign-info">
+    If your sign is shared between multiple labs, contact chemsafety at 
+        <a href="mailto:chemsafety@ehs.unc.edu">chemsafety@ehs.unc.edu</a> for a custom sign.
+    </p>
+
+    <form name="form1" method="POST" action="/submit" onsubmit="return labSignValidate(this)">
+        <section>
+            <fieldset>
+                <legend>Principal Investigator</legend>
+                <div class="form-row">
+                    <label for="pi_first_name">First name:</label>
+                    <input type="text" id="pi_first_name" name="pi_first_name" placeholder="Enter first name" required>
+                </div>
+                <div class="form-row">
+                    <label for="pi_last_name">Last name:</label>
+                    <input type="text" id="pi_last_name" name="pi_last_name" placeholder="Enter last name" required>
+                </div>
+                <div class="form-row">
+                    <label for="phone_pi">After-hours phone:</label>
+                    <input type="tel" id="phone_pi" name="phone_pi" placeholder="(123) 123-1234" required oninput="formatPhoneNumber(this)">
+                </div>
+                <div class="form-row">
+                    <label for="phone_emer">Secondary phone:</label>
+                    <input type="tel" id="phone_emer" name="phone_emer" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)">
+                </div>
+            </fieldset>
+        </section>
+        
+        <section>
+            <fieldset>
+                <legend>Primary Contact</legend>
+                <div class="form-row">
+                    <label for="primary_first_name">First name:</label>
+                    <input type="text" id="primary_first_name" name="primary_first_name" placeholder="Enter first name" required>
+                </div>
+                <div class="form-row">
+                    <label for="primary_last_name">Last name:</label>
+                    <input type="text" id="primary_last_name" name="primary_last_name" placeholder="Enter last name" required>
+                </div>
+                <div class="form-row">
+                    <label for="phone_primary">After-hours phone:</label>
+                    <input type="tel" id="phone_primary" name="phone_primary" placeholder="(123) 123-1234" required oninput="formatPhoneNumber(this)">
+                </div>
+                <div class="form-row">
+                    <label for="phone_secondary">Secondary phone:</label>
+                    <input type="tel" id="phone_secondary" name="phone_secondary" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)">
+                </div>
+            </fieldset>
+        </section>
+        
+        <section>
+            <fieldset>
+                <legend>Alternate Contact (optional)</legend>
+                <div class="form-row">
+                    <label for="alternate_first_name">First name:</label>
+                    <input type="text" id="alternate_first_name" name="alternate_first_name" placeholder="Enter first name">
+                </div>
+                <div class="form-row">
+                    <label for="alternate_last_name">Last name:</label>
+                    <input type="text" id="alternate_last_name" name="alternate_last_name" placeholder="Enter last name">
+                </div>
+                <div class="form-row">
+                    <label for="phone_alternate">After-hours phone:</label>
+                    <input type="tel" id="phone_alternate" name="phone_alternate" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)">
+                </div>
+                <div class="form-row">
+                    <label for="phone_secondary_alternate">Secondary phone:</label>
+                    <input type="tel" id="phone_secondary_alternate" name="phone_secondary_alternate" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)">
+                </div>
+            </fieldset>
+        </section>
+        
+
+        <section>
+            <fieldset>
+                <legend>Laboratory Information</legend>
+                <div class="form-row">
+                    <label for="department">Department:</label>
+                    <input type="text" id="department" name="department" placeholder="Enter department">
+                </div>
+                <div class="form-row">
+                    <label for="building">Building:</label>
+                    <input type="text" id="building" name="building" placeholder="Enter building">
+                </div>
+                <div class="form-row">
+                    <label for="room_number">Room Number:</label>
+                    <input type="text" id="room_number" name="room_number" placeholder="Enter room number">
+                </div>
+            </fieldset>
+        </section>
+
+        <section>
+            <fieldset>
+                <legend>Laboratory Hazards</legend>
+                <p>Indicate the hazards present in your lab.</p>
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <h3>BSL-2</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="biohazard" name="biohazard" value="biohazard">
+                            <label for="biohazard"><img src="{{ url_for('static', filename='04BSL2.png') }}" alt="BSL-2"></label>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Cancer Hazard</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="cancer" name="cancer" value="cancer">
+                            <label for="cancer"><img src="{{ url_for('static', filename='05cancer.png') }}" alt="Cancer Hazard"></label>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Corrosive Materials</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="corrosive" name="corrosive" value="corrosive">
+                            <label for="corrosive"><img src="{{ url_for('static', filename='08corrosive.png') }}" alt="Corrosive Materials"></label>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Flammable Gas</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="flammableg" name="flammableg" value="flammableg">
+                            <label for="flammableg"><img src="{{ url_for('static', filename='13flammable_gas.png') }}" alt="Flammable Gas"></label>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Flammable Materials</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="flammablem" name="flammablem" value="flammablem">
+                            <label for="flammablem"><img src="{{ url_for('static', filename='10flammable_materials.png') }}" alt="Flammable Materials"></label>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Highly Toxic</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="toxic" name="toxic" value="toxic">
+                            <label for="toxic"><img src="{{ url_for('static', filename='06toxic.png') }}" alt="Highly Toxic"></label>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Laser Radiation</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="laser" name="laser" value="laser">
+                            <label for="laser"><img src="{{ url_for('static', filename='03laser.png') }}" alt="Laser Radiation"></label>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Non-Flammable Gas</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="nflammableg" name="nflammableg" value="nflammableg">
+                            <label for="nflammableg"><img src="{{ url_for('static', filename='14non_flammable_gas.png') }}" alt="Non-Flammable Gas"></label>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Oxidizing Materials</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="oxidizing" name="oxidizing" value="oxidizing">
+                            <label for="oxidizing"><img src="{{ url_for('static', filename='11oxidizing.png') }}" alt="Oxidizing Materials"></label>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Radioactive Materials</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="radioactive" name="radioactive" value="radioactive">
+                            <label for="radioactive"><img src="{{ url_for('static', filename='01radioactive.png') }}" alt="Radioactive Materials"></label>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Reproductive Toxin</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="reproductive" name="reproductive" value="reproductive">
+                            <label for="reproductive"><img src="{{ url_for('static', filename='07reproductive_toxin.png') }}" alt="Reproductive Toxin"></label>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Ultraviolet Light</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="ultraviolet" name="ultraviolet" value="ultraviolet">
+                            <label for="ultraviolet"><img src="{{ url_for('static', filename='09ultraviolet.png') }}" alt="Ultraviolet Light"></label>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Water Reactive</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="water" name="water" value="water">
+                            <label for="water"><img src="{{ url_for('static', filename='12water.png') }}" alt="Water Reactive"></label>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <h3>X-Ray Equipment</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="xray" name="xray" value="xray">
+                            <label for="xray"><img src="{{ url_for('static', filename='02xray.png') }}" alt="X-Ray Equipment"></label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </section>
+        
+
+        <section>
+            <fieldset>
+                <legend>Multiple Signs</legend>
+
+                <p>Does your lab have sign holders in place?</p>
+        
+                <div class="multi-sign-grid-container">
+                    <div class="multi-sign-grid-item">
+                        <input type="radio" id="signs_yes" name="signs" value="yes" onchange="toggleSignFields()">
+                        <label for="signs_yes">Yes</label>
+                    </div>
+                    <div class="multi-sign-grid-item">
+                        <input type="radio" id="signs_no" name="signs" value="no" onchange="toggleSignFields()">
+                        <label for="signs_no">No</label>
+                    </div>
+                </div>
+                
+                <div id="signFieldsYes" class="multi-sign-follow-up" style="display: none;">
+                    <div class="multi-sign-grid-item">
+                        <label for="num_signs">How many signs do you need?</label>
+                        <input type="number" id="num_signs" name="num_signs">
+                    </div>
+                    <div class="multi-sign-grid-item">
+                        <label for="orientation">In what orientation are your sign holders?</label>
+                        <div class="orientation-options">
+                            <input type="radio" id="horizontal" name="orientation" value="horizontal">
+                            <label for="horizontal">Horizontal (▭)</label>
+                        </div>
+                        <div class="orientation-options">
+                            <input type="radio" id="vertical" name="orientation" value="vertical">
+                            <label for="vertical">Vertical (▯)</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="signFieldsNo" class="multi-sign-follow-up" style="display: none;">
+                    <div class="multi-sign-grid-item">
+                        <label for="num_entrances">How many entrances does your laboratory have?</label>
+                        <input type="number" id="num_entrances" name="num_entrances">
+                    </div>
+                </div>
+                
+        
+            </fieldset>
+        </section>
+        
+        
+        <input type="submit" value="Submit Sign Form" class="submit-button">
+    </form>
+   
+
+        
+
+    <script>
+        function formatPhoneNumber(input) {
+            // Remove all non-digit characters from the input value
+            let phoneNumber = input.value.replace(/\D/g, '');
+            
+            // Check the length and format accordingly
+            if (phoneNumber.length <= 3) {
+                input.value = `(${phoneNumber}`;
+            } else if (phoneNumber.length <= 6) {
+                input.value = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+            } else {
+                input.value = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+            }
+        }
+        </script>
+
+
+        <script>
+            function capitalizeFirstLetter(input) {
+                input.value = input.value.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+            }
+
+            document.getElementById('primary_first_name').addEventListener('input', function() {
+                capitalizeFirstLetter(this);
+            });
+
+            document.getElementById('primary_last_name').addEventListener('input', function() {
+                capitalizeFirstLetter(this);
+            });
+
+
+
+            
+        </script>
+
+
+    
+        <script>
+            // Function to toggle display of additional sign fields based on radio button state
+            function toggleSignFields() {
+                var yesRadio = document.getElementById('signs_yes');
+                var noRadio = document.getElementById('signs_no');
+                var signFieldsYes = document.getElementById('signFieldsYes');
+                var signFieldsNo = document.getElementById('signFieldsNo');
+                
+                if (yesRadio.checked) {
+                    signFieldsYes.style.display = 'grid';
+                    signFieldsNo.style.display = 'none';
+                } else if (noRadio.checked) {
+                    signFieldsYes.style.display = 'none';
+                    signFieldsNo.style.display = 'grid';
+                } else {
+                    signFieldsYes.style.display = 'none';
+                    signFieldsNo.style.display = 'none';
+                }
+            }
+    
+            // Ensure the function is called when the page loads to handle pre-checked states
+            document.addEventListener('DOMContentLoaded', function () {
+                toggleSignFields();
+            });
+        </script>
+    
+</body>
+</html>

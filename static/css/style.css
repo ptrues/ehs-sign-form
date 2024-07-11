@@ -1,0 +1,192 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    color: #00274C; /* Navy blue */
+    background-color: #F5F5F5; /* Light gray */
+}
+
+h1 {
+    color: #00274C; /* Navy blue */
+    text-align: center;
+}
+
+h3 {
+    font-size: medium;
+}
+
+.custom-sign-info {
+    font-size: 18px; /* Adjust the font size as needed */
+    color: #333; /* Adjust the text color as needed */
+    margin-top: 10px; /* Adjust the value to add buffer above the paragraph */
+    margin-bottom: 30px; /* Adjust the value to add buffer below the paragraph */
+}
+
+.custom-sign-info a {
+    color: #0066cc; /* Adjust the link color as needed */
+    text-decoration: none; /* Remove underline from the link */
+}
+
+.custom-sign-info a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+fieldset {
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    background-color: #E5E5E5;
+    margin-bottom: 30px;
+}
+
+legend {
+    font-weight: bold;
+    color: #00274C; /* Navy blue */
+    font-size: larger;
+    position: relative;
+    top: -10px; /* Adjust this value to shift the legend up or down */
+    margin-top: 10px;
+}
+
+
+label {
+    display: inline-block;
+    width: 150px;
+}
+
+.form-row {
+    margin-bottom: 20px; 
+}
+
+.department-input {
+    width: 40%;
+}
+
+.building-input {
+    width: 40%;
+}
+
+.room_number-input{
+    width: 40%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;  /* Increased gap for better spacing between items */
+    text-align: center;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;  /* Add some space between each grid item */
+}
+
+.row-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.row-layout img {
+    width: 150px;  /* Adjust the size as needed */
+    height: 150px; /* Adjust the size as needed */
+    border: 1px solid #ccc; /* Placeholder border for now */
+    margin-left: 10px;  /* Add some space between the checkbox and the image */
+}
+
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .row-layout img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 900px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .row-layout img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .row-layout img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+
+section {
+    margin-bottom: 20px;  /*Adds spacing between each form section */
+}
+
+.multi-sign-grid-container {
+    display: flex; /* Use flexbox to keep the radio buttons inline */
+    gap: 20px;
+    margin-bottom: 20px; /* Add spacing between the grid container and the next section */
+}
+
+.multi-sign-grid-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.multi-sign-follow-up {
+    display: flex;
+    flex-direction: column; /* Stack follow-up questions vertically */
+    gap: 15px; /* Add space between each follow-up question */
+    margin-bottom: 25px;
+}
+
+.multi-sign-follow-up .multi-sign-grid-item {
+    display: flex;
+    flex-direction: column; /* Ensure label and input are stacked vertically */
+    margin-bottom: 15px; /* Add space below each grid item */
+    align-items: flex-start; /* Align items to the left */
+}
+
+.multi-sign-follow-up .multi-sign-grid-item label {
+    margin-bottom: 5px; /* Add space below each label */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.multi-sign-follow-up .multi-sign-grid-item input[type="number"] {
+    margin-bottom: 10px; /* Add space below number input */
+}
+
+/* Specific styles for the radio buttons and their labels */
+.multi-sign-follow-up .orientation-options {
+    display: flex;
+    align-items: center; /* Align radio buttons and labels in the center vertically */
+    gap: 10px; /* Add space between radio buttons and labels */
+    margin-bottom: 10px; /* Add space below the options */
+}
+
+.submit-button {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    background-color: #00274C; /* Navy blue */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.form-row {
+    margin-bottom: 10px;
+}
