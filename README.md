@@ -1,3 +1,4 @@
+
 # EHS Sign Form Application
 
 ## Overview
@@ -32,14 +33,27 @@ Additionally, for WeasyPrint to function correctly, you must have the GTK and re
 
 1. **Clone the Repository**
 
-   ```sh
+   **Bash:**
+   ```bash
+   git clone https://github.com/your-username/ehs-sign-form.git
+   cd ehs-sign-form
+   ```
+
+   **PowerShell:**
+   ```powershell
    git clone https://github.com/your-username/ehs-sign-form.git
    cd ehs-sign-form
    ```
 
 2. **Set Up Virtual Environment**
 
-   ```sh
+   **Bash:**
+   ```bash
+   python -m venv venv
+   ```
+
+   **PowerShell:**
+   ```powershell
    python -m venv venv
    ```
 
@@ -47,19 +61,32 @@ Additionally, for WeasyPrint to function correctly, you must have the GTK and re
 
    - On Windows:
 
-     ```sh
-     .\venv\Scripts\activate
+     **Bash:**
+     ```bash
+     source venv/Scripts/activate
+     ```
+
+     **PowerShell:**
+     ```powershell
+     .env\Scriptsctivate
      ```
 
    - On macOS/Linux:
 
-     ```sh
+     **Bash:**
+     ```bash
      source venv/bin/activate
      ```
 
 4. **Install Python Dependencies**
 
-   ```sh
+   **Bash:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+   **PowerShell:**
+   ```powershell
    pip install -r requirements.txt
    ```
 
@@ -70,14 +97,27 @@ Additionally, for WeasyPrint to function correctly, you must have the GTK and re
    - Download and install MSYS2 from [msys2.org](https://www.msys2.org/).
    - Open the MSYS2 MinGW 64-bit terminal and run the following commands:
 
-     ```sh
+     **Bash:**
+     ```bash
+     pacman -Syu
+     pacman -S mingw-w64-x86_64-gtk3 mingw-w64-x86_64-cairo mingw-w64-x86_64-gdk-pixbuf2 mingw-w64-x86_64-pango
+     ```
+
+     **PowerShell (within MSYS2 MinGW 64-bit terminal):**
+     ```powershell
      pacman -Syu
      pacman -S mingw-w64-x86_64-gtk3 mingw-w64-x86_64-cairo mingw-w64-x86_64-gdk-pixbuf2 mingw-w64-x86_64-pango
      ```
 
    - Ensure MSYS2 paths are included in your system's PATH environment variable:
 
-     ```sh
+     **Bash:**
+     ```bash
+     export PATH=/c/msys64/mingw64/bin:$PATH
+     ```
+
+     **PowerShell:**
+     ```powershell
      set PATH=C:\msys64\mingw64\bin;%PATH%
      ```
 
@@ -85,13 +125,25 @@ Additionally, for WeasyPrint to function correctly, you must have the GTK and re
 
 1. **Run the Application**
 
-   ```sh
+   **Bash:**
+   ```bash
+   flask run
+   ```
+
+   **PowerShell:**
+   ```powershell
    flask run
    ```
 
    Alternatively, you can run the application using the `python` command:
 
-   ```sh
+   **Bash:**
+   ```bash
+   python signapp.py
+   ```
+
+   **PowerShell:**
+   ```powershell
    python signapp.py
    ```
 
