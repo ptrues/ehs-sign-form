@@ -21,7 +21,7 @@ body {
     color: #B50000;
     text-align: center;
     font-family: 'Open Sans';
-    font-size: 46px;
+    font-size: 48px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -89,6 +89,7 @@ body {
     font-size: 36px;
     font-weight: 700;
     margin-right: 50px; /* Add some space between the header and the table */
+    margin-bottom: -10px;
     white-space: pre-wrap; /* Preserve whitespace and line breaks */
     position: absolute;
     bottom: 1.0in;
@@ -109,13 +110,13 @@ body {
 .contact-column{
     position: absolute;
     left: 10px;
-    padding: 10px;
+    padding: 5px;
 }
 
 .contact-phone-column {
     position: absolute;
     right: 10px;
-    padding: 10px;
+    padding: 5px;
 }
 
 
@@ -143,7 +144,7 @@ body {
     color: #FFF;
     text-align: center;
     font-family: 'Open Sans';
-    font-size: 15px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
