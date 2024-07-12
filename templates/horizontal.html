@@ -15,7 +15,7 @@
         <div class="hazard-icons">
             <!-- Placeholder for hazard icons -->
             {% for icon in hazard_icons %}
-            <div><img src="{{ url_for('static', filename='images/' ~ icon) }}" alt="Hazard Icon"></div>
+            <div><img src="{{ icon }}" alt="Hazard Icon"></div>
             {% endfor %}
         </div>
 
@@ -23,25 +23,27 @@
             <p>{{ room }} {{ building }}</p>
         </div>
 
-        <div class="contact-info">
-            <div class="contact-header">
-                EMERGENCY<br>CONTACT<br>INFORMATION
+        
+        <div class="contact-header">
+            EMERGENCY<br>CONTACT<br>INFORMATION
+        </div>
+
+
+        <div class="contact-table">
+            <div class="contact-column">
+                <div>Primary Contact: <span>{{ primary_contact }}</span></div>
+                <div>Alternate Contact: <span>{{ alternate_contact }}</span></div>
+                <div>Principal Investigator: <span>{{ pi_contact }}</span></div>
+                <div>Department: <span>{{ department }}</span></div>
             </div>
-            <div class="contact-table">
-                <div class="contact-column">
-                    <div>Primary Contact: <span>{{ primary_contact }}</span></div>
-                    <div>Alternate Contact: <span>{{ alternate_contact }}</span></div>
-                    <div>Principal Investigator: <span>{{ pi_contact }}</span></div>
-                    <div>Department: <span>{{ department }}</span></div>
-                </div>
-                <div class="contact-phone-column">
-                    <div>Phone: <span>{{ primary_phone }}</span></div>
-                    <div>Phone: <span>{{ alternate_phone }}</span></div>
-                    <div>Phone: <span>{{ pi_phone }}</span></div>
-                    <div>Date Updated: <span>{{ date_updated }}</span></div>
-                </div>
+            <div class="contact-phone-column">
+                <div>Phone: <span>{{ primary_phone }}</span></div>
+                <div>Phone: <span>{{ alternate_phone }}</span></div>
+                <div>Phone: <span>{{ pi_phone }}</span></div>
+                <div>Date Updated: <span>{{ date_updated }}</span></div>
             </div>
         </div>
+        
 
         <div class="warning">
             EYE PROTECTION & LAB COAT REQUIRED AT ALL TIMES. EATING & DRINKING ARE PROHIBITED IN LAB AREAS.

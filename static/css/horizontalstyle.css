@@ -4,7 +4,6 @@
 }
 
 body {
-    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     width: 11in;
     height: 8.5in;
     margin: 0;
@@ -21,8 +20,8 @@ body {
 .header {
     color: #B50000;
     text-align: center;
-    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: 54px;
+    font-family: 'Open Sans';
+    font-size: 46px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -33,18 +32,18 @@ body {
     justify-content: center;
     flex-shrink: 0;
     text-wrap: nowrap;
-    margin-top: 10px;
+    margin-top: 2%;
 }
 
 .hazard-icons {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 1%;
     justify-content: space-between;
     width: 10in;
     height: 4in;
     position: absolute;
-    top: 1in;
+    top: 0.75in;
     left: 0.5in;
 }
 
@@ -65,7 +64,7 @@ body {
 
 .room-building {
     color: #000;
-    font-family: 'Open Sans Condensed', 'Helvetica Neue', Arial, sans-serif !important; 
+    font-family: 'Open Sans Condensed';
     font-size: 67px;
     font-style: normal;
     font-weight: 700;
@@ -75,52 +74,50 @@ body {
     flex-shrink: 0;
     text-align: center;
     position: absolute;
-    top: 400px;
+    top: 4in;
     left: 50%;
     transform: translateX(-50%);
 }
 
 
-.contact-info {
-    position: absolute;
-    top: 560px; 
-    left: 41%; 
-    transform: translateX(-50%);
-    width: 100%; /* Set width to 100% to allow proper alignment within the container */
-    display: flex; /* Use flexbox to position children elements */
-    justify-content: center; /* Center align the flex items */
-    align-items: flex-start; /* Align items to the start of the container */
-}
+
 
 .contact-header {
     color: #B50000;
     text-align: right; /* Align text to the right */
-    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
+    font-family: 'Open Sans';
     font-size: 36px;
     font-weight: 700;
-    flex: 0 0 50%; /* Set flex basis to 50% of the container width */
-    margin-right: 20px; /* Add some space between the header and the table */
+    margin-right: 50px; /* Add some space between the header and the table */
     white-space: pre-wrap; /* Preserve whitespace and line breaks */
-    margin-top: -50px;
+    position: absolute;
+    bottom: 1.0in;
+    right: 6.5in;
 }
 
 
-.contact-table {
-    display: grid; /* Use grid layout for the contact table */
-    grid-template-columns: repeat(2, 3.8in); /* Create two columns with auto width */
-    grid-gap: 10px; /* Add some space between grid items */
+.contact-table {   
     border: 1px solid #56A0D3;
-    padding: 10px;
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width */
-    flex: 1; /* Allow the table to take the remaining width */
-    width: auto;
-    margin-right: -70px;
+    width: 635px;
+    height: 125px;
+    font-family: 'Open Sans';
+    position: absolute;
+    bottom: 1.5in;
+    right: 0.25in;
 }
 
-.contact-column,
-.contact-phone-column {
-    display: contents; /* Use display: contents to use grid layout for individual items */
+.contact-column{
+    position: absolute;
+    left: 10px;
+    padding: 10px;
 }
+
+.contact-phone-column {
+    position: absolute;
+    right: 10px;
+    padding: 10px;
+}
+
 
 
 .contact-column div,
@@ -137,33 +134,33 @@ body {
 
 
 .warning {
-    width: 360px;
-    height: 77px;
+    width: 335px;
+    height: 75px;
     flex-shrink: 0;
     background-color: #56A0D3;
     border: 1px solid #56A0D3;
     padding: 0px 10px;
     color: #FFF;
     text-align: center;
-    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: 17px;
+    font-family: 'Open Sans';
+    font-size: 15px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
     letter-spacing: 0.058px;
     position: absolute; 
-    bottom: 25px; 
-    left: 25px; 
+    bottom: .5in; 
+    left: .25in; 
 }
 
 .emergency-box {
     background-color: #D0DFF1;
     border: 1px solid #0362BA;
-    width: 600px;
-    height: 77px;
+    width: 635px;
+    height: 75px;
     position: absolute; 
-    bottom: 25px; 
-    right: 25px; 
+    bottom: .5in; 
+    right: .25in; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
@@ -171,13 +168,13 @@ body {
 
 .emergency-text {
     color: #B50000;
-    font-family: 'Open Sans Condensed', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: 48px;
+    font-family: 'Open Sans Condensed';
+    font-size: 36px;
     font-weight: 900;
     line-height: normal;
     letter-spacing: 0.526px;
     text-align: left;
     text-wrap: nowrap;
-    padding: 0 90px;
+    padding: 0 .5in;
 }
 

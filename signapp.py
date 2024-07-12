@@ -62,7 +62,7 @@ def submit():
 
     # Ensure there are 10 icons, filling with EMPTY.png if necessary
     while len(selected_hazards) < 10:
-        selected_hazards.append('00EMPTY.png')
+        selected_hazards.append(f'{request.host_url}static/images/00EMPTY.png')
 
     # Prepare data for the template
     context = {
@@ -76,7 +76,7 @@ def submit():
         'pi_phone': phone_pi,
         'department': department,
         'date_updated': datetime.today().strftime('%m/%d/%Y'),
-        'hazard_icons': [url_for('static', filename=f'images/{icon}', _external=True) for icon in selected_hazards]
+        'hazard_icons': selected_hazards  # Use the full URL directly
     }
 
     # Determine which template to render based on the orientation, default to horizontal
