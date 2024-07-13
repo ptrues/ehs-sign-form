@@ -137,14 +137,13 @@ section {
 
 .multi-sign-grid-container {
     display: flex; /* Use flexbox to keep the radio buttons inline */
-    gap: 20px;
-    margin-bottom: 20px; /* Add spacing between the grid container and the next section */
 }
 
 .multi-sign-grid-item {
     display: flex;
     align-items: center;
     margin-bottom: 25px;
+    margin-top: 25px;
 }
 
 .multi-sign-follow-up {
@@ -167,7 +166,7 @@ section {
 }
 
 .multi-sign-follow-up .multi-sign-grid-item input[type="number"] {
-    margin-bottom: 10px; /* Add space below number input */
+    margin-top: 10px; /* Add space above number input */
 }
 
 /* Specific styles for the radio buttons and their labels */

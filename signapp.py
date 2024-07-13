@@ -15,7 +15,7 @@ def submit():
     pi_first_name = request.form['pi_first_name']
     pi_last_name = request.form['pi_last_name']
     phone_pi = request.form['phone_pi']
-    phone_emer = request.form.get('phone_emer')
+    phone_pi_secondary = request.form.get('phone_pi_secondary')
 
     # Extract form data for Primary Contact
     primary_first_name = request.form['primary_first_name']
@@ -24,10 +24,28 @@ def submit():
     phone_secondary = request.form.get('phone_secondary')
 
     # Extract form data for Alternate Contact
-    alternate_first_name = request.form.get('alternate_first_name')
-    alternate_last_name = request.form.get('alternate_last_name')
-    phone_alternate = request.form.get('phone_alternate')
-    phone_secondary_alternate = request.form.get('phone_secondary_alternate')
+    alternate_first_name = request.form.get('alternate_first_name', '')
+    alternate_last_name = request.form.get('alternate_last_name', '')
+    phone_alternate = request.form.get('phone_alternate', '')
+    phone_secondary_alternate = request.form.get('phone_secondary_alternate', '')
+
+    # Check if alternate contact fields are empty
+    if not alternate_first_name and not alternate_last_name and not phone_alternate and not phone_secondary_alternate:
+        # If alternate contact fields are empty, check if PI and Primary Contact fields are the same
+        if (pi_first_name == primary_first_name and
+            pi_last_name == primary_last_name and
+            phone_pi == phone_primary and
+            phone_pi_secondary == phone_secondary):
+            alternate_first_name = ''
+            alternate_last_name = ''
+            phone_alternate = ''
+            phone_secondary_alternate = ''
+    else:
+        # If alternate contact fields are not empty, use the user-provided data
+        alternate_first_name = request.form['alternate_first_name']
+        alternate_last_name = request.form['alternate_last_name']
+        phone_alternate = request.form['phone_alternate']
+        phone_secondary_alternate = request.form['phone_secondary_alternate']
 
     # Extract form data for Laboratory Information
     department = request.form['department']
@@ -52,7 +70,7 @@ def submit():
         'nflammableg': '14non_flammable_gas.png',
     }
 
-  # Create a list of selected hazard icons with proper URLs
+    # Create a list of selected hazard icons with proper URLs
     selected_hazards = [f'{request.host_url}static/images/{hazards[hazard]}' for hazard in hazards if hazard in request.form]
 
     # Print paths for debugging
@@ -63,6 +81,10 @@ def submit():
     # Ensure there are 10 icons, filling with EMPTY.png if necessary
     while len(selected_hazards) < 10:
         selected_hazards.append(f'{request.host_url}static/images/00EMPTY.png')
+
+    # Check if PI after-hours phone is the same as the primary contact after-hours phone
+    if phone_pi == phone_primary:
+        phone_pi = phone_pi_secondary
 
     # Prepare data for the template
     context = {
@@ -78,6 +100,9 @@ def submit():
         'date_updated': datetime.today().strftime('%m/%d/%Y'),
         'hazard_icons': selected_hazards  # Use the full URL directly
     }
+
+    # Print PI phone for debugging
+    print(f"phone_pi: {phone_pi}, phone_primary: {phone_primary}, phone_pi_secondary: {phone_pi_secondary}")
 
     # Determine which template to render based on the orientation, default to horizontal
     orientation = request.form.get('orientation', 'horizontal')

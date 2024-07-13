@@ -33,8 +33,8 @@
                     <input type="tel" id="phone_pi" name="phone_pi" placeholder="(123) 123-1234" required oninput="formatPhoneNumber(this)">
                 </div>
                 <div class="form-row">
-                    <label for="phone_emer">Secondary phone:</label>
-                    <input type="tel" id="phone_emer" name="phone_emer" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)">
+                    <label for="phone_pi_secondary">Secondary phone:</label>
+                    <input type="tel" id="phone_pi_secondary" name="phone_pi_secondary" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)">
                 </div>
             </fieldset>
         </section>
@@ -216,7 +216,7 @@
             <fieldset>
                 <legend>Multiple Signs</legend>
 
-                <p>Does your lab have sign holders in place?</p>
+                <p>Are there sign holders installed at each lab entrance?</p>
         
                 <div class="multi-sign-grid-container">
                     <div class="multi-sign-grid-item">
@@ -231,10 +231,6 @@
                 
                 <div id="signFieldsYes" class="multi-sign-follow-up" style="display: none;">
                     <div class="multi-sign-grid-item">
-                        <label for="num_signs">How many signs do you need?</label>
-                        <input type="number" id="num_signs" name="num_signs">
-                    </div>
-                    <div class="multi-sign-grid-item">
                         <label for="orientation">In what orientation are your sign holders?</label>
                         <div class="orientation-options">
                             <input type="radio" id="horizontal" name="orientation" value="horizontal">
@@ -243,6 +239,10 @@
                         <div class="orientation-options">
                             <input type="radio" id="vertical" name="orientation" value="vertical">
                             <label for="vertical">Vertical (▯)</label>
+                        </div>
+                        <div class="multi-sign-grid-item">
+                            <label for="num_signs">How many signs do you need?</label>
+                            <input type="number" id="num_signs" name="num_signs">
                         </div>
                     </div>
                 </div>
