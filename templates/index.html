@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
     <h1>{{ title }}</h1>
 
     <p class="custom-sign-info">
-    If your sign is shared between multiple labs, contact chemsafety at 
+        If your sign is shared between multiple labs, contact chemsafety at
         <a href="mailto:chemsafety@ehs.unc.edu">chemsafety@ehs.unc.edu</a> for a custom sign.
     </p>
 
@@ -22,82 +22,81 @@
                 <legend>Principal Investigator</legend>
                 <div class="form-row">
                     <label for="pi_first_name">First name:</label>
-                    <input type="text" id="pi_first_name" name="pi_first_name" placeholder="Enter first name" required>
+                    <input type="text" id="pi_first_name" name="pi_first_name" placeholder="Enter first name" required value="{{ request.form.pi_first_name }}">
                 </div>
                 <div class="form-row">
                     <label for="pi_last_name">Last name:</label>
-                    <input type="text" id="pi_last_name" name="pi_last_name" placeholder="Enter last name" required>
+                    <input type="text" id="pi_last_name" name="pi_last_name" placeholder="Enter last name" required value="{{ request.form.pi_last_name }}">
                 </div>
                 <div class="form-row">
                     <label for="phone_pi">After-hours phone:</label>
-                    <input type="tel" id="phone_pi" name="phone_pi" placeholder="(123) 123-1234" required oninput="formatPhoneNumber(this)">
+                    <input type="tel" id="phone_pi" name="phone_pi" placeholder="(123) 123-1234" required oninput="formatPhoneNumber(this)" value="{{ request.form.phone_pi }}">
                 </div>
                 <div class="form-row">
                     <label for="phone_pi_secondary">Secondary phone:</label>
-                    <input type="tel" id="phone_pi_secondary" name="phone_pi_secondary" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)">
+                    <input type="tel" id="phone_pi_secondary" name="phone_pi_secondary" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)" value="{{ request.form.phone_pi_secondary }}">
                 </div>
             </fieldset>
         </section>
-        
+
         <section>
             <fieldset>
                 <legend>Primary Contact</legend>
                 <div class="form-row">
                     <label for="primary_first_name">First name:</label>
-                    <input type="text" id="primary_first_name" name="primary_first_name" placeholder="Enter first name" required>
+                    <input type="text" id="primary_first_name" name="primary_first_name" placeholder="Enter first name" required value="{{ request.form.primary_first_name }}">
                 </div>
                 <div class="form-row">
                     <label for="primary_last_name">Last name:</label>
-                    <input type="text" id="primary_last_name" name="primary_last_name" placeholder="Enter last name" required>
+                    <input type="text" id="primary_last_name" name="primary_last_name" placeholder="Enter last name" required value="{{ request.form.primary_last_name }}">
                 </div>
                 <div class="form-row">
                     <label for="phone_primary">After-hours phone:</label>
-                    <input type="tel" id="phone_primary" name="phone_primary" placeholder="(123) 123-1234" required oninput="formatPhoneNumber(this)">
+                    <input type="tel" id="phone_primary" name="phone_primary" placeholder="(123) 123-1234" required oninput="formatPhoneNumber(this)" value="{{ request.form.phone_primary }}">
                 </div>
                 <div class="form-row">
                     <label for="phone_secondary">Secondary phone:</label>
-                    <input type="tel" id="phone_secondary" name="phone_secondary" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)">
+                    <input type="tel" id="phone_secondary" name="phone_secondary" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)" value="{{ request.form.phone_secondary }}">
                 </div>
             </fieldset>
         </section>
-        
+
         <section>
             <fieldset>
                 <legend>Alternate Contact (optional)</legend>
                 <div class="form-row">
                     <label for="alternate_first_name">First name:</label>
-                    <input type="text" id="alternate_first_name" name="alternate_first_name" placeholder="Enter first name">
+                    <input type="text" id="alternate_first_name" name="alternate_first_name" placeholder="Enter first name" value="{{ request.form.alternate_first_name }}">
                 </div>
                 <div class="form-row">
                     <label for="alternate_last_name">Last name:</label>
-                    <input type="text" id="alternate_last_name" name="alternate_last_name" placeholder="Enter last name">
+                    <input type="text" id="alternate_last_name" name="alternate_last_name" placeholder="Enter last name" value="{{ request.form.alternate_last_name }}">
                 </div>
                 <div class="form-row">
                     <label for="phone_alternate">After-hours phone:</label>
-                    <input type="tel" id="phone_alternate" name="phone_alternate" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)">
+                    <input type="tel" id="phone_alternate" name="phone_alternate" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)" value="{{ request.form.phone_alternate }}">
                 </div>
                 <div class="form-row">
                     <label for="phone_secondary_alternate">Secondary phone:</label>
-                    <input type="tel" id="phone_secondary_alternate" name="phone_secondary_alternate" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)">
+                    <input type="tel" id="phone_secondary_alternate" name="phone_secondary_alternate" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)" value="{{ request.form.phone_secondary_alternate }}">
                 </div>
             </fieldset>
         </section>
-        
 
         <section>
             <fieldset>
                 <legend>Laboratory Information</legend>
                 <div class="form-row">
                     <label for="department">Department:</label>
-                    <input type="text" id="department" name="department" placeholder="Enter department">
+                    <input type="text" id="department" name="department" placeholder="Enter department" value="{{ request.form.department }}">
                 </div>
                 <div class="form-row">
                     <label for="building">Building:</label>
-                    <input type="text" id="building" name="building" placeholder="Enter building">
+                    <input type="text" id="building" name="building" placeholder="Enter building" value="{{ request.form.building }}">
                 </div>
                 <div class="form-row">
                     <label for="room_number">Room Number:</label>
-                    <input type="text" id="room_number" name="room_number" placeholder="Enter room number">
+                    <input type="text" id="room_number" name="room_number" placeholder="Enter room number" value="{{ request.form.room_number }}">
                 </div>
             </fieldset>
         </section>
@@ -110,166 +109,157 @@
                     <div class="grid-item">
                         <h3>BSL-2</h3>
                         <div class="row-layout">
-                            <input type="checkbox" id="biohazard" name="biohazard" value="biohazard">
+                            <input type="checkbox" id="biohazard" name="biohazard" value="biohazard" {{ 'checked' if 'biohazard' in request.form else '' }}>
                             <label for="biohazard"><img src="{{ url_for('static', filename='images/04BSL2.png') }}" alt="BSL-2"></label>
                         </div>
                     </div>
                     <div class="grid-item">
                         <h3>Cancer Hazard</h3>
                         <div class="row-layout">
-                            <input type="checkbox" id="cancer" name="cancer" value="cancer">
+                            <input type="checkbox" id="cancer" name="cancer" value="cancer" {{ 'checked' if 'cancer' in request.form else '' }}>
                             <label for="cancer"><img src="{{ url_for('static', filename='images/05cancer.png') }}" alt="Cancer Hazard"></label>
                         </div>
                     </div>
                     <div class="grid-item">
                         <h3>Corrosive Materials</h3>
                         <div class="row-layout">
-                            <input type="checkbox" id="corrosive" name="corrosive" value="corrosive">
+                            <input type="checkbox" id="corrosive" name="corrosive" value="corrosive" {{ 'checked' if 'corrosive' in request.form else '' }}>
                             <label for="corrosive"><img src="{{ url_for('static', filename='images/08corrosive.png') }}" alt="Corrosive Materials"></label>
                         </div>
                     </div>
                     <div class="grid-item">
                         <h3>Flammable Gas</h3>
                         <div class="row-layout">
-                            <input type="checkbox" id="flammableg" name="flammableg" value="flammableg">
+                            <input type="checkbox" id="flammableg" name="flammableg" value="flammableg" {{ 'checked' if 'flammableg' in request.form else '' }}>
                             <label for="flammableg"><img src="{{ url_for('static', filename='images/13flammable_gas.png') }}" alt="Flammable Gas"></label>
                         </div>
                     </div>
                     <div class="grid-item">
                         <h3>Flammable Materials</h3>
                         <div class="row-layout">
-                            <input type="checkbox" id="flammablem" name="flammablem" value="flammablem">
+                            <input type="checkbox" id="flammablem" name="flammablem" value="flammablem" {{ 'checked' if 'flammablem' in request.form else '' }}>
                             <label for="flammablem"><img src="{{ url_for('static', filename='images/10flammable_materials.png') }}" alt="Flammable Materials"></label>
                         </div>
                     </div>
                     <div class="grid-item">
                         <h3>Highly Toxic</h3>
                         <div class="row-layout">
-                            <input type="checkbox" id="toxic" name="toxic" value="toxic">
+                            <input type="checkbox" id="toxic" name="toxic" value="toxic" {{ 'checked' if 'toxic' in request.form else '' }}>
                             <label for="toxic"><img src="{{ url_for('static', filename='images/06toxic.png') }}" alt="Highly Toxic"></label>
                         </div>
                     </div>
                     <div class="grid-item">
                         <h3>Laser Radiation</h3>
                         <div class="row-layout">
-                            <input type="checkbox" id="laser" name="laser" value="laser">
+                            <input type="checkbox" id="laser" name="laser" value="laser" {{ 'checked' if 'laser' in request.form else '' }}>
                             <label for="laser"><img src="{{ url_for('static', filename='images/03laser.png') }}" alt="Laser Radiation"></label>
                         </div>
                     </div>
                     <div class="grid-item">
                         <h3>Non-Flammable Gas</h3>
                         <div class="row-layout">
-                            <input type="checkbox" id="nflammableg" name="nflammableg" value="nflammableg">
+                            <input type="checkbox" id="nflammableg" name="nflammableg" value="nflammableg" {{ 'checked' if 'nflammableg' in request.form else '' }}>
                             <label for="nflammableg"><img src="{{ url_for('static', filename='images/14non_flammable_gas.png') }}" alt="Non-Flammable Gas"></label>
                         </div>
                     </div>
                     <div class="grid-item">
                         <h3>Oxidizing Materials</h3>
                         <div class="row-layout">
-                            <input type="checkbox" id="oxidizing" name="oxidizing" value="oxidizing">
+                            <input type="checkbox" id="oxidizing" name="oxidizing" value="oxidizing" {{ 'checked' if 'oxidizing' in request.form else '' }}>
                             <label for="oxidizing"><img src="{{ url_for('static', filename='images/11oxidizing.png') }}" alt="Oxidizing Materials"></label>
                         </div>
                     </div>
                     <div class="grid-item">
                         <h3>Radioactive Materials</h3>
                         <div class="row-layout">
-                            <input type="checkbox" id="radioactive" name="radioactive" value="radioactive">
+                            <input type="checkbox" id="radioactive" name="radioactive" value="radioactive" {{ 'checked' if 'radioactive' in request.form else '' }}>
                             <label for="radioactive"><img src="{{ url_for('static', filename='images/01radioactive.png') }}" alt="Radioactive Materials"></label>
                         </div>
                     </div>
                     <div class="grid-item">
                         <h3>Reproductive Toxin</h3>
                         <div class="row-layout">
-                            <input type="checkbox" id="reproductive" name="reproductive" value="reproductive">
+                            <input type="checkbox" id="reproductive" name="reproductive" value="reproductive" {{ 'checked' if 'reproductive' in request.form else '' }}>
                             <label for="reproductive"><img src="{{ url_for('static', filename='images/07reproductive_toxin.png') }}" alt="Reproductive Toxin"></label>
                         </div>
                     </div>
                     <div class="grid-item">
                         <h3>Ultraviolet Light</h3>
                         <div class="row-layout">
-                            <input type="checkbox" id="ultraviolet" name="ultraviolet" value="ultraviolet">
+                            <input type="checkbox" id="ultraviolet" name="ultraviolet" value="ultraviolet" {{ 'checked' if 'ultraviolet' in request.form else '' }}>
                             <label for="ultraviolet"><img src="{{ url_for('static', filename='images/09ultraviolet.png') }}" alt="Ultraviolet Light"></label>
                         </div>
                     </div>
                     <div class="grid-item">
                         <h3>Water Reactive</h3>
                         <div class="row-layout">
-                            <input type="checkbox" id="water" name="water" value="water">
+                            <input type="checkbox" id="water" name="water" value="water" {{ 'checked' if 'water' in request.form else '' }}>
                             <label for="water"><img src="{{ url_for('static', filename='images/12water.png') }}" alt="Water Reactive"></label>
                         </div>
                     </div>
                     <div class="grid-item">
                         <h3>X-Ray Equipment</h3>
                         <div class="row-layout">
-                            <input type="checkbox" id="xray" name="xray" value="xray">
+                            <input type="checkbox" id="xray" name="xray" value="xray" {{ 'checked' if 'xray' in request.form else '' }}>
                             <label for="xray"><img src="{{ url_for('static', filename='images/02xray.png') }}" alt="X-Ray Equipment"></label>
                         </div>
                     </div>
                 </div>
-                
-                </div>
             </fieldset>
         </section>
-        
 
         <section>
             <fieldset>
                 <legend>Multiple Signs</legend>
 
                 <p>Are there sign holders installed at each lab entrance?</p>
-        
+
                 <div class="multi-sign-grid-container">
                     <div class="multi-sign-grid-item">
-                        <input type="radio" id="signs_yes" name="signs" value="yes" onchange="toggleSignFields()">
+                        <input type="radio" id="signs_yes" name="signs" value="yes" onchange="toggleSignFields()" {{ 'checked' if request.form.get('signs') == 'yes' else '' }}>
                         <label for="signs_yes">Yes</label>
                     </div>
                     <div class="multi-sign-grid-item">
-                        <input type="radio" id="signs_no" name="signs" value="no" onchange="toggleSignFields()">
+                        <input type="radio" id="signs_no" name="signs" value="no" onchange="toggleSignFields()" {{ 'checked' if request.form.get('signs') == 'no' else '' }}>
                         <label for="signs_no">No</label>
                     </div>
                 </div>
-                
+
                 <div id="signFieldsYes" class="multi-sign-follow-up" style="display: none;">
                     <div class="multi-sign-grid-item">
                         <label for="orientation">In what orientation are your sign holders?</label>
                         <div class="orientation-options">
-                            <input type="radio" id="horizontal" name="orientation" value="horizontal">
+                            <input type="radio" id="horizontal" name="orientation" value="horizontal" {{ 'checked' if request.form.get('orientation') == 'horizontal' else '' }}>
                             <label for="horizontal">Horizontal (▭)</label>
                         </div>
                         <div class="orientation-options">
-                            <input type="radio" id="vertical" name="orientation" value="vertical">
+                            <input type="radio" id="vertical" name="orientation" value="vertical" {{ 'checked' if request.form.get('orientation') == 'vertical' else '' }}>
                             <label for="vertical">Vertical (▯)</label>
                         </div>
                         <div class="multi-sign-grid-item">
                             <label for="num_signs">How many signs do you need?</label>
-                            <input type="number" id="num_signs" name="num_signs">
+                            <input type="number" id="num_signs" name="num_signs" value="{{ request.form.num_signs }}">
                         </div>
                     </div>
                 </div>
-                
+
                 <div id="signFieldsNo" class="multi-sign-follow-up" style="display: none;">
                     <div class="multi-sign-grid-item">
                         <label for="num_entrances">How many entrances does your laboratory have?</label>
-                        <input type="number" id="num_entrances" name="num_entrances">
+                        <input type="number" id="num_entrances" name="num_entrances" value="{{ request.form.num_entrances }}">
                     </div>
                 </div>
-                
-        
             </fieldset>
         </section>
-        
-        
+
         <input type="submit" value="Submit Sign Form" class="submit-button">
     </form>
-   
-
-        
 
     <script>
         function formatPhoneNumber(input) {
             // Remove all non-digit characters from the input value
             let phoneNumber = input.value.replace(/\D/g, '');
-            
+
             // Check the length and format accordingly
             if (phoneNumber.length <= 3) {
                 input.value = `(${phoneNumber}`;
@@ -279,54 +269,57 @@
                 input.value = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
             }
         }
-        </script>
+    </script>
 
+    <script>
+        function capitalizeFirstLetter(input) {
+            input.value = input.value.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+        }
 
-        <script>
-            function capitalizeFirstLetter(input) {
-                input.value = input.value.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+        document.getElementById('primary_first_name').addEventListener('input', function() {
+            capitalizeFirstLetter(this);
+        });
+
+        document.getElementById('primary_last_name').addEventListener('input', function() {
+            capitalizeFirstLetter(this);
+        });
+    </script>
+
+    <script>
+        // Function to toggle display of additional sign fields based on radio button state
+        function toggleSignFields() {
+            var yesRadio = document.getElementById('signs_yes');
+            var noRadio = document.getElementById('signs_no');
+            var signFieldsYes = document.getElementById('signFieldsYes');
+            var signFieldsNo = document.getElementById('signFieldsNo');
+
+            if (yesRadio.checked) {
+                signFieldsYes.style.display = 'grid';
+                signFieldsNo.style.display = 'none';
+            } else if (noRadio.checked) {
+                signFieldsYes.style.display = 'none';
+                signFieldsNo.style.display = 'grid';
+            } else {
+                signFieldsYes.style.display = 'none';
+                signFieldsNo.style.display = 'none';
             }
+        }
 
-            document.getElementById('primary_first_name').addEventListener('input', function() {
-                capitalizeFirstLetter(this);
-            });
+        // Ensure the function is called when the page loads to handle pre-checked states
+        document.addEventListener('DOMContentLoaded', function () {
+            toggleSignFields();
+        });
+    </script>
 
-            document.getElementById('primary_last_name').addEventListener('input', function() {
-                capitalizeFirstLetter(this);
-            });
-
-
-
-            
-        </script>
-
-
-    
-        <script>
-            // Function to toggle display of additional sign fields based on radio button state
-            function toggleSignFields() {
-                var yesRadio = document.getElementById('signs_yes');
-                var noRadio = document.getElementById('signs_no');
-                var signFieldsYes = document.getElementById('signFieldsYes');
-                var signFieldsNo = document.getElementById('signFieldsNo');
-                
-                if (yesRadio.checked) {
-                    signFieldsYes.style.display = 'grid';
-                    signFieldsNo.style.display = 'none';
-                } else if (noRadio.checked) {
-                    signFieldsYes.style.display = 'none';
-                    signFieldsNo.style.display = 'grid';
-                } else {
-                    signFieldsYes.style.display = 'none';
-                    signFieldsNo.style.display = 'none';
-                }
+    <!-- JavaScript to display the error message as a popup -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var errorMessage = "{{ error_message }}";
+            if (errorMessage) {
+                alert(errorMessage);
             }
-    
-            // Ensure the function is called when the page loads to handle pre-checked states
-            document.addEventListener('DOMContentLoaded', function () {
-                toggleSignFields();
-            });
-        </script>
-    
+        });
+    </script>
+
 </body>
 </html>
