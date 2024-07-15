@@ -11,11 +11,6 @@
 <body>
     <h1>{{ title }}</h1>
 
-    <p class="custom-sign-info">
-        If your sign is shared between multiple labs, contact chemsafety at
-        <a href="mailto:chemsafety@ehs.unc.edu">chemsafety@ehs.unc.edu</a> for a custom sign.
-    </p>
-
     <form name="form1" method="POST" action="/submit" onsubmit="return labSignValidate(this)">
         <section>
             <fieldset>
@@ -104,7 +99,7 @@
         <section>
             <fieldset>
                 <legend>Laboratory Hazards</legend>
-                <p>Indicate the hazards present in your lab.</p>
+                <p>Indicate the hazards present in your workspace.</p>
                 <div class="grid-container">
                     <div class="grid-item">
                         <h3>BSL-2</h3>
@@ -210,7 +205,7 @@
 
         <section>
             <fieldset>
-                <legend>Multiple Signs</legend>
+                <legend>Sign Details</legend>
 
                 <p>Are there sign holders installed at each lab entrance?</p>
 
@@ -252,15 +247,31 @@
             </fieldset>
         </section>
 
+        <section>
+            <fieldset class="shared-space-fieldset">
+                <legend>Shared Spaces</legend>
+                
+                <p>Is this room shared between multiple labs?</p>
+                <div class="shared-space-question">
+                    <input type="radio" id="shared_yes" name="shared" value="yes">
+                    <label for="shared_yes">Yes</label>
+                    <input type="radio" id="shared_no" name="shared" value="no">
+                    <label for="shared_no">No</label>
+                </div>
+                
+                <p id="customSignMessage" style="display: none;">List additional names and contact numbers to include on the sign: 
+                    <textarea id="additionalInfo" name="additionalInfo" rows="4" cols="50"></textarea><br>
+                    <br> Submit the form, and we will create a custom sign for you.</p>
+            </fieldset>
+        </section>
+        
+
         <input type="submit" value="Submit Sign Form" class="submit-button">
     </form>
 
     <script>
         function formatPhoneNumber(input) {
-            // Remove all non-digit characters from the input value
             let phoneNumber = input.value.replace(/\D/g, '');
-
-            // Check the length and format accordingly
             if (phoneNumber.length <= 3) {
                 input.value = `(${phoneNumber}`;
             } else if (phoneNumber.length <= 6) {
@@ -269,57 +280,91 @@
                 input.value = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
             }
         }
-    </script>
-
-    <script>
+    
         function capitalizeFirstLetter(input) {
             input.value = input.value.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
         }
-
-        document.getElementById('primary_first_name').addEventListener('input', function() {
-            capitalizeFirstLetter(this);
-        });
-
-        document.getElementById('primary_last_name').addEventListener('input', function() {
-            capitalizeFirstLetter(this);
-        });
-    </script>
-
-    <script>
-        // Function to toggle display of additional sign fields based on radio button state
+    
         function toggleSignFields() {
             var yesRadio = document.getElementById('signs_yes');
             var noRadio = document.getElementById('signs_no');
             var signFieldsYes = document.getElementById('signFieldsYes');
             var signFieldsNo = document.getElementById('signFieldsNo');
-
+    
             if (yesRadio.checked) {
-                signFieldsYes.style.display = 'grid';
+                signFieldsYes.style.display = 'block';
                 signFieldsNo.style.display = 'none';
             } else if (noRadio.checked) {
                 signFieldsYes.style.display = 'none';
-                signFieldsNo.style.display = 'grid';
+                signFieldsNo.style.display = 'block';
             } else {
                 signFieldsYes.style.display = 'none';
                 signFieldsNo.style.display = 'none';
             }
         }
-
-        // Ensure the function is called when the page loads to handle pre-checked states
-        document.addEventListener('DOMContentLoaded', function () {
-            toggleSignFields();
-        });
-    </script>
-
-    <!-- JavaScript to display the error message as a popup -->
-    <script>
+    
+        function toggleCustomSignMessage() {
+            var yesOption = document.getElementById('shared_yes');
+            var message = document.getElementById('customSignMessage');
+            if (yesOption.checked) {
+                message.style.display = 'block';
+            } else {
+                message.style.display = 'none';
+            }
+        }
+    
         document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('primary_first_name').addEventListener('input', function() {
+                capitalizeFirstLetter(this);
+            });
+    
+            document.getElementById('primary_last_name').addEventListener('input', function() {
+                capitalizeFirstLetter(this);
+            });
+    
+            document.getElementById('phone_pi').addEventListener('input', function() {
+                formatPhoneNumber(this);
+            });
+    
+            document.getElementById('phone_pi_secondary').addEventListener('input', function() {
+                formatPhoneNumber(this);
+            });
+    
+            document.getElementById('phone_primary').addEventListener('input', function() {
+                formatPhoneNumber(this);
+            });
+    
+            document.getElementById('phone_secondary').addEventListener('input', function() {
+                formatPhoneNumber(this);
+            });
+    
+            document.getElementById('phone_alternate').addEventListener('input', function() {
+                formatPhoneNumber(this);
+            });
+    
+            document.getElementById('phone_secondary_alternate').addEventListener('input', function() {
+                formatPhoneNumber(this);
+            });
+    
+            // Ensure the functions are called when the page loads to handle pre-checked states
+            toggleSignFields();
+            toggleCustomSignMessage();
+    
             var errorMessage = "{{ error_message }}";
             if (errorMessage) {
                 alert(errorMessage);
             }
+    
+            // Add event listeners for the second question
+            document.getElementById('shared_yes').addEventListener('change', toggleCustomSignMessage);
+            document.getElementById('shared_no').addEventListener('change', toggleCustomSignMessage);
+    
+            // Add event listeners for the first question
+            document.getElementById('signs_yes').addEventListener('change', toggleSignFields);
+            document.getElementById('signs_no').addEventListener('change', toggleSignFields);
         });
     </script>
-
+    
+    
 </body>
 </html>
