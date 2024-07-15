@@ -142,13 +142,6 @@
                         </div>
                     </div>
                     <div class="grid-item">
-                        <h3>Highly Toxic</h3>
-                        <div class="row-layout">
-                            <input type="checkbox" id="toxic" name="toxic" value="toxic" {{ 'checked' if 'toxic' in request.form else '' }}>
-                            <label for="toxic"><img src="{{ url_for('static', filename='images/06toxic.png') }}" alt="Highly Toxic"></label>
-                        </div>
-                    </div>
-                    <div class="grid-item">
                         <h3>Laser Radiation</h3>
                         <div class="row-layout">
                             <input type="checkbox" id="laser" name="laser" value="laser" {{ 'checked' if 'laser' in request.form else '' }}>
@@ -181,6 +174,13 @@
                         <div class="row-layout">
                             <input type="checkbox" id="reproductive" name="reproductive" value="reproductive" {{ 'checked' if 'reproductive' in request.form else '' }}>
                             <label for="reproductive"><img src="{{ url_for('static', filename='images/07reproductive_toxin.png') }}" alt="Reproductive Toxin"></label>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Highly Toxic</h3>
+                        <div class="row-layout">
+                            <input type="checkbox" id="toxic" name="toxic" value="toxic" {{ 'checked' if 'toxic' in request.form else '' }}>
+                            <label for="toxic"><img src="{{ url_for('static', filename='images/06toxic.png') }}" alt="Highly Toxic"></label>
                         </div>
                     </div>
                     <div class="grid-item">
