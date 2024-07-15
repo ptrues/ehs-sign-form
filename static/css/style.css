@@ -235,25 +235,27 @@ label {
     }
 
     .row-layout img {
-        width: 80px;
-        height: 80px;
+        width: 150px;
+        height: 150px;
     }
 }
-
 
 .multi-sign-grid-container {
     display: flex; /* Use flexbox to keep the radio buttons inline */
     gap: 20px; /* Add space between the radio buttons */
     margin-bottom: 25px;
     margin-left: 20px;
+    width: 100%;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
 }
 
 .multi-sign-grid-item {
     display: flex;
     align-items: center;
+    flex: 1 1 100%; /* Allow items to grow and shrink with a basis of 100% */
 }
 
-div.multi-sign-grid-item{
+div.multi-sign-grid-item {
     margin-bottom: 20px;
 }
 
@@ -310,6 +312,30 @@ div.multi-sign-grid-item{
 .shared-space-fieldset p {
     margin-bottom: 10px;  /* Space between question and radio buttons */
 }
+
+/* Add media query for smaller screens */
+@media (max-width: 550px) {
+    .multi-sign-grid-container {
+        flex-direction: column;
+        gap: 10px; /* Adjust gap for smaller screens */
+    }
+
+    .multi-sign-grid-item {
+        flex: 1 1 auto; /* Adjust flex basis for smaller screens */
+    }
+
+    .orientation-options {
+        margin-left: 0;
+        gap: 5px; /* Adjust gap for smaller screens */
+    }
+    .shared-space-question {
+        flex-direction: column;
+        align-items: flex-start; /* Align items to the start */
+        gap: 5px; /* Adjust gap for smaller screens */
+        margin: 10px; /* Adjust margin for smaller screens */
+    }
+}
+
 
 
 .submit-button {
