@@ -211,7 +211,7 @@
 
                 <div class="multi-sign-grid-container">
                     <div class="multi-sign-grid-item">
-                        <input type="radio" id="signs_yes" name="signs" value="yes" onchange="toggleSignFields()" {{ 'checked' if request.form.get('signs') == 'yes' else '' }}>
+                        <input type="radio" id="signs_yes" name="signs" value="yes" onchange="toggleSignFields()" {{ 'checked' if request.form.get('signs') == 'yes' else 'checked' if not request.form.get('signs') else '' }}>
                         <label for="signs_yes">Yes</label>
                     </div>
                     <div class="multi-sign-grid-item">
@@ -219,25 +219,26 @@
                         <label for="signs_no">No</label>
                     </div>
                 </div>
-
+                       
+        
                 <div id="signFieldsYes" class="multi-sign-follow-up" style="display: none;">
                     <div class="multi-sign-grid-item">
                         <label for="orientation">In what orientation are your sign holders?</label>
                         <div class="orientation-options">
                             <input type="radio" id="horizontal" name="orientation" value="horizontal" {{ 'checked' if request.form.get('orientation') == 'horizontal' else '' }}>
-                            <label for="horizontal">Horizontal (▭)</label>
+                            <label for="horizontal" class="horizontal-label">Horizontal (▭)</label>
                         </div>
                         <div class="orientation-options">
                             <input type="radio" id="vertical" name="orientation" value="vertical" {{ 'checked' if request.form.get('orientation') == 'vertical' else '' }}>
-                            <label for="vertical">Vertical (▯)</label>
-                        </div>
-                        <div class="multi-sign-grid-item">
-                            <label for="num_signs">How many signs do you need?</label>
-                            <input type="number" id="num_signs" name="num_signs" value="{{ request.form.num_signs }}">
+                            <label for="vertical" class="vertical-label">Vertical (▯)</label>
                         </div>
                     </div>
+                    <div class="multi-sign-grid-item">
+                        <label for="num_signs">How many signs do you need?</label>
+                        <input type="number" id="num_signs" name="num_signs" value="{{ request.form.num_signs }}">
+                    </div>
                 </div>
-
+        
                 <div id="signFieldsNo" class="multi-sign-follow-up" style="display: none;">
                     <div class="multi-sign-grid-item">
                         <label for="num_entrances">How many entrances does your laboratory have?</label>
@@ -246,22 +247,25 @@
                 </div>
             </fieldset>
         </section>
-
+        
         <section>
             <fieldset class="shared-space-fieldset">
                 <legend>Shared Spaces</legend>
                 
-                <p>Is this room shared between multiple labs?</p>
+                <p>     Is this room shared between multiple labs?</p>
                 <div class="shared-space-question">
                     <input type="radio" id="shared_yes" name="shared" value="yes">
                     <label for="shared_yes">Yes</label>
-                    <input type="radio" id="shared_no" name="shared" value="no">
+                    <input type="radio" id="shared_no" name="shared" value="no" checked>
                     <label for="shared_no">No</label>
                 </div>
                 
-                <p id="customSignMessage" style="display: none;">List additional names and contact numbers to include on the sign: 
+                <p id="customSignMessage" style="display: none;">
+                    List additional names and contact numbers to include on the sign: 
                     <textarea id="additionalInfo" name="additionalInfo" rows="4" cols="50"></textarea><br>
-                    <br> Submit the form, and we will create a custom sign for you.</p>
+                    <br> Submit the form, and we will create a custom sign for you.
+                </p>
+
             </fieldset>
         </section>
         
@@ -270,99 +274,104 @@
     </form>
 
     <script>
-        function formatPhoneNumber(input) {
-            let phoneNumber = input.value.replace(/\D/g, '');
-            if (phoneNumber.length <= 3) {
-                input.value = `(${phoneNumber}`;
-            } else if (phoneNumber.length <= 6) {
-                input.value = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
-            } else {
-                input.value = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
-            }
+    function formatPhoneNumber(input) {
+    let phoneNumber = input.value.replace(/\D/g, '');
+    if (phoneNumber.length <= 3) {
+        input.value = `(${phoneNumber}`;
+    } else if (phoneNumber.length <= 6) {
+        input.value = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+    } else {
+        input.value = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+    }
+}
+
+    function capitalizeFirstLetter(input) {
+        input.value = input.value.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+    }
+
+    function toggleSignFields() {
+        var yesRadio = document.getElementById('signs_yes');
+        var noRadio = document.getElementById('signs_no');
+        var signFieldsYes = document.getElementById('signFieldsYes');
+        var signFieldsNo = document.getElementById('signFieldsNo');
+
+        if (yesRadio.checked) {
+            signFieldsYes.style.display = 'block';
+            signFieldsNo.style.display = 'none';
+        } else if (noRadio.checked) {
+            signFieldsYes.style.display = 'none';
+            signFieldsNo.style.display = 'block';
+        } else {
+            signFieldsYes.style.display = 'none';
+            signFieldsNo.style.display = 'none';
         }
-    
-        function capitalizeFirstLetter(input) {
-            input.value = input.value.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+    }
+
+    function toggleCustomSignMessage() {
+        var yesOption = document.getElementById('shared_yes');
+        var message = document.getElementById('customSignMessage');
+        if (yesOption.checked) {
+            message.style.display = 'block';
+        } else {
+            message.style.display = 'none';
         }
-    
-        function toggleSignFields() {
-            var yesRadio = document.getElementById('signs_yes');
-            var noRadio = document.getElementById('signs_no');
-            var signFieldsYes = document.getElementById('signFieldsYes');
-            var signFieldsNo = document.getElementById('signFieldsNo');
-    
-            if (yesRadio.checked) {
-                signFieldsYes.style.display = 'block';
-                signFieldsNo.style.display = 'none';
-            } else if (noRadio.checked) {
-                signFieldsYes.style.display = 'none';
-                signFieldsNo.style.display = 'block';
-            } else {
-                signFieldsYes.style.display = 'none';
-                signFieldsNo.style.display = 'none';
-            }
-        }
-    
-        function toggleCustomSignMessage() {
-            var yesOption = document.getElementById('shared_yes');
-            var message = document.getElementById('customSignMessage');
-            if (yesOption.checked) {
-                message.style.display = 'block';
-            } else {
-                message.style.display = 'none';
-            }
-        }
-    
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('primary_first_name').addEventListener('input', function() {
-                capitalizeFirstLetter(this);
-            });
-    
-            document.getElementById('primary_last_name').addEventListener('input', function() {
-                capitalizeFirstLetter(this);
-            });
-    
-            document.getElementById('phone_pi').addEventListener('input', function() {
-                formatPhoneNumber(this);
-            });
-    
-            document.getElementById('phone_pi_secondary').addEventListener('input', function() {
-                formatPhoneNumber(this);
-            });
-    
-            document.getElementById('phone_primary').addEventListener('input', function() {
-                formatPhoneNumber(this);
-            });
-    
-            document.getElementById('phone_secondary').addEventListener('input', function() {
-                formatPhoneNumber(this);
-            });
-    
-            document.getElementById('phone_alternate').addEventListener('input', function() {
-                formatPhoneNumber(this);
-            });
-    
-            document.getElementById('phone_secondary_alternate').addEventListener('input', function() {
-                formatPhoneNumber(this);
-            });
-    
-            // Ensure the functions are called when the page loads to handle pre-checked states
-            toggleSignFields();
-            toggleCustomSignMessage();
-    
-            var errorMessage = "{{ error_message }}";
-            if (errorMessage) {
-                alert(errorMessage);
-            }
-    
-            // Add event listeners for the second question
-            document.getElementById('shared_yes').addEventListener('change', toggleCustomSignMessage);
-            document.getElementById('shared_no').addEventListener('change', toggleCustomSignMessage);
-    
-            // Add event listeners for the first question
-            document.getElementById('signs_yes').addEventListener('change', toggleSignFields);
-            document.getElementById('signs_no').addEventListener('change', toggleSignFields);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('primary_first_name').addEventListener('input', function() {
+            capitalizeFirstLetter(this);
         });
+
+        document.getElementById('primary_last_name').addEventListener('input', function() {
+            capitalizeFirstLetter(this);
+        });
+
+        document.getElementById('phone_pi').addEventListener('input', function() {
+            formatPhoneNumber(this);
+        });
+
+        document.getElementById('phone_pi_secondary').addEventListener('input', function() {
+            formatPhoneNumber(this);
+        });
+
+        document.getElementById('phone_primary').addEventListener('input', function() {
+            formatPhoneNumber(this);
+        });
+
+        document.getElementById('phone_secondary').addEventListener('input', function() {
+            formatPhoneNumber(this);
+        });
+
+        document.getElementById('phone_alternate').addEventListener('input', function() {
+            formatPhoneNumber(this);
+        });
+
+        document.getElementById('phone_secondary_alternate').addEventListener('input', function() {
+            formatPhoneNumber(this);
+        });
+
+        // Ensure the functions are called when the page loads to handle pre-checked states
+        toggleSignFields();
+        toggleCustomSignMessage();
+
+        var errorMessage = "{{ error_message }}";
+        if (errorMessage) {
+            alert(errorMessage);
+        }
+
+        // Add event listeners for the second question
+        document.getElementById('shared_yes').addEventListener('change', toggleCustomSignMessage);
+        document.getElementById('shared_no').addEventListener('change', toggleCustomSignMessage);
+
+        // Add event listeners for the first question
+        document.getElementById('signs_yes').addEventListener('change', toggleSignFields);
+        document.getElementById('signs_no').addEventListener('change', toggleSignFields);
+
+        // Set placeholder text for additional info textarea
+        var textarea = document.getElementById('additionalInfo');
+        textarea.placeholder = "PI: Jane Doe (123) 456-7890\nAlternate contact: John Doe (098) 765-4321\nAdditional PI: Alice Smith (234) 567-8901\nAlternate contact: Bob Johnson (345) 678-9012";
+    });
+
     </script>
     
     

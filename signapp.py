@@ -35,7 +35,7 @@ def submit():
 
     # Check if alternate contact fields are empty
     if not alternate_first_name and not alternate_last_name and not phone_alternate and not phone_secondary_alternate:
-        # If alternate contact fields are empty, check if PI and Primary Contact fields are the same
+        # If PI and Primary Contact fields are the same
         if (pi_first_name == primary_first_name and
             pi_last_name == primary_last_name and
             phone_pi == phone_primary and
@@ -51,6 +51,12 @@ def submit():
                 alternate_last_name = ''
                 phone_alternate = ''
                 phone_secondary_alternate = ''
+                # Set PI phone output to phone_pi_secondary
+                pi_phone_output = phone_pi_secondary
+        else:
+            # Maintain original phone output variables
+            pi_phone_output = phone_pi
+            primary_phone_output = phone_primary
     else:
         # If alternate contact fields are not empty, use the user-provided data
         alternate_first_name = request.form['alternate_first_name']
@@ -66,7 +72,7 @@ def submit():
                 primary_phone_output = phone_primary
             elif phone_pi_secondary == phone_secondary:
                 # Primary Contact field to be populated with the primary phone and PI contact field with the secondary phone
-                pi_phone_output = phone_primary
+                pi_phone_output = phone_pi_secondary
                 primary_phone_output = phone_primary
             else:
                 pi_phone_output = phone_primary

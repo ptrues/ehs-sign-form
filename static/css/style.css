@@ -103,12 +103,17 @@ body {
 }
 
 h1 {
+    font-size: 36px;
     color: #00274C; /* Navy blue */
     text-align: center;
 }
 
 h3 {
     font-size: medium;
+}
+
+p{
+    font-weight:bold;
 }
 
 .custom-sign-info {
@@ -128,10 +133,10 @@ h3 {
 }
 
 fieldset {
-    border: 1px solid #CCCCCC;
+    border: 0px solid #CCCCCC;
     padding: 10px;
     background-color: #E5E5E5;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 legend {
@@ -139,8 +144,9 @@ legend {
     color: #00274C; /* Navy blue */
     font-size: 24px;
     position: relative;
-    top: -10px; /* Adjust this value to shift the legend up or down */
-    margin-top: 20px;
+    top: 20px; /* Adjust this value to shift the legend up or down */
+    margin-top: 10px;
+    margin-bottom: 30px;
 }
 
 
@@ -153,6 +159,7 @@ label {
     display: block;
     margin-left: 8px;
 }
+
 
 .form-row {
     margin-bottom: 20px; 
@@ -234,19 +241,20 @@ label {
 }
 
 
-section {
-    margin-bottom: 20px;  /*Adds spacing between each form section */
-}
-
 .multi-sign-grid-container {
     display: flex; /* Use flexbox to keep the radio buttons inline */
+    gap: 20px; /* Add space between the radio buttons */
+    margin-bottom: 25px;
+    margin-left: 20px;
 }
 
 .multi-sign-grid-item {
     display: flex;
     align-items: center;
-    margin-bottom: 25px;
-    margin-top: 25px;
+}
+
+div.multi-sign-grid-item{
+    margin-bottom: 20px;
 }
 
 .multi-sign-follow-up {
@@ -257,9 +265,7 @@ section {
 }
 
 .multi-sign-follow-up .multi-sign-grid-item {
-    display: flex;
     flex-direction: column; /* Ensure label and input are stacked vertically */
-    margin-bottom: 15px; /* Add space below each grid item */
     align-items: flex-start; /* Align items to the left */
 }
 
@@ -268,16 +274,21 @@ section {
     white-space: nowrap; /* Prevent text wrapping */
 }
 
-.multi-sign-follow-up .multi-sign-grid-item input[type="number"] {
-    margin-top: 10px; /* Add space above number input */
-}
-
-/* Specific styles for the radio buttons and their labels */
 .multi-sign-follow-up .orientation-options {
     display: flex;
     align-items: center; /* Align radio buttons and labels in the center vertically */
     gap: 10px; /* Add space between radio buttons and labels */
-    margin-bottom: 10px; /* Add space below the options */
+}
+
+.orientation-options {
+    margin-left: 20px;
+}
+
+.horizontal-label,
+.vertical-label {
+    font-weight: normal; /* Unbold the font weight */
+    color: inherit; /* Keep the default text color */
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 /* Container for the shared-space-question to use flexbox */

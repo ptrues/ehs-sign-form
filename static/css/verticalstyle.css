@@ -43,7 +43,7 @@ body {
     width: 7.5in;
     height: 3in;
     position: absolute;
-    top: 2.25in;
+    top: 2.0in;
     left: 0.5in;
 }
 
@@ -69,12 +69,11 @@ body {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    width: 100%; 
-    height: 76px;
+    width: 96%; 
     flex-shrink: 0;
     text-align: center;
     position: absolute;
-    bottom: 5.5in;
+    bottom: 4in;
     left: 50%;
     transform: translateX(-50%);
 }
