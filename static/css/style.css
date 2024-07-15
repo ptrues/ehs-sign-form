@@ -8,7 +8,7 @@ textarea {
     padding: 10px;                 /* Padding inside the input */
     font-size: 16px;               /* Font size */
     color: #333;                   /* Text color */
-    background-color: #f9f9f9;     /* Light grey background */
+    background-color: white;     /* Background */
     width: 100%;                   /* Full width */
     box-sizing: border-box;        /* Include padding and border in element's total width and height */
     transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transitions for focus state */
@@ -99,7 +99,7 @@ input[type="radio"]:checked::before {
 body {
     font-family: "Open Sans", sans-serif;
     color: #00274C; /* Navy blue */
-    background-color: #F5F5F5; /* Light gray */
+    background-color: white; 
 }
 
 h1 {
@@ -134,9 +134,9 @@ p{
 
 fieldset {
     border: 0px solid #CCCCCC;
+    border-radius: 10px;
     padding: 10px;
-    background-color: #E5E5E5;
-    margin-bottom: 10px;
+    background-color: #F5F5F5;
 }
 
 legend {
