@@ -114,23 +114,10 @@ h3 {
 
 p{
     font-weight:bold;
+    margin-bottom: 5px;
+    margin-top: 20px;
 }
 
-.custom-sign-info {
-    font-size: 18px; /* Adjust the font size as needed */
-    color: #333; /* Adjust the text color as needed */
-    margin-top: 10px; /* Adjust the value to add buffer above the paragraph */
-    margin-bottom: 30px; /* Adjust the value to add buffer below the paragraph */
-}
-
-.custom-sign-info a {
-    color: #0066cc; /* Adjust the link color as needed */
-    text-decoration: none; /* Remove underline from the link */
-}
-
-.custom-sign-info a:hover {
-    text-decoration: underline; /* Add underline on hover */
-}
 
 fieldset {
     border: 0px solid #CCCCCC;
@@ -242,9 +229,9 @@ label {
 
 .multi-sign-grid-container {
     display: flex; /* Use flexbox to keep the radio buttons inline */
-    gap: 20px; /* Add space between the radio buttons */
-    margin-bottom: 25px;
-    margin-left: 20px;
+    gap: 10px; /* Add space between the radio buttons */
+    margin-bottom: 00000;
+    margin-left: 00000;
     width: 100%;
     flex-wrap: wrap; /* Allow items to wrap to the next line */
 }
@@ -253,11 +240,9 @@ label {
     display: flex;
     align-items: center;
     flex: 1 1 100%; /* Allow items to grow and shrink with a basis of 100% */
+    gap: 10px;
 }
 
-div.multi-sign-grid-item {
-    margin-bottom: 20px;
-}
 
 .multi-sign-follow-up {
     display: flex;
@@ -279,16 +264,16 @@ div.multi-sign-grid-item {
 .multi-sign-follow-up .orientation-options {
     display: flex;
     align-items: center; /* Align radio buttons and labels in the center vertically */
-    gap: 10px; /* Add space between radio buttons and labels */
+    gap: 5px; /* Add space between radio buttons and labels */
 }
 
 .orientation-options {
-    margin-left: 20px;
+    margin-left: 00000;
 }
+
 
 .horizontal-label,
 .vertical-label {
-    font-weight: normal; /* Unbold the font weight */
     color: inherit; /* Keep the default text color */
     white-space: nowrap; /* Prevent text wrapping */
 }
@@ -297,20 +282,23 @@ div.multi-sign-grid-item {
 .shared-space-question {
     display: flex;
     align-items: center;  /* Align items vertically centered */
+    margin-top: 16px;
     gap: 10px;            /* Space between elements */
-    margin: 20px;
 }
 
 /* Ensure the radio buttons and labels are inline */
 .shared-space-question input[type="radio"],
 .shared-space-question label {
     display: inline-block;
-    margin: 0;
 }
 
 /* Ensure the paragraph stays above the radio buttons */
 .shared-space-fieldset p {
-    margin-bottom: 10px;  /* Space between question and radio buttons */
+    margin-bottom: 0000;  /* Space between question and radio buttons */
+}
+
+div.shared-space-option{
+    margin: 0 0 0 0
 }
 
 /* Add media query for smaller screens */
@@ -322,6 +310,7 @@ div.multi-sign-grid-item {
 
     .multi-sign-grid-item {
         flex: 1 1 auto; /* Adjust flex basis for smaller screens */
+        margin-bottom: -6px;
     }
 
     .orientation-options {
@@ -331,8 +320,8 @@ div.multi-sign-grid-item {
     .shared-space-question {
         flex-direction: column;
         align-items: flex-start; /* Align items to the start */
-        gap: 5px; /* Adjust gap for smaller screens */
-        margin: 10px; /* Adjust margin for smaller screens */
+        gap: 10px; /* Adjust gap for smaller screens */
+        margin-top: 16px; /* Adjust margin for smaller screens */
     }
 }
 
@@ -344,6 +333,7 @@ div.multi-sign-grid-item {
     background-color: #00274C; 
     color: white;
     border: none;
+    border-radius: 10px;
     cursor: pointer;
     margin: 10px;
     margin-bottom: 30px;

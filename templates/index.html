@@ -223,7 +223,7 @@
         
                 <div id="signFieldsYes" class="multi-sign-follow-up" style="display: none;">
                     <div class="multi-sign-grid-item">
-                        <label for="orientation">In what orientation are the sign holders?</label>
+                        <p>In what orientation are the sign holders?</p>
                         <div class="orientation-options">
                             <input type="radio" id="horizontal" name="orientation" value="horizontal" {{ 'checked' if request.form.get('orientation') == 'horizontal' else '' }}>
                             <label for="horizontal" class="horizontal-label">Horizontal (▭)</label>
@@ -234,14 +234,14 @@
                         </div>
                     </div>
                     <div class="multi-sign-grid-item">
-                        <label for="num_signs">How many signs do you need?</label>
+                        <p>How many signs do you need?</p>
                         <input type="number" id="num_signs" name="num_signs" value="{{ request.form.num_signs }}">
                     </div>
                 </div>
         
                 <div id="signFieldsNo" class="multi-sign-follow-up" style="display: none;">
                     <div class="multi-sign-grid-item">
-                        <label for="num_entrances">How many entrances does your laboratory have?</label>
+                        <p>How many entrances does your laboratory have?<p>
                         <input type="number" id="num_entrances" name="num_entrances" value="{{ request.form.num_entrances }}">
                     </div>
                 </div>
@@ -373,7 +373,7 @@
 
         // Set placeholder text for additional info textarea
         var textarea = document.getElementById('additionalInfo');
-        textarea.placeholder = "PI: Jane Doe (123) 456-7890\nAlternate contact: John Doe (098) 765-4321\nAdditional PI: Alice Smith (234) 567-8901\nAlternate contact: Bob Johnson (345) 678-9012";
+        textarea.placeholder = "Additional PI: Alice Smith (555) 123-4567\nAlternate contact: Bob Johnson (555) 987-6543";
     });
 
     </script>
