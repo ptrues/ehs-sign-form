@@ -37,20 +37,21 @@ jobs:
 
     - name: Package with PyInstaller
       run: |
-        pyinstaller --onefile --add-data "static;static" signapp.py
+        pyinstaller --onefile --add-data "static;static" --add-data "templates;templates" signapp.py
 
     - name: List Dist Directory
       run: |
         dir dist
 
     - name: Verify Executable
+      shell: powershell
       run: |
-        if [ -f "dist/signapp.exe" ]; then
-          echo "Executable created successfully."
-        else
-          echo "Executable not found!"
+        if (Test-Path "dist/signapp.exe") {
+          Write-Output "Executable created successfully."
+        } else {
+          Write-Error "Executable not found!"
           exit 1
-        fi
+        }
 
     - name: Upload the package
       uses: actions/upload-artifact@v2
