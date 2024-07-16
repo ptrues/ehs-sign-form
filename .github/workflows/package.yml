@@ -43,8 +43,7 @@ jobs:
       run: |
         dir dist
 
-    - name: Verify and Upload the package
-      if: success()
+    - name: Verify Executable
       run: |
         if [ -f "dist/signapp.exe" ]; then
           echo "Executable created successfully."
@@ -52,6 +51,8 @@ jobs:
           echo "Executable not found!"
           exit 1
         fi
+
+    - name: Upload the package
       uses: actions/upload-artifact@v2
       with:
         name: packaged-app
