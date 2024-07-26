@@ -66,9 +66,8 @@ body {
     color: #000;
     font-family: 'Open Sans Condensed';
     font-size: 52px;
-    font-style: normal;
+    font-stretch: normal;
     font-weight: 700;
-    line-height: normal;
     width: 10in; 
     height: 1.5in;
     flex-shrink: 0;

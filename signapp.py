@@ -5,9 +5,90 @@ from weasyprint import HTML, CSS
 
 app = Flask(__name__)
 
+
+buildings = [
+{"code": "000", "building": "Institute Of Marine Sciences"},
+{"code": "003", "building": "Ackland Art Museum"},
+{"code": "004", "building": "Alumni Bldg"},
+{"code": "010", "building": "Coker Hall"},
+{"code": "013", "building": "Davie Hall"},
+{"code": "021", "building": "Howell Hall"},
+{"code": "026", "building": "Manning Hall"},
+{"code": "029", "building": "Mitchell Hall"},
+{"code": "039", "building": "Phillips Hall"},
+{"code": "041", "building": "Coastal Proc. Env. Health Lab"},
+{"code": "046", "building": "Wilson Hall"},
+{"code": "048", "building": "Fordham Hall"},
+{"code": "069", "building": "Kenan Labs"},
+{"code": "079", "building": "Hanes Art Center"},
+{"code": "081", "building": "Morehead Chemistry Labs"},
+{"code": "086", "building": "Caudill Labs"},
+{"code": "087", "building": "Chapman Hall"},
+{"code": "094", "building": "IMS Fisheries Research Lab"},
+{"code": "152", "building": "Morehead Planetarium"},
+{"code": "165", "building": "Franklin Street, 134 E."},
+{"code": "200", "building": "Beard Hall"},
+{"code": "201", "building": "Rosenau Hall"},
+{"code": "202", "building": "MacNider Hall"},
+{"code": "204", "building": "UNC Hospitals"},
+{"code": "207", "building": "Medical School Wing B"},
+{"code": "208", "building": "Medical School Wing D"},
+{"code": "209", "building": "First Dental"},
+{"code": "210A", "building": "Koury OHS"},
+{"code": "211", "building": "Brauer Hall"},
+{"code": "212", "building": "Francis Owen Blood Research Lab"},
+{"code": "214", "building": "Carrington Hall"},
+{"code": "217", "building": "Taylor Hall"},
+{"code": "219", "building": "Berryhill Hall"},
+{"code": "221", "building": "Medical School Wing C"},
+{"code": "228", "building": "Brinkhous-Bullitt Bldg"},
+{"code": "229", "building": "Burnett-Womack Bldg"},
+{"code": "231", "building": "Mary Ellen Jones"},
+{"code": "236", "building": "Glaxo Research Building"},
+{"code": "237", "building": "Lineberger Cancer Research Center"},
+{"code": "238", "building": "McGavran-Greenberg Hall"},
+{"code": "239", "building": "Baity Lab"},
+{"code": "240", "building": "Aycock Family Medicine"},
+{"code": "242", "building": "Thurston-Bowles Bldg"},
+{"code": "243", "building": "EPA Bldg"},
+{"code": "245", "building": "Neurosciences Research Bldg"},
+{"code": "247", "building": "Medical Biomolecular Research Bldg"},
+{"code": "327", "building": "Medical Research Bldg B"},
+{"code": "351", "building": "NeuroSciences Hospital"},
+{"code": "357", "building": "Kerr Hall"},
+{"code": "358", "building": "Hooker Research Center"},
+{"code": "359", "building": "Genetic Medicine Research Bldg"},
+{"code": "360", "building": "Marsico Hall"},
+{"code": "363", "building": "Roper Hall"},
+{"code": "462", "building": "Art Studio Bldg"},
+{"code": "468", "building": "Fetzer Hall"},
+{"code": "469", "building": "Taylor Campus Health"},
+{"code": "491", "building": "Franklin Square"},
+{"code": "605A", "building": "UNC Heart Center at Meadowmont"},
+{"code": "614", "building": "Smith Middle School Addition"},
+{"code": "625", "building": "ITS Manning"},
+{"code": "649", "building": "Environment, Health And Safety Bldg"},
+{"code": "658", "building": "Houpt Physician Office Building"},
+{"code": "673", "building": "Kannapolis Nutrition Research"},
+{"code": "674", "building": "Murray Hall"},
+{"code": "676", "building": "Genome Sciences Building"},
+{"code": "709C", "building": "Market St, 100 - Southern Village"},
+{"code": "745", "building": "Venable Hall"},
+{"code": "940", "building": "UNC Eastowne Medical Office Building"},
+{"code": "950", "building": "UNC-IDSS"},
+{"code": "961A", "building": "Southport Building 2"},
+{"code": "980N", "building": "Carolina Crossing B"},
+{"code": "980R", "building": "Carolina Crossing C"},
+{"code": "984Q", "building": "Quadrangle 6101"},
+{"code": "998C", "building": "121 S Estes Drive"},
+{"code": "999", "building": "UNC CHILDREN'S RALEIGH"}
+]
+
+
+
 @app.route('/')
 def home():
-    return render_template('index.html', title='EHS Sign Form')
+    return render_template('index.html', title='EHS Sign Form', buildings=buildings)
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -87,20 +168,20 @@ def submit():
 
     # Extract form data for Laboratory Hazards
     hazards = {
-        'radioactive': '01radioactive.png',
-        'xray': '02xray.png',
-        'laser': '03laser.png',
-        'biohazard': '04BSL2.png',
-        'cancer': '05cancer.png',
-        'toxic': '06toxic.png',
-        'reproductive': '07reproductive_toxin.png',
-        'corrosive': '08corrosive.png',
-        'ultraviolet': '09ultraviolet.png',
-        'flammablem': '10flammable_materials.png',
-        'oxidizing': '11oxidizing.png',
-        'water': '12water.png',
-        'flammableg': '13flammable_gas.png',
-        'nflammableg': '14non_flammable_gas.png',
+        'radioactive': '01radioactive.svg',
+        'xray': '02xray.svg',
+        'laser': '03laser.svg',
+        'biohazard': '04BSL2.svg',
+        'cancer': '05cancer.svg',
+        'toxic': '06toxic.svg',
+        'reproductive': '07reproductive_toxin.svg',
+        'corrosive': '08corrosive.svg',
+        'ultraviolet': '09ultraviolet.svg',
+        'flammablem': '10flammable_materials.svg',
+        'oxidizing': '11oxidizing.svg',
+        'water': '12water.svg',
+        'flammableg': '13flammable_gas.svg',
+        'nflammableg': '14non_flammable_gas.svg',
     }
 
     # Create a list of selected hazard icons with proper URLs
@@ -118,6 +199,18 @@ def submit():
     department = request.form['department']
     building = request.form['building']
     room_number = request.form['room_number']
+
+    # Find the building code based on the selected building
+    building_code = next((b['code'] for b in buildings if b['building'] == building), 'unknown')
+
+    # Create the filename in the format "code-room_number"
+    filename = f"{building_code}-{room_number}.pdf"
+
+    # Debugging print statements
+    print(f"Building: {building}")
+    print(f"Building Code: {building_code}")
+    print(f"Room Number: {room_number}")
+    print(f"Filename: {filename}")
 
     # Prepare data for the template
     context = {
@@ -149,15 +242,10 @@ def submit():
         stylesheets=[CSS(string='@page { size: 8.5in 11in; margin: 0in; }')]
     )
 
-    # Print CSS path for debugging
-    css_path = url_for('static', filename='css/horizontalstyle.css', _external=True)
-    print("CSS path:")
-    print(css_path)
-
     # Create a response to send the PDF back to the client
     response = make_response(pdf)
     response.headers['Content-Type'] = 'application/pdf'
-    response.headers['Content-Disposition'] = 'inline; filename=lab_sign.pdf'
+    response.headers['Content-Disposition'] = f'inline; filename="{filename}"'
 
     return response
 

@@ -87,7 +87,12 @@
                 </div>
                 <div class="form-row">
                     <label for="building">Building:</label>
-                    <input type="text" id="building" name="building" placeholder="Enter building" value="{{ request.form.building }}">
+                    <input type="text" list="buildings" id="building" name="building" placeholder="Enter or select building" value="{{ request.form.get('building', '') }}">
+                    <datalist id="buildings">
+                        {% for building in buildings %}
+                            <option value="{{ building['building'] }}"></option>
+                        {% endfor %}
+                    </datalist>
                 </div>
                 <div class="form-row">
                     <label for="room_number">Room Number:</label>
@@ -278,106 +283,131 @@
     </form>
 
     <script>
-    function formatPhoneNumber(input) {
-    let phoneNumber = input.value.replace(/\D/g, '');
-    if (phoneNumber.length <= 3) {
-        input.value = `(${phoneNumber}`;
-    } else if (phoneNumber.length <= 6) {
-        input.value = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
-    } else {
-        input.value = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
-    }
-}
-
-    function capitalizeFirstLetter(input) {
-        input.value = input.value.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
-    }
-
-    function toggleSignFields() {
-        var yesRadio = document.getElementById('signs_yes');
-        var noRadio = document.getElementById('signs_no');
-        var signFieldsYes = document.getElementById('signFieldsYes');
-        var signFieldsNo = document.getElementById('signFieldsNo');
-
-        if (yesRadio.checked) {
-            signFieldsYes.style.display = 'block';
-            signFieldsNo.style.display = 'none';
-        } else if (noRadio.checked) {
-            signFieldsYes.style.display = 'none';
-            signFieldsNo.style.display = 'block';
-        } else {
-            signFieldsYes.style.display = 'none';
-            signFieldsNo.style.display = 'none';
+        function formatPhoneNumber(input) {
+            let phoneNumber = input.value.replace(/\D/g, '');
+            if (phoneNumber.length <= 3) {
+                input.value = `(${phoneNumber}`;
+            } else if (phoneNumber.length <= 6) {
+                input.value = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+            } else {
+                input.value = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+            }
         }
-    }
-
-    function toggleCustomSignMessage() {
-        var yesOption = document.getElementById('shared_yes');
-        var message = document.getElementById('customSignMessage');
-        if (yesOption.checked) {
-            message.style.display = 'block';
-        } else {
-            message.style.display = 'none';
+        
+        function capitalizeFirstLetter(input) {
+            input.value = input.value.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
         }
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('primary_first_name').addEventListener('input', function() {
-            capitalizeFirstLetter(this);
-        });
-
-        document.getElementById('primary_last_name').addEventListener('input', function() {
-            capitalizeFirstLetter(this);
-        });
-
-        document.getElementById('phone_pi').addEventListener('input', function() {
-            formatPhoneNumber(this);
-        });
-
-        document.getElementById('phone_pi_secondary').addEventListener('input', function() {
-            formatPhoneNumber(this);
-        });
-
-        document.getElementById('phone_primary').addEventListener('input', function() {
-            formatPhoneNumber(this);
-        });
-
-        document.getElementById('phone_secondary').addEventListener('input', function() {
-            formatPhoneNumber(this);
-        });
-
-        document.getElementById('phone_alternate').addEventListener('input', function() {
-            formatPhoneNumber(this);
-        });
-
-        document.getElementById('phone_secondary_alternate').addEventListener('input', function() {
-            formatPhoneNumber(this);
-        });
-
-        // Ensure the functions are called when the page loads to handle pre-checked states
-        toggleSignFields();
-        toggleCustomSignMessage();
-
-        var errorMessage = "{{ error_message }}";
-        if (errorMessage) {
-            alert(errorMessage);
+        
+        function toggleSignFields() {
+            var yesRadio = document.getElementById('signs_yes');
+            var noRadio = document.getElementById('signs_no');
+            var signFieldsYes = document.getElementById('signFieldsYes');
+            var signFieldsNo = document.getElementById('signFieldsNo');
+        
+            if (yesRadio.checked) {
+                signFieldsYes.style.display = 'block';
+                signFieldsNo.style.display = 'none';
+            } else if (noRadio.checked) {
+                signFieldsYes.style.display = 'none';
+                signFieldsNo.style.display = 'block';
+            } else {
+                signFieldsYes.style.display = 'none';
+                signFieldsNo.style.display = 'none';
+            }
         }
+        
+        function toggleCustomSignMessage() {
+            var yesOption = document.getElementById('shared_yes');
+            var message = document.getElementById('customSignMessage');
+            if (yesOption.checked) {
+                message.style.display = 'block';
+            } else {
+                message.style.display = 'none';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('primary_first_name').addEventListener('input', function() {
+                capitalizeFirstLetter(this);
+            });
+        
+            document.getElementById('primary_last_name').addEventListener('input', function() {
+                capitalizeFirstLetter(this);
+            });
+        
+            document.getElementById('phone_pi').addEventListener('input', function() {
+                formatPhoneNumber(this);
+            });
+        
+            document.getElementById('phone_pi_secondary').addEventListener('input', function() {
+                formatPhoneNumber(this);
+            });
+        
+            document.getElementById('phone_primary').addEventListener('input', function() {
+                formatPhoneNumber(this);
+            });
+        
+            document.getElementById('phone_secondary').addEventListener('input', function() {
+                formatPhoneNumber(this);
+            });
+        
+            document.getElementById('phone_alternate').addEventListener('input', function() {
+                formatPhoneNumber(this);
+            });
+        
+            document.getElementById('phone_secondary_alternate').addEventListener('input', function() {
+                formatPhoneNumber(this);
+            });
+        
+            // Ensure the functions are called when the page loads to handle pre-checked states
+            toggleSignFields();
+            toggleCustomSignMessage();
+        
+            var errorMessage = "{{ error_message }}";
+            if (errorMessage) {
+                alert(errorMessage);
+            }
+        
+            // Add event listeners for the second question
+            document.getElementById('shared_yes').addEventListener('change', toggleCustomSignMessage);
+            document.getElementById('shared_no').addEventListener('change', toggleCustomSignMessage);
+        
+            // Add event listeners for the first question
+            document.getElementById('signs_yes').addEventListener('change', toggleSignFields);
+            document.getElementById('signs_no').addEventListener('change', toggleSignFields);
+        
+            // Set placeholder text for additional info textarea
+            var textarea = document.getElementById('additionalInfo');
+            textarea.placeholder = "Additional PI: Alice Smith (555) 123-4567\nAlternate contact: Bob Johnson (555) 987-6543";
+                
+            // Filtering and highlighting for the building datalist
+            const buildingInput = document.getElementById('building');
+            const dataList = document.getElementById('buildings');
+            const originalOptions = Array.from(dataList.options);
 
-        // Add event listeners for the second question
-        document.getElementById('shared_yes').addEventListener('change', toggleCustomSignMessage);
-        document.getElementById('shared_no').addEventListener('change', toggleCustomSignMessage);
+            buildingInput.addEventListener('input', function() {
+                const inputValue = buildingInput.value.toLowerCase();
+                dataList.innerHTML = ''; // Clear existing options
 
-        // Add event listeners for the first question
-        document.getElementById('signs_yes').addEventListener('change', toggleSignFields);
-        document.getElementById('signs_no').addEventListener('change', toggleSignFields);
+                const filteredOptions = originalOptions.filter(option => 
+                    option.value.toLowerCase().startsWith(inputValue)
+                );
 
-        // Set placeholder text for additional info textarea
-        var textarea = document.getElementById('additionalInfo');
-        textarea.placeholder = "Additional PI: Alice Smith (555) 123-4567\nAlternate contact: Bob Johnson (555) 987-6543";
-    });
-
-    </script>
-    
+                const maxOptionsToShow = 10;
+                filteredOptions.slice(0, maxOptionsToShow).forEach(option => {
+                    const highlightedText = option.value.replace(
+                        new RegExp(`^${inputValue}`, 'i'),
+                        (match) => `<span class="highlight">${match}</span>`
+                    );
+                    const newOption = document.createElement('option');
+                    newOption.value = option.value;
+                    newOption.innerHTML = highlightedText;
+                    dataList.appendChild(newOption);
+                });
+            });
+        });
+        </script>
+           
     
 </body>
 </html>
