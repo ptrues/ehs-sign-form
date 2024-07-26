@@ -81,7 +81,7 @@ buildings = [
 {"code": "980R", "building": "Carolina Crossing C"},
 {"code": "984Q", "building": "Quadrangle 6101"},
 {"code": "998C", "building": "121 S Estes Drive"},
-{"code": "999", "building": "UNC CHILDREN'S RALEIGH"}
+{"code": "999", "building": "UNC Children's Hospital-Raleigh"}
 ]
 
 
