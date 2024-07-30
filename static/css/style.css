@@ -1,3 +1,58 @@
+/* Base style for the entire page */
+body {
+    font-family: "Open Sans", sans-serif;
+    color: #00274C; /* Navy blue */
+    background-color: white; 
+}
+
+/* Style for the main heading */
+h1 {
+    font-size: 36px;
+    color: #00274C; /* Navy blue */
+    text-align: center;
+}
+
+/* General styling for paragraphs */
+p {
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+/* Fieldset styling */
+fieldset {
+    border: 0px solid #CCCCCC;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #F5F5F5;
+}
+
+/* Legend styling */
+legend {
+    font-weight: bold;
+    color: #00274C; /* Navy blue */
+    font-size: 24px;
+    position: relative;
+    top: 20px; /* Adjust this value to shift the legend up or down */
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+/* Label styling */
+label {
+    display: block;
+    width: 200px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-left: 8px;
+}
+
+/* Form row styling */
+.form-row {
+    margin-bottom: 20px; 
+}
+
 /* Base style for all text input fields, number input fields, tel input fields, and textarea fields */
 input[type="text"],
 input[type="number"],
@@ -8,8 +63,8 @@ textarea {
     padding: 10px;                 /* Padding inside the input */
     font-size: 16px;               /* Font size */
     color: #333;                   /* Text color */
-    background-color: white;     /* Background */
-    width: 100%;                   /* Full width */
+    background-color: white;       /* Background */
+    width: 350px;                  /* Full width */
     box-sizing: border-box;        /* Include padding and border in element's total width and height */
     transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transitions for focus state */
 }
@@ -30,7 +85,7 @@ textarea {
     resize: vertical;              /* Allow vertical resizing */
 }
 
-
+/* Remove spin buttons from number inputs */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -95,75 +150,20 @@ input[type="radio"]:checked::before {
     transform: translate(-50%, -50%); /* Centered */
 }
 
-
-body {
-    font-family: "Open Sans", sans-serif;
-    color: #00274C; /* Navy blue */
-    background-color: white; 
+/* Clear button styled as a hyperlink */
+.clear-button {
+    background: none;
+    border: none;
+    color: navy;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: inherit;
+    padding: 0;
+    position: absolute;
+    right: 10px;
 }
 
-h1 {
-    font-size: 36px;
-    color: #00274C; /* Navy blue */
-    text-align: center;
-}
-
-h3 {
-    font-size: medium;
-}
-
-p{
-    font-weight:bold;
-    margin-bottom: 5px;
-    margin-top: 20px;
-}
-
-
-fieldset {
-    border: 0px solid #CCCCCC;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: #F5F5F5;
-}
-
-legend {
-    font-weight: bold;
-    color: #00274C; /* Navy blue */
-    font-size: 24px;
-    position: relative;
-    top: 20px; /* Adjust this value to shift the legend up or down */
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-
-
-label {
-    display: inline-block;
-    width: 200px;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-    margin-left: 8px;
-}
-
-
-.form-row {
-    margin-bottom: 20px; 
-}
-
-.department-input {
-    width: 40%;
-}
-
-.building-input {
-    width: 40%;
-}
-
-.room_number-input{
-    width: 40%;
-}
-
+/* Styling for grid container and items */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -192,8 +192,7 @@ label {
     margin-left: 10px;  /* Add some space between the checkbox and the image */
 }
 
-
-/* Responsive styles */
+/* Responsive styles for grid layout */
 @media (max-width: 1200px) {
     .grid-container {
         grid-template-columns: repeat(3, 1fr);
@@ -227,11 +226,12 @@ label {
     }
 }
 
+/* Styling for multi-sign grid container and items */
 .multi-sign-grid-container {
     display: flex; /* Use flexbox to keep the radio buttons inline */
     gap: 10px; /* Add space between the radio buttons */
-    margin-bottom: 00000;
-    margin-left: 00000;
+    margin-bottom: 0;
+    margin-left: 0;
     width: 100%;
     flex-wrap: wrap; /* Allow items to wrap to the next line */
 }
@@ -243,7 +243,7 @@ label {
     gap: 10px;
 }
 
-
+/* Styling for follow-up questions */
 .multi-sign-follow-up {
     display: flex;
     flex-direction: column; /* Stack follow-up questions vertically */
@@ -268,9 +268,8 @@ label {
 }
 
 .orientation-options {
-    margin-left: 00000;
+    margin-left: 0;
 }
-
 
 .horizontal-label,
 .vertical-label {
@@ -294,11 +293,11 @@ label {
 
 /* Ensure the paragraph stays above the radio buttons */
 .shared-space-fieldset p {
-    margin-bottom: 0000;  /* Space between question and radio buttons */
+    margin-bottom: 0;  /* Space between question and radio buttons */
 }
 
-div.shared-space-option{
-    margin: 0 0 0 0
+div.shared-space-option {
+    margin: 0;
 }
 
 /* Add media query for smaller screens */
@@ -317,6 +316,7 @@ div.shared-space-option{
         margin-left: 0;
         gap: 5px; /* Adjust gap for smaller screens */
     }
+
     .shared-space-question {
         flex-direction: column;
         align-items: flex-start; /* Align items to the start */
@@ -325,8 +325,7 @@ div.shared-space-option{
     }
 }
 
-
-
+/* Styling for the submit button */
 .submit-button {
     font-size: 1.2em;
     padding: 10px 20px;
@@ -339,10 +338,29 @@ div.shared-space-option{
     margin-bottom: 30px;
 }
 
-.submit-button:hover{
-    background-color:#025baf
+.submit-button:hover {
+    background-color: #025baf;
 }
 
+/* Error animation for input fields */
+@keyframes red-border {
+    0% {
+        border-color: #00274C;
+    }
+    25% {
+        border-color: red;
+    }
+    100% {
+        border-color: red;
+    }
+}
+
+.error {
+    animation: red-border 3s ease;
+    border: 2px solid red;
+}
+
+/* Form row margin */
 .form-row {
     margin-bottom: 10px;
 }

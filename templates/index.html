@@ -12,28 +12,31 @@
     <h1>{{ title }}</h1>
 
     <form name="form1" method="POST" action="/submit" onsubmit="return labSignValidate(this)">
+
+        <button type="button" class="clear-button" onclick="clearForm()">Clear Form</button>
+
         <section>
             <fieldset>
                 <legend>Principal Investigator</legend>
                 <div class="form-row">
-                    <label for="pi_first_name">First name:</label>
-                    <input type="text" id="pi_first_name" name="pi_first_name" placeholder="Enter first name" required value="{{ request.form.pi_first_name }}">
+                    <label for="PI_first_name">First name:</label>
+                    <input type="text" id="PI_first_name" name="PI_first_name" placeholder="Enter first name" required value="{{ request.form.get('PI_first_name', '') }}">
                 </div>
                 <div class="form-row">
-                    <label for="pi_last_name">Last name:</label>
-                    <input type="text" id="pi_last_name" name="pi_last_name" placeholder="Enter last name" required value="{{ request.form.pi_last_name }}">
+                    <label for="PI_last_name">Last name:</label>
+                    <input type="text" id="PI_last_name" name="PI_last_name" placeholder="Enter last name" required value="{{ request.form.get('PI_last_name', '') }}">
                 </div>
                 <div class="form-row">
-                    <label for="phone_pi">After-hours phone:</label>
-                    <input type="tel" id="phone_pi" name="phone_pi" placeholder="(123) 123-1234" required oninput="formatPhoneNumber(this)" value="{{ request.form.phone_pi }}">
+                    <label for="PI_phone">After-hours phone:</label>
+                    <input type="tel" id="PI_phone" name="PI_phone" placeholder="(123) 123-1234" required oninput="formatPhoneNumber(this)" value="{{ request.form.get('PI_phone', '') }}">
                 </div>
                 <div class="form-row">
-                    <label for="phone_pi_secondary">Secondary phone:</label>
-                    <input type="tel" id="phone_pi_secondary" name="phone_pi_secondary" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)" value="{{ request.form.phone_pi_secondary }}">
+                    <label for="PI_after_hours">Secondary phone:</label>
+                    <input type="tel" id="PI_after_hours" name="PI_after_hours" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)" value="{{ request.form.get('PI_after_hours', '') }}">
                 </div>
             </fieldset>
         </section>
-
+        
         <section>
             <fieldset>
                 <legend>Primary Contact</legend>
@@ -46,16 +49,16 @@
                     <input type="text" id="primary_last_name" name="primary_last_name" placeholder="Enter last name" required value="{{ request.form.primary_last_name }}">
                 </div>
                 <div class="form-row">
-                    <label for="phone_primary">After-hours phone:</label>
-                    <input type="tel" id="phone_primary" name="phone_primary" placeholder="(123) 123-1234" required oninput="formatPhoneNumber(this)" value="{{ request.form.phone_primary }}">
+                    <label for="primary_after_hours">After-hours phone:</label>
+                    <input type="tel" id="primary_after_hours" name="primary_after_hours" placeholder="(123) 123-1234" required oninput="formatPhoneNumber(this)" value="{{ request.form.primary_after_hours }}">
                 </div>
                 <div class="form-row">
-                    <label for="phone_secondary">Secondary phone:</label>
-                    <input type="tel" id="phone_secondary" name="phone_secondary" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)" value="{{ request.form.phone_secondary }}">
+                    <label for="primary_phone">Secondary phone:</label>
+                    <input type="tel" id="primary_phone" name="primary_phone" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)" value="{{ request.form.primary_phone }}">
                 </div>
             </fieldset>
         </section>
-
+        
         <section>
             <fieldset>
                 <legend>Alternate Contact (optional)</legend>
@@ -68,15 +71,16 @@
                     <input type="text" id="alternate_last_name" name="alternate_last_name" placeholder="Enter last name" value="{{ request.form.alternate_last_name }}">
                 </div>
                 <div class="form-row">
-                    <label for="phone_alternate">After-hours phone:</label>
-                    <input type="tel" id="phone_alternate" name="phone_alternate" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)" value="{{ request.form.phone_alternate }}">
+                    <label for="alternate_phone">After-hours phone:</label>
+                    <input type="tel" id="alternate_phone" name="alternate_phone" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)" value="{{ request.form.alternate_phone }}">
                 </div>
                 <div class="form-row">
-                    <label for="phone_secondary_alternate">Secondary phone:</label>
-                    <input type="tel" id="phone_secondary_alternate" name="phone_secondary_alternate" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)" value="{{ request.form.phone_secondary_alternate }}">
+                    <label for="alternate_after_hours">Secondary phone:</label>
+                    <input type="tel" id="alternate_after_hours" name="alternate_after_hours" placeholder="(123) 123-1234" oninput="formatPhoneNumber(this)" value="{{ request.form.alternate_after_hours }}">
                 </div>
             </fieldset>
         </section>
+        
 
         <section>
             <fieldset>
@@ -282,6 +286,8 @@
         <input type="submit" value="Submit Sign Form" class="submit-button">
     </form>
 
+
+
     <script>
         function formatPhoneNumber(input) {
             let phoneNumber = input.value.replace(/\D/g, '');
@@ -293,17 +299,17 @@
                 input.value = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
             }
         }
-        
+    
         function capitalizeFirstLetter(input) {
             input.value = input.value.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
         }
-        
+    
         function toggleSignFields() {
             var yesRadio = document.getElementById('signs_yes');
             var noRadio = document.getElementById('signs_no');
             var signFieldsYes = document.getElementById('signFieldsYes');
             var signFieldsNo = document.getElementById('signFieldsNo');
-        
+    
             if (yesRadio.checked) {
                 signFieldsYes.style.display = 'block';
                 signFieldsNo.style.display = 'none';
@@ -315,7 +321,7 @@
                 signFieldsNo.style.display = 'none';
             }
         }
-        
+    
         function toggleCustomSignMessage() {
             var yesOption = document.getElementById('shared_yes');
             var message = document.getElementById('customSignMessage');
@@ -325,57 +331,86 @@
                 message.style.display = 'none';
             }
         }
-        
+    
+        function highlightErrorFields() {
+            const PI_phone = document.getElementById('PI_phone');
+            const PI_after_hours = document.getElementById('PI_after_hours');
+            const primary_phone = document.getElementById('primary_phone');
+            const primary_after_hours = document.getElementById('primary_after_hours');
+    
+            // Remove existing error class
+            PI_phone.classList.remove('error');
+            PI_after_hours.classList.remove('error');
+            primary_phone.classList.remove('error');
+            primary_after_hours.classList.remove('error');
+    
+            // Add error class to fields with duplicate phone numbers
+            let phoneNumbers = {};
+            [PI_phone, PI_after_hours, primary_phone, primary_after_hours].forEach(field => {
+                if (field.value) {
+                    if (phoneNumbers[field.value]) {
+                        phoneNumbers[field.value].forEach(f => f.classList.add('error'));
+                        field.classList.add('error');
+                    } else {
+                        phoneNumbers[field.value] = [field];
+                    }
+                }
+            });
+        }
+    
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('primary_first_name').addEventListener('input', function() {
                 capitalizeFirstLetter(this);
             });
-        
+    
             document.getElementById('primary_last_name').addEventListener('input', function() {
                 capitalizeFirstLetter(this);
             });
-        
-            document.getElementById('phone_pi').addEventListener('input', function() {
+    
+            document.getElementById('PI_phone').addEventListener('input', function() {
                 formatPhoneNumber(this);
             });
-        
-            document.getElementById('phone_pi_secondary').addEventListener('input', function() {
+    
+            document.getElementById('PI_after_hours').addEventListener('input', function() {
                 formatPhoneNumber(this);
             });
-        
-            document.getElementById('phone_primary').addEventListener('input', function() {
+    
+            document.getElementById('primary_phone').addEventListener('input', function() {
                 formatPhoneNumber(this);
             });
-        
-            document.getElementById('phone_secondary').addEventListener('input', function() {
+    
+            document.getElementById('primary_after_hours').addEventListener('input', function() {
                 formatPhoneNumber(this);
             });
-        
-            document.getElementById('phone_alternate').addEventListener('input', function() {
+    
+            document.getElementById('alternate_phone').addEventListener('input', function() {
                 formatPhoneNumber(this);
             });
-        
-            document.getElementById('phone_secondary_alternate').addEventListener('input', function() {
+    
+            document.getElementById('alternate_after_hours').addEventListener('input', function() {
                 formatPhoneNumber(this);
             });
-        
+    
             // Ensure the functions are called when the page loads to handle pre-checked states
             toggleSignFields();
             toggleCustomSignMessage();
-        
+    
             var errorMessage = "{{ error_message }}";
             if (errorMessage) {
                 alert(errorMessage);
+                highlightErrorFields();
+            } else {
+                clearErrorMessages();
             }
-        
+    
             // Add event listeners for the second question
             document.getElementById('shared_yes').addEventListener('change', toggleCustomSignMessage);
             document.getElementById('shared_no').addEventListener('change', toggleCustomSignMessage);
-        
+    
             // Add event listeners for the first question
             document.getElementById('signs_yes').addEventListener('change', toggleSignFields);
             document.getElementById('signs_no').addEventListener('change', toggleSignFields);
-        
+    
             // Set placeholder text for additional info textarea
             var textarea = document.getElementById('additionalInfo');
             textarea.placeholder = "Additional PI: Alice Smith (555) 123-4567\nAlternate contact: Bob Johnson (555) 987-6543";
@@ -384,15 +419,15 @@
             const buildingInput = document.getElementById('building');
             const dataList = document.getElementById('buildings');
             const originalOptions = Array.from(dataList.options);
-
+    
             buildingInput.addEventListener('input', function() {
                 const inputValue = buildingInput.value.toLowerCase();
                 dataList.innerHTML = ''; // Clear existing options
-
+    
                 const filteredOptions = originalOptions.filter(option => 
                     option.value.toLowerCase().startsWith(inputValue)
                 );
-
+    
                 const maxOptionsToShow = 10;
                 filteredOptions.slice(0, maxOptionsToShow).forEach(option => {
                     const highlightedText = option.value.replace(
@@ -406,8 +441,9 @@
                 });
             });
         });
-        </script>
-           
+    </script>
+    
+    
     
 </body>
 </html>

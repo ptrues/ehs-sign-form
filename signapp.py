@@ -95,76 +95,69 @@ def submit():
     error_message = None
 
     # Extract form data for contacts
-    pi_first_name = request.form.get('pi_first_name')
-    pi_last_name = request.form.get('pi_last_name')
-    phone_pi = request.form.get('phone_pi')
-    phone_pi_secondary = request.form.get('phone_pi_secondary')
+    PI_first_name = request.form.get('PI_first_name')
+    PI_last_name = request.form.get('PI_last_name')
+    PI_phone = request.form.get('PI_phone')
+    PI_after_hours = request.form.get('PI_after_hours')
 
     primary_first_name = request.form.get('primary_first_name')
     primary_last_name = request.form.get('primary_last_name')
-    phone_primary = request.form.get('phone_primary')
-    phone_secondary = request.form.get('phone_secondary')
+    primary_phone = request.form.get('primary_phone')
+    primary_after_hours = request.form.get('primary_after_hours')
 
     alternate_first_name = request.form.get('alternate_first_name')
     alternate_last_name = request.form.get('alternate_last_name')
-    phone_alternate = request.form.get('phone_alternate')
-    phone_secondary_alternate = request.form.get('phone_secondary_alternate')
+    alternate_phone = request.form.get('alternate_phone')
+    alternate_after_hours = request.form.get('alternate_after_hours')
+
+    # Debugging print statements for PI and primary data
+    print(f"PI_first_name: {PI_first_name}")
+    print(f"PI_last_name: {PI_last_name}")
+    print(f"PI_phone: {PI_phone}")
+    print(f"PI_after_hours: {PI_after_hours}")
+    print(f"primary_first_name: {primary_first_name}")
+    print(f"primary_last_name: {primary_last_name}")
+    print(f"primary_phone: {primary_phone}")
+    print(f"primary_after_hours: {primary_after_hours}")
 
     # Initialize phone output variables
-    pi_phone_output = phone_pi
-    primary_phone_output = phone_primary
+    primary_phone_output = primary_after_hours  # Primary contact's emergency phone prioritized
+    PI_phone_output = PI_after_hours if PI_after_hours != primary_after_hours else PI_phone
+
+    # Check for unique phone numbers
+    unique_phones = set(filter(None, [PI_phone, PI_after_hours, primary_phone, primary_after_hours, alternate_phone, alternate_after_hours]))
+    if len(unique_phones) < 2:
+        error_message = "At least two contact numbers are required."
+        print(f"Error: {error_message}")
+    else:
+        error_message = None
+
+    # Return an error if found
+    if error_message:
+        return render_template('index.html', title='EHS Sign Form', buildings=buildings, error_message=error_message, request_form=request.form)
 
     # Check if alternate contact fields are empty
-    if not alternate_first_name and not alternate_last_name and not phone_alternate and not phone_secondary_alternate:
-        # If PI and Primary Contact fields are the same
-        if (pi_first_name == primary_first_name and
-            pi_last_name == primary_last_name and
-            phone_pi == phone_primary and
-            phone_pi_secondary == phone_secondary):
+    if not alternate_first_name and not alternate_last_name and not alternate_phone and not alternate_after_hours:
+        # List of potential alternate contacts
+        potential_alternates = [
+            (primary_first_name, primary_last_name, primary_phone),  # Primary contact's main phone
+            (PI_first_name, PI_last_name, PI_phone),  # PI's main phone if different
+        ]
 
-            # Check if the secondary phone field is empty
-            if not phone_pi_secondary:
-                # Set an error message if at least two contact numbers are required
-                error_message = "At least two contact numbers are required."
-            else:
-                # Clear alternate contact fields
-                alternate_first_name = ''
-                alternate_last_name = ''
-                phone_alternate = ''
-                phone_secondary_alternate = ''
-                # Set PI phone output to phone_pi_secondary
-                pi_phone_output = phone_pi_secondary
-        else:
-            # Maintain original phone output variables
-            pi_phone_output = phone_pi
-            primary_phone_output = phone_primary
+        # Find the first unused contact number
+        for first_name, last_name, phone in potential_alternates:
+            if phone != primary_phone_output and phone != PI_phone_output:
+                alternate_first_name = first_name
+                alternate_last_name = last_name
+                alternate_phone = phone
+                alternate_after_hours = ''  # No secondary phone for the alternate
+                break
     else:
-        # If alternate contact fields are not empty, use the user-provided data
-        alternate_first_name = request.form['alternate_first_name']
-        alternate_last_name = request.form['alternate_last_name']
-        phone_alternate = request.form['phone_alternate']
-        phone_secondary_alternate = request.form['phone_secondary_alternate']
-
-        # Additional logic for PI and Primary Contact fields
-        if phone_pi == phone_primary:
-            if not phone_pi_secondary and not phone_secondary:
-                # Both PI and Primary Contact fields to be populated with the primary phone
-                pi_phone_output = phone_primary
-                primary_phone_output = phone_primary
-            elif phone_pi_secondary == phone_secondary:
-                # Primary Contact field to be populated with the primary phone and PI contact field with the secondary phone
-                pi_phone_output = phone_pi_secondary
-                primary_phone_output = phone_primary
-            else:
-                pi_phone_output = phone_primary
-                primary_phone_output = phone_primary
-        else:
-            pi_phone_output = phone_pi
-            primary_phone_output = phone_primary
-
-    # If there's an error, render the form with the error message
-    if error_message:
-        return render_template('index.html', error_message=error_message)
+        # Use user-provided alternate contact data if available
+        alternate_first_name = request.form.get('alternate_first_name')
+        alternate_last_name = request.form.get('alternate_last_name')
+        alternate_phone = request.form.get('alternate_phone')
+        alternate_after_hours = request.form.get('alternate_after_hours')
 
     # Extract form data for Laboratory Hazards
     hazards = {
@@ -191,10 +184,6 @@ def submit():
     while len(selected_hazards) < 10:
         selected_hazards.append(f'{request.host_url}static/images/00EMPTY.png')
 
-    # Check if PI after-hours phone is the same as the primary contact after-hours phone
-    if phone_pi == phone_primary:
-        phone_pi = phone_pi_secondary
-
     # Extract form data for Laboratory Information
     department = request.form['department']
     building = request.form['building']
@@ -219,9 +208,9 @@ def submit():
         'primary_contact': f"{primary_first_name} {primary_last_name}",
         'primary_phone': primary_phone_output,
         'alternate_contact': f"{alternate_first_name} {alternate_last_name}",
-        'alternate_phone': phone_alternate,
-        'pi_contact': f"{pi_first_name} {pi_last_name}",
-        'pi_phone': pi_phone_output,
+        'alternate_phone': alternate_phone,
+        'PI_contact': f"{PI_first_name} {PI_last_name}",
+        'PI_phone': PI_phone_output,
         'department': department,
         'date_updated': datetime.today().strftime('%m/%d/%Y'),
         'hazard_icons': selected_hazards  # Use the full URL directly
