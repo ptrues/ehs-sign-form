@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biohazard Form</title>
+</head>
+
+<body>
+
+    <form name="form1" method="POST" action="/submit" onsubmit="return labSignValidate(this)">
+        <section>
+            <fieldset>
+                <legend>Biological Safety Level</legend>
+                <div class="form-row">
+                    <input type="radio" id="bsl1" name="bsl" value="BSL1"/>                   
+                    <label for="bsl1">BSL1</label>
+                </div>
+                <div class="form-row">
+                    <input type="radio" id="bsl2" name="bsl" value="BSL2"/>                   
+                    <label for="bsl2">BSL2</label>
+                </div>
+                <div class="form-row">
+                    <input type="radio" id="bsl2plus" name="bsl" value="BSL2+"/>                   
+                    <label for="bsl2plus">BSL2+</label>
+                </div>
+                <div class="form-row">
+                    <input type="radio" id="bsl3" name="bsl" value="BSL3"/>                   
+                    <label for="bsl3">BSL3</label>
+                </div>
+            </fieldset>
+        </section>
+    
+    <section>
+        <fieldset>
+            <legend>Biological Agents</legend>
+            <div class="form-row">
+                <input type="checkbox" id="animal_clinical" name="biological_agents" value="Animal source material (clinical specimens)"/>                   
+                <label for="animal_clinical">Animal source material (clinical specimens)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="animal_tissue" name="biological_agents" value="Animal source material (tissue/cell culture)"/>                   
+                <label for="animal_tissue">Animal source material (tissue/cell culture)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="animal_other" name="biological_agents" value="Animal source material (other)"/>                   
+                <label for="animal_other">Animal source material (other)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="fungi_bioassay" name="biological_agents" value="Fungi (bioassay/other)"/>                   
+                <label for="fungi_bioassay">Fungi (bioassay/other)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="fungi_culture" name="biological_agents" value="Fungi (culturing)"/>                   
+                <label for="fungi_culture">Fungi (culturing)</label>
+            </div>            
+            <div class="form-row">
+                <input type="checkbox" id="human_clinical" name="biological_agents" value="Human source material (clinical specimens)"/>                   
+                <label for="human_clinical">Human source material (clinical specimens)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="human_tissue" name="biological_agents" value="Human source material (tissue/cell culture)"/>                   
+                <label for="human_tissue">Human source material (tissue/cell culture)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="human_other" name="biological_agents" value="Human source material (other)"/>                   
+                <label for="human_other">Human source material (other)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="nonhuman_rhesus" name="biological_agents" value="Non-human primate source material (R. macaque derived)"/>                   
+                <label for="nonhuman_rhesus">Non-human primate source material (R. macaque derived)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="nonhuman_other" name="biological_agents" value="Non-human primate source material (other)"/>                   
+                <label for="nonhuman_other">Non-human primate source material (other)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="biological_toxin" name="biological_agents" value="Biological toxin"/>                   
+                <label for="biological_toxin">Biological toxin</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="viral_vectors" name="biological_agents" value="Viral vectors"/>                   
+                <label for="viral_vectors">Viral vectors</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="plasmids" name="biological_agents" value="Plasmids"/>                   
+                <label for="plasmids">Plasmids</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="recombinant" name="biological_agents" value="Recombinant/synthetic nucleic acids (other)"/>                   
+                <label for="recombinant">Recombinant/synthetic nucleic acids (other)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="bacteria_culture" name="biological_agents" value="Bacteria (culturing)"/>                   
+                <label for="bacteria_culture">Bacteria (culturing)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="bacteria_bioassay" name="biological_agents" value="Bacteria (bioassay/other)"/>                   
+                <label for="bacteria_bioassay">Bacteria (bioassay/other)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="virus_culture" name="biological_agents" value="Virus (culturing)"/>                   
+                <label for="virus_culture">Virus (culturing)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="virus_bioassay" name="biological_agents" value="Virus (bioassay/other)"/>                   
+                <label for="virus_bioassay">Virus (bioassay/other)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="prions" name="biological_agents" value="Prions"/>                   
+                <label for="prions">Prions</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="other" name="biological_agents" value="Other" onclick="toggleOtherTextBox(this)"/>                   
+                <label for="other">Other</label>
+            </div>
+            <div class="form-row" id="otherTextBox" style="display: none; margin-left: 20px;">
+                <label for="other_specify">Please specify:</label>
+                <input type="text" id="other_specify" name="other_biological_agent"/>
+            </div>
+        </fieldset>
+    </section>
+
+    <section>
+        <fieldset>
+            <legend>Vaccines Required</legend>
+            <div class="form-row">
+                <input type="checkbox" id="anthrax" name="vaccines" value="Anthrax"/>                   
+                <label for="anthrax">Anthrax</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="bcg_tb" name="vaccines" value="Bacille Calmette-Guérin (BCG)/ Tuberculosis (TB) Disease"/>                   
+                <label for="bcg_tb">Bacille Calmette-Guérin (BCG)/ Tuberculosis (TB) Disease</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="cholera" name="vaccines" value="Cholera"/>                   
+                <label for="cholera">Cholera</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="covid" name="vaccines" value="COVID-19 Vaccine and Current Booster"/>                   
+                <label for="covid">COVID-19 Vaccine and Current Boster</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="dtap_tdap_td" name="vaccines" value="DTaP/Tdap/Td (Pertussis, Tetanus, and Diphtheria)"/>                   
+                <label for="dtap_tdap_td">DTaP/Tdap/Td (Pertussis, Tetanus, and Diphtheria)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="hepatitis_a" name="vaccines" value="Hepatitis A"/>                   
+                <label for="hepatitis_a">Hepatitis A</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="hepatitis_b" name="vaccines" value="Hepatitis B"/>                   
+                <label for="hepatitis_b">Hepatitis B</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="hib" name="vaccines" value="Hib (Haemophilus Influenzae type B)"/>                   
+                <label for="hib">Hib (Haemophilus Influenzae type B)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="hpv" name="vaccines" value="Human Papillomavirus (HPV)"/>                   
+                <label for="hpv">Human Papillomavirus (HPV)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="influenza" name="vaccines" value="Influenza"/>                   
+                <label for="influenza">Influenza</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="japanese_encephalitis" name="vaccines" value="Japanese Encephalitis"/>                   
+                <label for="japanese_encephalitis">Japanese Encephalitis</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="mmr" name="vaccines" value="MMR (Measles, Mumps and Rubella)"/>                   
+                <label for="mmr">MMR (Measles, Mumps and Rubella)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="mmrv" name="vaccines" value="MMRV (Measles, Mumps, Rubella, and Varicella)"/>                   
+                <label for="mmrv">MMRV (Measles, Mumps, Rubella, and Varicella)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="meningococcal" name="vaccines" value="Meningococcal"/>                   
+                <label for="meningococcal">Meningococcal</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="pertussis" name="vaccines" value="Pertussis"/>                   
+                <label for="pertussis">Pertussis</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="pneumococcal" name="vaccines" value="Pneumococcal"/>                   
+                <label for="pneumococcal">Pneumococcal</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="polio" name="vaccines" value="Polio"/>                   
+                <label for="polio">Polio</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="rabies" name="vaccines" value="Rabies"/>                   
+                <label for="rabies">Rabies</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="rotavirus" name="vaccines" value="Rotavirus"/>                   
+                <label for="rotavirus">Rotavirus</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="smallpox" name="vaccines" value="Vaccinia (Smallpox) Vaccine"/>                   
+                <label for="smallpox">Vaccinia (Smallpox) Vaccine</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="tetanus" name="vaccines" value="Tetanus"/>                   
+                <label for="tetanus">Tetanus</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="tick_borne_encephalitis" name="vaccines" value="Tick-borne Encephalitis Virus (TBEV)"/>                   
+                <label for="tick_borne_encephalitis">Tick-borne Encephalitis Virus (TBEV)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="typhoid" name="vaccines" value="Typhoid (Salmonella serotype Typhi)"/>                   
+                <label for="typhoid">Typhoid (Salmonella serotype Typhi)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="varicella" name="vaccines" value="Varicella (Chickenpox)"/>                   
+                <label for="varicella">Varicella (Chickenpox)</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="yellow_fever" name="vaccines" value="Yellow Fever"/>                   
+                <label for="yellow_fever">Yellow Fever</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="zoster" name="vaccines" value="Zoster (Shingles)"/>                   
+                <label for="zoster">Zoster (Shingles)</label>
+            </div>
+        </fieldset>
+    </section>
+
+    <section>
+        <fieldset>
+            <legend>Medical Surveillance Required</legend>
+            <div class="form-row">
+                <input type="checkbox" id="respiratory_protection" name="medical_surveillance" value="Respiratory Protection Physical"/>                   
+                <label for="respiratory_protection">Respiratory Protection Physical</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="bsl3_physical" name="medical_surveillance" value="BSL3 Physical"/>                   
+                <label for="bsl3_physical">BSL3 Physical</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="tb_skin_test" name="medical_surveillance" value="Tuberculosis Skin Test"/>                   
+                <label for="tb_skin_test">Tuberculosis Skin Test</label>
+            </div>
+        </fieldset>
+    </section>
+    
+
+  </form>
+
+    <script>
+        function toggleOtherTextBox(checkbox) {
+            var textBox = document.getElementById('otherTextBox');
+            if (checkbox.checked) {
+                textBox.style.display = 'block';
+            } else {
+                textBox.style.display = 'none';
+            }
+        }
+    </script>
+    
+
+
+</body>
