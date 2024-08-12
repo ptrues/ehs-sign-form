@@ -51,6 +51,8 @@ label {
 /* Form row styling */
 .form-row {
     margin-bottom: 20px; 
+    display: flex;
+    align-items: center;
 }
 
 /* Base style for all text input fields, number input fields, tel input fields, and textarea fields */
@@ -266,6 +268,31 @@ input[type="radio"]:checked::before {
     align-items: center; /* Align radio buttons and labels in the center vertically */
     gap: 5px; /* Add space between radio buttons and labels */
 }
+
+.bsl-container {
+    display: flex;
+    gap: 35px; 
+    justify-content: start; /* Align items to the left */
+}
+
+.bsl-container .form-row {
+    display: inline-flex; /* Align radio button and label in a single line */
+    align-items: center; /* Center the items vertically */
+    margin: 0; /* Remove margin */
+    padding: 0; /* Remove padding */
+}
+
+.bsl-container .form-row label {
+    margin-left: 2px; /* Reduce space between radio button and label */
+    white-space: nowrap; /* Prevent labels from wrapping */
+    flex-grow: 0; /* Prevent labels from expanding */
+    width: auto; /* Ensure labels only take up as much space as their content */
+    padding: 0; /* Remove any padding */
+    overflow: hidden; /* Hide any overflow, if necessary */
+    text-overflow: ellipsis; /* Add ellipsis if text overflows */
+}
+
+
 
 .orientation-options {
     margin-left: 0;
