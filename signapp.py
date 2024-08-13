@@ -84,8 +84,6 @@ buildings = [
 {"code": "999", "building": "UNC Children's Hospital-Raleigh"}
 ]
 
-
-
 @app.route('/')
 def home():
     return render_template('index.html', title='EHS Sign Form', buildings=buildings)
@@ -110,54 +108,49 @@ def submit():
     alternate_phone = request.form.get('alternate_phone')
     alternate_after_hours = request.form.get('alternate_after_hours')
 
-    # Debugging print statements for PI and primary data
-    print(f"PI_first_name: {PI_first_name}")
-    print(f"PI_last_name: {PI_last_name}")
-    print(f"PI_phone: {PI_phone}")
-    print(f"PI_after_hours: {PI_after_hours}")
-    print(f"primary_first_name: {primary_first_name}")
-    print(f"primary_last_name: {primary_last_name}")
-    print(f"primary_phone: {primary_phone}")
-    print(f"primary_after_hours: {primary_after_hours}")
-
-    # Initialize phone output variables
-    primary_phone_output = primary_after_hours  # Primary contact's emergency phone prioritized
+    # Initialize phone output variables for PI and Primary Contact
+    primary_phone_output = primary_after_hours or primary_phone
     PI_phone_output = PI_after_hours if PI_after_hours != primary_after_hours else PI_phone
 
-    # Check for unique phone numbers
-    unique_phones = set(filter(None, [PI_phone, PI_after_hours, primary_phone, primary_after_hours, alternate_phone, alternate_after_hours]))
-    if len(unique_phones) < 2:
-        error_message = "At least two contact numbers are required."
-        print(f"Error: {error_message}")
-    else:
-        error_message = None
+    # Initialize a set to track unique phone numbers
+    unique_phones = set([primary_phone_output, PI_phone_output])
 
-    # Return an error if found
-    if error_message:
+    # Check for two unique phone numbers initially
+    if len(unique_phones) < 2:
+        error_message = "At least two unique contact numbers are required."
         return render_template('index.html', title='EHS Sign Form', buildings=buildings, error_message=error_message, request_form=request.form)
 
-    # Check if alternate contact fields are empty
-    if not alternate_first_name and not alternate_last_name and not alternate_phone and not alternate_after_hours:
-        # List of potential alternate contacts
-        potential_alternates = [
-            (primary_first_name, primary_last_name, primary_phone),  # Primary contact's main phone
-            (PI_first_name, PI_last_name, PI_phone),  # PI's main phone if different
-        ]
-
-        # Find the first unused contact number
-        for first_name, last_name, phone in potential_alternates:
-            if phone != primary_phone_output and phone != PI_phone_output:
-                alternate_first_name = first_name
-                alternate_last_name = last_name
-                alternate_phone = phone
-                alternate_after_hours = ''  # No secondary phone for the alternate
-                break
+    # Assign the alternate contact's phone only if it's unique
+    if alternate_phone not in unique_phones:
+        alternate_phone_output = alternate_phone
+        unique_phones.add(alternate_phone)
     else:
-        # Use user-provided alternate contact data if available
-        alternate_first_name = request.form.get('alternate_first_name')
-        alternate_last_name = request.form.get('alternate_last_name')
-        alternate_phone = request.form.get('alternate_phone')
-        alternate_after_hours = request.form.get('alternate_after_hours')
+        # Try to use the alternate's emergency phone if it's unique
+        if alternate_after_hours and alternate_after_hours not in unique_phones:
+            alternate_phone_output = alternate_after_hours
+            unique_phones.add(alternate_after_hours)
+        else:
+            # If neither alternate phone is unique, assign a unique phone from PI or Primary Contact
+            if PI_phone not in unique_phones:
+                alternate_phone_output = PI_phone
+                unique_phones.add(PI_phone)
+            elif PI_after_hours not in unique_phones:
+                alternate_phone_output = PI_after_hours
+                unique_phones.add(PI_after_hours)
+            elif primary_phone not in unique_phones:
+                alternate_phone_output = primary_phone
+                unique_phones.add(primary_phone)
+            elif primary_after_hours not in unique_phones:
+                alternate_phone_output = primary_after_hours
+                unique_phones.add(primary_after_hours)
+            else:
+                error_message = "At least two unique contact numbers are required."
+                return render_template('index.html', title='EHS Sign Form', buildings=buildings, error_message=error_message, request_form=request.form)
+
+    # Final validation to ensure two unique phone numbers are present
+    if len(unique_phones) < 2:
+        error_message = "At least two unique contact numbers are required."
+        return render_template('index.html', title='EHS Sign Form', buildings=buildings, error_message=error_message, request_form=request.form)
 
     # Extract form data for Laboratory Hazards
     hazards = {
@@ -185,21 +178,15 @@ def submit():
         selected_hazards.append(f'{request.host_url}static/images/00EMPTY.png')
 
     # Extract form data for Laboratory Information
-    department = request.form['department']
-    building = request.form['building']
-    room_number = request.form['room_number']
+    department = request.form.get('department')
+    building = request.form.get('building')
+    room_number = request.form.get('room_number')
 
     # Find the building code based on the selected building
     building_code = next((b['code'] for b in buildings if b['building'] == building), 'unknown')
 
     # Create the filename in the format "code-room_number"
     filename = f"{building_code}-{room_number}.pdf"
-
-    # Debugging print statements
-    print(f"Building: {building}")
-    print(f"Building Code: {building_code}")
-    print(f"Room Number: {room_number}")
-    print(f"Filename: {filename}")
 
     # Prepare data for the template
     context = {
@@ -208,22 +195,18 @@ def submit():
         'primary_contact': f"{primary_first_name} {primary_last_name}",
         'primary_phone': primary_phone_output,
         'alternate_contact': f"{alternate_first_name} {alternate_last_name}",
-        'alternate_phone': alternate_phone,
+        'alternate_phone': alternate_phone_output,  # Updated to use the correct variable
         'PI_contact': f"{PI_first_name} {PI_last_name}",
         'PI_phone': PI_phone_output,
         'department': department,
         'date_updated': datetime.today().strftime('%m/%d/%Y'),
-        'hazard_icons': selected_hazards  # Use the full URL directly
+        'hazard_icons': selected_hazards
     }
 
-    # Determine which template to render based on the orientation, default to horizontal
-    orientation = request.form.get('orientation', 'horizontal')
-    if orientation == 'vertical':
-        template = 'vertical.html'
-    else:
-        template = 'horizontal.html'
 
-    # Render the HTML template with context
+    # Render the appropriate template based on the orientation
+    orientation = request.form.get('orientation', 'horizontal')
+    template = 'vertical.html' if orientation == 'vertical' else 'horizontal.html'
     html = render_template(template, **context)
 
     # Generate PDF from the rendered HTML
