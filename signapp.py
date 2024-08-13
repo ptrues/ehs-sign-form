@@ -91,63 +91,49 @@ def home():
 @app.route('/submit', methods=['POST'])
 def submit():
     error_message = None
-
+            
     # Extract form data for contacts
     PI_first_name = request.form.get('PI_first_name')
     PI_last_name = request.form.get('PI_last_name')
-    PI_phone = request.form.get('PI_phone')
-    PI_after_hours = request.form.get('PI_after_hours')
+    PI_after_hours = request.form.get('PI_phone')  # Now this correctly handles "after-hours" as the emergency phone
+    PI_phone = request.form.get('PI_after_hours')  # Now this correctly handles "secondary phone" as the alternate phone
 
     primary_first_name = request.form.get('primary_first_name')
     primary_last_name = request.form.get('primary_last_name')
-    primary_phone = request.form.get('primary_phone')
-    primary_after_hours = request.form.get('primary_after_hours')
+    primary_after_hours = request.form.get('primary_after_hours')  # Correct as is
+    primary_phone = request.form.get('primary_phone')  # Correct as is
 
     alternate_first_name = request.form.get('alternate_first_name')
     alternate_last_name = request.form.get('alternate_last_name')
-    alternate_phone = request.form.get('alternate_phone')
-    alternate_after_hours = request.form.get('alternate_after_hours')
-
-    # Initialize phone output variables for PI and Primary Contact
-    primary_phone_output = primary_after_hours or primary_phone
-    PI_phone_output = PI_after_hours if PI_after_hours != primary_after_hours else PI_phone
+    alternate_after_hours = request.form.get('alternate_phone')  # Correct as is
+    alternate_phone = request.form.get('alternate_after_hours')  # Correct as is
 
     # Initialize a set to track unique phone numbers
-    unique_phones = set([primary_phone_output, PI_phone_output])
+    unique_phones = set()
 
-    # Check for two unique phone numbers initially
-    if len(unique_phones) < 2:
-        error_message = "At least two unique contact numbers are required."
-        return render_template('index.html', title='EHS Sign Form', buildings=buildings, error_message=error_message, request_form=request.form)
+    # 1. Assign Primary Contact's phone (prioritize emergency phone which maps to `after_hours`)
+    primary_phone_output = primary_after_hours
+    unique_phones.add(primary_after_hours)
 
-    # Assign the alternate contact's phone only if it's unique
-    if alternate_phone not in unique_phones:
-        alternate_phone_output = alternate_phone
-        unique_phones.add(alternate_phone)
+    # 2. Assign PI's phone (prioritize emergency phone which maps to `after_hours`)
+    if PI_after_hours and PI_after_hours not in unique_phones:
+        PI_phone_output = PI_after_hours
+        unique_phones.add(PI_after_hours)
     else:
-        # Try to use the alternate's emergency phone if it's unique
-        if alternate_after_hours and alternate_after_hours not in unique_phones:
-            alternate_phone_output = alternate_after_hours
-            unique_phones.add(alternate_after_hours)
-        else:
-            # If neither alternate phone is unique, assign a unique phone from PI or Primary Contact
-            if PI_phone not in unique_phones:
-                alternate_phone_output = PI_phone
-                unique_phones.add(PI_phone)
-            elif PI_after_hours not in unique_phones:
-                alternate_phone_output = PI_after_hours
-                unique_phones.add(PI_after_hours)
-            elif primary_phone not in unique_phones:
-                alternate_phone_output = primary_phone
-                unique_phones.add(primary_phone)
-            elif primary_after_hours not in unique_phones:
-                alternate_phone_output = primary_after_hours
-                unique_phones.add(primary_after_hours)
-            else:
-                error_message = "At least two unique contact numbers are required."
-                return render_template('index.html', title='EHS Sign Form', buildings=buildings, error_message=error_message, request_form=request.form)
+        PI_phone_output = PI_phone
+        if PI_phone:  # Ensure the PI's phone is not empty
+            unique_phones.add(PI_phone)
 
-    # Final validation to ensure two unique phone numbers are present
+    # 3. Assign Alternate Contact's phone (prioritize emergency phone which maps to `after_hours`)
+    if alternate_after_hours and alternate_after_hours not in unique_phones:
+        alternate_phone_output = alternate_after_hours
+        unique_phones.add(alternate_after_hours)
+    else:
+        alternate_phone_output = alternate_phone
+        if alternate_phone:  # Ensure the alternate phone is not empty
+            unique_phones.add(alternate_phone)
+
+    # Final validation to ensure there are at least two unique contact numbers
     if len(unique_phones) < 2:
         error_message = "At least two unique contact numbers are required."
         return render_template('index.html', title='EHS Sign Form', buildings=buildings, error_message=error_message, request_form=request.form)
@@ -195,14 +181,13 @@ def submit():
         'primary_contact': f"{primary_first_name} {primary_last_name}",
         'primary_phone': primary_phone_output,
         'alternate_contact': f"{alternate_first_name} {alternate_last_name}",
-        'alternate_phone': alternate_phone_output,  # Updated to use the correct variable
+        'alternate_phone': alternate_phone_output,
         'PI_contact': f"{PI_first_name} {PI_last_name}",
         'PI_phone': PI_phone_output,
         'department': department,
         'date_updated': datetime.today().strftime('%m/%d/%Y'),
         'hazard_icons': selected_hazards
     }
-
 
     # Render the appropriate template based on the orientation
     orientation = request.form.get('orientation', 'horizontal')
