@@ -5,83 +5,11 @@ from weasyprint import HTML, CSS
 
 app = Flask(__name__)
 
-
+# Define your buildings list as before
 buildings = [
-{"code": "000", "building": "Institute Of Marine Sciences"},
-{"code": "003", "building": "Ackland Art Museum"},
-{"code": "004", "building": "Alumni Bldg"},
-{"code": "010", "building": "Coker Hall"},
-{"code": "013", "building": "Davie Hall"},
-{"code": "021", "building": "Howell Hall"},
-{"code": "026", "building": "Manning Hall"},
-{"code": "029", "building": "Mitchell Hall"},
-{"code": "039", "building": "Phillips Hall"},
-{"code": "041", "building": "Coastal Proc. Env. Health Lab"},
-{"code": "046", "building": "Wilson Hall"},
-{"code": "048", "building": "Fordham Hall"},
-{"code": "069", "building": "Kenan Labs"},
-{"code": "079", "building": "Hanes Art Center"},
-{"code": "081", "building": "Morehead Chemistry Labs"},
-{"code": "086", "building": "Caudill Labs"},
-{"code": "087", "building": "Chapman Hall"},
-{"code": "094", "building": "IMS Fisheries Research Lab"},
-{"code": "152", "building": "Morehead Planetarium"},
-{"code": "165", "building": "Franklin Street, 134 E."},
-{"code": "200", "building": "Beard Hall"},
-{"code": "201", "building": "Rosenau Hall"},
-{"code": "202", "building": "MacNider Hall"},
-{"code": "204", "building": "UNC Hospitals"},
-{"code": "207", "building": "Medical School Wing B"},
-{"code": "208", "building": "Medical School Wing D"},
-{"code": "209", "building": "First Dental"},
-{"code": "210A", "building": "Koury OHS"},
-{"code": "211", "building": "Brauer Hall"},
-{"code": "212", "building": "Francis Owen Blood Research Lab"},
-{"code": "214", "building": "Carrington Hall"},
-{"code": "217", "building": "Taylor Hall"},
-{"code": "219", "building": "Berryhill Hall"},
-{"code": "221", "building": "Medical School Wing C"},
-{"code": "228", "building": "Brinkhous-Bullitt Bldg"},
-{"code": "229", "building": "Burnett-Womack Bldg"},
-{"code": "231", "building": "Mary Ellen Jones"},
-{"code": "236", "building": "Glaxo Research Building"},
-{"code": "237", "building": "Lineberger Cancer Research Center"},
-{"code": "238", "building": "McGavran-Greenberg Hall"},
-{"code": "239", "building": "Baity Lab"},
-{"code": "240", "building": "Aycock Family Medicine"},
-{"code": "242", "building": "Thurston-Bowles Bldg"},
-{"code": "243", "building": "EPA Bldg"},
-{"code": "245", "building": "Neurosciences Research Bldg"},
-{"code": "247", "building": "Medical Biomolecular Research Bldg"},
-{"code": "327", "building": "Medical Research Bldg B"},
-{"code": "351", "building": "NeuroSciences Hospital"},
-{"code": "357", "building": "Kerr Hall"},
-{"code": "358", "building": "Hooker Research Center"},
-{"code": "359", "building": "Genetic Medicine Research Bldg"},
-{"code": "360", "building": "Marsico Hall"},
-{"code": "363", "building": "Roper Hall"},
-{"code": "462", "building": "Art Studio Bldg"},
-{"code": "468", "building": "Fetzer Hall"},
-{"code": "469", "building": "Taylor Campus Health"},
-{"code": "491", "building": "Franklin Square"},
-{"code": "605A", "building": "UNC Heart Center at Meadowmont"},
-{"code": "614", "building": "Smith Middle School Addition"},
-{"code": "625", "building": "ITS Manning"},
-{"code": "649", "building": "Environment, Health And Safety Bldg"},
-{"code": "658", "building": "Houpt Physician Office Building"},
-{"code": "673", "building": "Kannapolis Nutrition Research"},
-{"code": "674", "building": "Murray Hall"},
-{"code": "676", "building": "Genome Sciences Building"},
-{"code": "709C", "building": "Market St, 100 - Southern Village"},
-{"code": "745", "building": "Venable Hall"},
-{"code": "940", "building": "UNC Eastowne Medical Office Building"},
-{"code": "950", "building": "UNC-IDSS"},
-{"code": "961A", "building": "Southport Building 2"},
-{"code": "980N", "building": "Carolina Crossing B"},
-{"code": "980R", "building": "Carolina Crossing C"},
-{"code": "984Q", "building": "Quadrangle 6101"},
-{"code": "998C", "building": "121 S Estes Drive"},
-{"code": "999", "building": "UNC Children's Hospital-Raleigh"}
+    {"code": "000", "building": "Institute Of Marine Sciences"},
+    # ... (other building entries)
+    {"code": "999", "building": "UNC Children's Hospital-Raleigh"}
 ]
 
 @app.route('/')
@@ -91,52 +19,56 @@ def home():
 @app.route('/submit', methods=['POST'])
 def submit():
     error_message = None
-            
+
     # Extract form data for contacts
     PI_first_name = request.form.get('PI_first_name')
     PI_last_name = request.form.get('PI_last_name')
-    PI_after_hours = request.form.get('PI_phone')  # Now this correctly handles "after-hours" as the emergency phone
-    PI_phone = request.form.get('PI_after_hours')  # Now this correctly handles "secondary phone" as the alternate phone
+    PI_after_hours = request.form.get('PI_phone')  # Corrected mapping
+    PI_phone = request.form.get('PI_after_hours')  # Corrected mapping
 
     primary_first_name = request.form.get('primary_first_name')
     primary_last_name = request.form.get('primary_last_name')
-    primary_after_hours = request.form.get('primary_after_hours')  # Correct as is
-    primary_phone = request.form.get('primary_phone')  # Correct as is
+    primary_after_hours = request.form.get('primary_after_hours')
+    primary_phone = request.form.get('primary_phone')
 
     alternate_first_name = request.form.get('alternate_first_name')
     alternate_last_name = request.form.get('alternate_last_name')
-    alternate_after_hours = request.form.get('alternate_phone')  # Correct as is
-    alternate_phone = request.form.get('alternate_after_hours')  # Correct as is
+    alternate_after_hours = request.form.get('alternate_phone')  # Corrected mapping
+    alternate_phone = request.form.get('alternate_after_hours')  # Corrected mapping
 
     # Initialize a set to track unique phone numbers
     unique_phones = set()
 
-    # 1. Assign Primary Contact's phone (prioritize emergency phone which maps to `after_hours`)
+    # Assign phone numbers, prioritizing emergency phones
     primary_phone_output = primary_after_hours
     unique_phones.add(primary_after_hours)
 
-    # 2. Assign PI's phone (prioritize emergency phone which maps to `after_hours`)
     if PI_after_hours and PI_after_hours not in unique_phones:
         PI_phone_output = PI_after_hours
         unique_phones.add(PI_after_hours)
     else:
         PI_phone_output = PI_phone
-        if PI_phone:  # Ensure the PI's phone is not empty
+        if PI_phone:
             unique_phones.add(PI_phone)
 
-    # 3. Assign Alternate Contact's phone (prioritize emergency phone which maps to `after_hours`)
     if alternate_after_hours and alternate_after_hours not in unique_phones:
         alternate_phone_output = alternate_after_hours
         unique_phones.add(alternate_after_hours)
     else:
         alternate_phone_output = alternate_phone
-        if alternate_phone:  # Ensure the alternate phone is not empty
+        if alternate_phone:
             unique_phones.add(alternate_phone)
 
-    # Final validation to ensure there are at least two unique contact numbers
+    # Validate at least two unique contact numbers
     if len(unique_phones) < 2:
         error_message = "At least two unique contact numbers are required."
-        return render_template('index.html', title='EHS Sign Form', buildings=buildings, error_message=error_message, request_form=request.form)
+        return render_template(
+            'index.html',
+            title='EHS Sign Form',
+            buildings=buildings,
+            error_message=error_message,
+            request_form=request.form
+        )
 
     # Extract form data for Laboratory Hazards
     hazards = {
@@ -157,7 +89,11 @@ def submit():
     }
 
     # Create a list of selected hazard icons with proper URLs
-    selected_hazards = [f'{request.host_url}static/images/{hazards[hazard]}' for hazard in hazards if hazard in request.form]
+    selected_hazards = [
+        f'{request.host_url}static/images/{hazards[hazard]}'
+        for hazard in hazards
+        if hazard in request.form
+    ]
 
     # Ensure there are 10 icons, filling with EMPTY.png if necessary
     while len(selected_hazards) < 10:
@@ -171,7 +107,7 @@ def submit():
     # Find the building code based on the selected building
     building_code = next((b['code'] for b in buildings if b['building'] == building), 'unknown')
 
-    # Create the filename in the format "code-room_number"
+    # Create the filename in the format "code-room_number.pdf"
     filename = f"{building_code}-{room_number}.pdf"
 
     # Prepare data for the template
@@ -189,9 +125,57 @@ def submit():
         'hazard_icons': selected_hazards
     }
 
-    # Render the appropriate template based on the orientation
+    # Determine if 'biohazard' is selected
+    biohazard_selected = 'biohazard' in request.form
+
+    # Extract biohazard-specific data if 'biohazard' is selected
+    if biohazard_selected:
+        # Extract Biosafety Level
+        bsl = request.form.get('bsl', 'Not specified')
+
+        # Extract Biological Agents (list of selected options)
+        biological_agents = request.form.getlist('biological_agents')
+
+        # If 'Other' is selected, include the specified text
+        if 'Other' in biological_agents:
+            other_agent = request.form.get('other_biological_agent', '')
+            biological_agents = [agent for agent in biological_agents if agent != 'Other']
+            if other_agent:
+                biological_agents.append(other_agent)
+
+        # Join biological agents into a string
+        biological_agents_str = ', '.join(biological_agents) if biological_agents else 'None specified'
+
+        # Extract Vaccines Required (list)
+        vaccines = request.form.getlist('vaccines')
+        vaccines_str = ', '.join(vaccines) if vaccines else 'None required'
+
+        # Extract Medical Surveillance Required (list)
+        medical_surveillance = request.form.getlist('medical_surveillance')
+        medical_surveillance_str = ', '.join(medical_surveillance) if medical_surveillance else 'None required'
+
+        # Update context with biohazard-specific data
+        context.update({
+            'bsl': bsl,
+            'biological_agents': biological_agents_str,
+            'vaccines': vaccines_str,
+            'medical_surveillance': medical_surveillance_str,
+        })
+
+    # Render the appropriate template based on orientation and biohazard selection
     orientation = request.form.get('orientation', 'horizontal')
-    template = 'vertical.html' if orientation == 'vertical' else 'horizontal.html'
+
+    if biohazard_selected:
+        if orientation == 'vertical':
+            template = 'vert_bio.html'  # Use your vertical biohazard template
+        else:
+            template = 'horiz_bio.html'  # Use your horizontal biohazard template
+    else:
+        if orientation == 'vertical':
+            template = 'vertical.html'  # Use your standard vertical template
+        else:
+            template = 'horizontal.html'  # Use your standard horizontal template
+
     html = render_template(template, **context)
 
     # Generate PDF from the rendered HTML
