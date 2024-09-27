@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Sign Template</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='horiz_bio_style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            LABORATORY HAZARD INFORMATION
+        </div>
+
+        <div class="hazard-icons">
+            {% for icon in hazard_icons %}
+            <div><img src="{{ icon }}" alt="Hazard Icon"></div>
+            {% endfor %}
+        </div>
+
+        <div class="room-building">
+            <p>{{ room }} {{ building }}</p>
+        </div>
+
+     
+        <div class="bio-header">
+            BIOSAFETY INFORMATION
+        </div>
+
+
+        <div class="bio-table">
+            <div class="bio-column">
+                <div>Biosafety Level: <span>{{ bsl }}</span></div>
+                <div>Biological Agents: <span>{{ biological_agents }}</span></div>
+                <div>Occupational Health Requirements: <span>{{ vaccines }}</span><span>{{ medical_surveillance }}</span></div>
+            </div>
+        </div>
+
+        <div class="contact-header">
+            EMERGENCY CONTACT INFORMATION
+        </div>
+
+
+        <div class="contact-table">
+            <div class="contact-column">
+                <div>Primary Contact: <span>{{ primary_contact }}</span></div>
+                <div>Alternate Contact: <span>{{ alternate_contact }}</span></div>
+                <div>Principal Investigator: <span>{{ PI_contact }}</span></div>
+                <div>Department: <span>{{ department }}</span></div>
+            </div>
+            <div class="contact-phone-column">
+                <div>Phone: <span>{{ primary_phone }}</span></div>
+                <div>Phone: <span>{{ alternate_phone }}</span></div>
+                <div>Phone: <span>{{ PI_phone }}</span></div>
+                <div>Date Updated: <span>{{ date_updated }}</span></div>
+            </div>
+        </div>
+        
+
+        <div class="warning">
+            <div class="warning-text-header">
+            ENTRY/EXIT PROCEDURES:        
+            </div>
+            <div class="warning-text">
+                PPE REQUIRED AT ALL TIMES (LAB COAT, GLOVES, GOGGLES/  FACE SHIELD, CLOSED-TOE SHOES, LONG PANTS). EATING & DRINKING ARE  PROHIBITED IN LAB AREAS. REMOVE PPE & WASH HANDS BEFORE EXITING. 
+            </div>
+        </div>
+        
+        <div class="emergency-box">
+            <div class="emergency-text">
+                EMERGENCY: DIAL 911
+            </div>
+            <div class="ehs-text">
+                EHS: (919) 962-5507
+            </div>
+        </div>
+    </div>
+</body>
+</html>
