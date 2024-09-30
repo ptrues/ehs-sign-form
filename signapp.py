@@ -134,33 +134,142 @@ def submit():
         bsl = request.form.get('bsl', 'Not specified')
 
         # Extract Biological Agents (list of selected options)
-        biological_agents = request.form.getlist('biological_agents')
+        selected_agents = request.form.getlist('biological_agents')
 
         # If 'Other' is selected, include the specified text
-        if 'Other' in biological_agents:
+        if 'Other' in selected_agents:
             other_agent = request.form.get('other_biological_agent', '')
-            biological_agents = [agent for agent in biological_agents if agent != 'Other']
+            selected_agents = [agent for agent in selected_agents if agent != 'Other']
             if other_agent:
-                biological_agents.append(other_agent)
+                selected_agents.append(other_agent)
 
-        # Join biological agents into a string
-        biological_agents_str = ', '.join(biological_agents) if biological_agents else 'None specified'
+        # Define the mapping of subcategories to main categories
+        agent_mapping = {
+            'Animal Source Material': {
+                'Animal source material (clinical specimens)': 'clinical specimens',
+                'Animal source material (tissue/cell culture)': 'tissue/cell culture',
+                'Animal source material (other)': 'other',
+            },
+            'Human Source Material': {
+                'Human source material (clinical specimens)': 'clinical specimens',
+                'Human source material (tissue/cell culture)': 'tissue/cell culture',
+                'Human source material (other)': 'other',
+            },
+            'Non-Human Primate Source Material': {
+                'Non-human primate source material (R. macaque derived)': 'R. macaque derived',
+                'Non-human primate source material (other)': 'other',
+            },
+            'Fungi': {
+                'Fungi (culturing)': 'culturing',
+                'Fungi (bioassay/other)': 'bioassay/other',
+            },
+            'Bacteria': {
+                'Bacteria (culturing)': 'culturing',
+                'Bacteria (bioassay/other)': 'bioassay/other',
+            },
+            'Virus': {
+                'Virus (culturing)': 'culturing',
+                'Virus (bioassay/other)': 'bioassay/other',
+            },
+            'Recombinant/Synthetic Nucleic Acids': {
+                'Plasmids': 'plasmids',
+                'Viral vectors': 'viral vectors',
+                'Recombinant/synthetic nucleic acids (other)': 'other',
+            },
+            'Other Biological Agents': {
+                'Biological toxin': 'biological toxin',
+                'Prions': 'prions',
+                # 'Other' is handled separately
+            },
+        }
+
+        # Initialize a dictionary to hold the grouped agents
+        grouped_agents = {}
+
+        # Process selected agents
+        for agent in selected_agents:
+            found = False
+            for main_category, subcategories in agent_mapping.items():
+                if agent in subcategories:
+                    found = True
+                    if main_category not in grouped_agents:
+                        grouped_agents[main_category] = []
+                    grouped_agents[main_category].append(subcategories[agent])
+                    break
+            if not found:
+                # Handle agents not in the mapping (e.g., 'Other' specified by the user)
+                if 'Other' not in grouped_agents:
+                    grouped_agents['Other'] = []
+                grouped_agents['Other'].append(agent)
+
+        # Build the formatted string
+        biological_agents_list = []
+        for main_category, subcats in grouped_agents.items():
+            subcats_str = ', '.join(subcats)
+            biological_agents_list.append(f"{main_category} ({subcats_str})")
+        biological_agents_str = ', '.join(biological_agents_list)
+
+        # Define the vaccine abbreviation mapping
+        vaccine_abbreviations = {
+            'Anthrax': 'Anthrax',
+            'Bacille Calmette-Guérin (BCG)/ Tuberculosis (TB) Disease': 'BCG/TB',
+            'Cholera': 'Cholera',
+            'COVID-19 Vaccine and Current Booster': 'COVID-19',
+            'DTaP/Tdap/Td (Pertussis, Tetanus, and Diphtheria)': 'DTaP/Tdap/Td',
+            'Hepatitis A': 'HepA',
+            'Hepatitis B': 'HepB',
+            'Hib (Haemophilus Influenzae type B)': 'Hib',
+            'Human Papillomavirus (HPV)': 'HPV',
+            'Influenza': 'Flu',
+            'Japanese Encephalitis': 'JE',
+            'MMR (Measles, Mumps and Rubella)': 'MMR',
+            'MMRV (Measles, Mumps, Rubella, and Varicella)': 'MMRV',
+            'Meningococcal': 'Meningococcal',
+            'Pertussis': 'Pertussis',
+            'Pneumococcal': 'Pneumococcal',
+            'Polio': 'Polio',
+            'Rabies': 'Rabies',
+            'Rotavirus': 'RV',
+            'Vaccinia (Smallpox) Vaccine': 'Smallpox',
+            'Tetanus': 'Tetanus',
+            'Tick-borne Encephalitis Virus (TBEV)': 'TBE',
+            'Typhoid (Salmonella serotype Typhi)': 'Typhoid',
+            'Varicella (Chickenpox)': 'VAR',
+            'Yellow Fever': 'YF',
+            'Zoster (Shingles)': 'Zoster (Shingles)',
+        }
 
         # Extract Vaccines Required (list)
         vaccines = request.form.getlist('vaccines')
-        vaccines_str = ', '.join(vaccines) if vaccines else 'None required'
+
+        # Map the selected vaccines to their abbreviations
+        abbreviated_vaccines = [vaccine_abbreviations.get(vaccine, vaccine) for vaccine in vaccines]
+
+        vaccines_str = ', '.join(abbreviated_vaccines) if abbreviated_vaccines else ''
 
         # Extract Medical Surveillance Required (list)
         medical_surveillance = request.form.getlist('medical_surveillance')
-        medical_surveillance_str = ', '.join(medical_surveillance) if medical_surveillance else 'None required'
+        medical_surveillance_str = ', '.join(medical_surveillance) if medical_surveillance else ''
+
+        # Combine vaccines and medical surveillance into a single string
+        if not vaccines and not medical_surveillance:
+            occupational_health_requirements = 'None required'
+        else:
+            # Create a list to hold the selected items
+            ohr_list = []
+            if vaccines_str:
+                ohr_list.append(f"Vaccines ({vaccines_str})")
+            if medical_surveillance_str:
+                ohr_list.append(f"Medical Surveillance ({medical_surveillance_str})")
+            occupational_health_requirements = ', '.join(ohr_list)
 
         # Update context with biohazard-specific data
         context.update({
             'bsl': bsl,
             'biological_agents': biological_agents_str,
-            'vaccines': vaccines_str,
-            'medical_surveillance': medical_surveillance_str,
+            'occupational_health_requirements': occupational_health_requirements,
         })
+    
 
     # Render the appropriate template based on orientation and biohazard selection
     orientation = request.form.get('orientation', 'horizontal')

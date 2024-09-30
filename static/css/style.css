@@ -55,6 +55,11 @@ label {
     align-items: center;
 }
 
+.sub-form-row {
+    margin-left: 20px;
+}
+
+
 /* Base style for all text input fields, number input fields, tel input fields, and textarea fields */
 input[type="text"],
 input[type="number"],

@@ -26,7 +26,7 @@
 
      
         <div class="bio-header">
-            BIOSAFETY INFORMATION
+            BIOSAFETY INFORMATION 
         </div>
 
 
@@ -34,26 +34,21 @@
             <div class="bio-column">
                 <div>Biosafety Level: <span>{{ bsl }}</span></div>
                 <div>Biological Agents: <span>{{ biological_agents }}</span></div>
-                <div>Occupational Health Requirements: <span>{{ vaccines }}</span><span>{{ medical_surveillance }}</span></div>
+                <div>Occupational Health Requirements: <span>{{ occupational_health_requirements }}</span></div>
             </div>
         </div>
 
         <div class="contact-header">
-            EMERGENCY CONTACT INFORMATION
+            EMERGENCY CONTACT INFO
         </div>
 
 
         <div class="contact-table">
             <div class="contact-column">
-                <div>Primary Contact: <span>{{ primary_contact }}</span></div>
-                <div>Alternate Contact: <span>{{ alternate_contact }}</span></div>
-                <div>Principal Investigator: <span>{{ PI_contact }}</span></div>
+                <div>Primary Contact: <span>{{ primary_contact }}, {{ primary_phone }}</span></div>
+                <div>Alternate Contact: <span>{{ alternate_contact }}, {{ alternate_phone }}</span></div>
+                <div>Principal Investigator: <span>{{ PI_contact }}, {{ PI_phone }}</span></div>
                 <div>Department: <span>{{ department }}</span></div>
-            </div>
-            <div class="contact-phone-column">
-                <div>Phone: <span>{{ primary_phone }}</span></div>
-                <div>Phone: <span>{{ alternate_phone }}</span></div>
-                <div>Phone: <span>{{ PI_phone }}</span></div>
                 <div>Date Updated: <span>{{ date_updated }}</span></div>
             </div>
         </div>

@@ -232,96 +232,136 @@
                 
             </fieldset>
         </section>
-        
         <section id="bio-agents" style="display: none;">
             <fieldset>
                 <legend>Biological Agents</legend>
+        
+                <!-- Animal Source Material -->
                 <div class="form-row">
+                    <strong>Animal Source Material</strong>
+                </div>
+                <div class="sub-form-row">
                     <input type="checkbox" id="animal_clinical" name="biological_agents" value="Animal source material (clinical specimens)"/>                   
-                    <label for="animal_clinical">Animal source material (clinical specimens)</label>
+                    <label for="animal_clinical">Clinical specimens</label>
                 </div>
-                <div class="form-row">
+                <div class="sub-form-row">
                     <input type="checkbox" id="animal_tissue" name="biological_agents" value="Animal source material (tissue/cell culture)"/>                   
-                    <label for="animal_tissue">Animal source material (tissue/cell culture)</label>
+                    <label for="animal_tissue">Tissue/cell culture</label>
                 </div>
-                <div class="form-row">
+                <div class="sub-form-row">
                     <input type="checkbox" id="animal_other" name="biological_agents" value="Animal source material (other)"/>                   
-                    <label for="animal_other">Animal source material (other)</label>
+                    <label for="animal_other">Other</label>
                 </div>
+        
+                <!-- Human Source Material -->
                 <div class="form-row">
-                    <input type="checkbox" id="fungi_bioassay" name="biological_agents" value="Fungi (bioassay/other)"/>                   
-                    <label for="fungi_bioassay">Fungi (bioassay/other)</label>
+                    <strong>Human Source Material</strong>
                 </div>
-                <div class="form-row">
-                    <input type="checkbox" id="fungi_culture" name="biological_agents" value="Fungi (culturing)"/>                   
-                    <label for="fungi_culture">Fungi (culturing)</label>
-                </div>            
-                <div class="form-row">
+                <div class="sub-form-row">
                     <input type="checkbox" id="human_clinical" name="biological_agents" value="Human source material (clinical specimens)"/>                   
-                    <label for="human_clinical">Human source material (clinical specimens)</label>
+                    <label for="human_clinical">Clinical specimens</label>
                 </div>
-                <div class="form-row">
+                <div class="sub-form-row">
                     <input type="checkbox" id="human_tissue" name="biological_agents" value="Human source material (tissue/cell culture)"/>                   
-                    <label for="human_tissue">Human source material (tissue/cell culture)</label>
+                    <label for="human_tissue">Tissue/cell culture</label>
                 </div>
-                <div class="form-row">
+                <div class="sub-form-row">
                     <input type="checkbox" id="human_other" name="biological_agents" value="Human source material (other)"/>                   
-                    <label for="human_other">Human source material (other)</label>
+                    <label for="human_other">Other</label>
                 </div>
+        
+                <!-- Non-Human Primate Source Material -->
                 <div class="form-row">
+                    <strong>Non-Human Primate Source Material</strong>
+                </div>
+                <div class="sub-form-row">
                     <input type="checkbox" id="nonhuman_rhesus" name="biological_agents" value="Non-human primate source material (R. macaque derived)"/>                   
-                    <label for="nonhuman_rhesus">Non-human primate source material (R. macaque derived)</label>
+                    <label for="nonhuman_rhesus">R. macaque derived</label>
                 </div>
-                <div class="form-row">
+                <div class="sub-form-row">
                     <input type="checkbox" id="nonhuman_other" name="biological_agents" value="Non-human primate source material (other)"/>                   
-                    <label for="nonhuman_other">Non-human primate source material (other)</label>
+                    <label for="nonhuman_other">Other</label>
                 </div>
+        
+                <!-- Fungi -->
                 <div class="form-row">
-                    <input type="checkbox" id="biological_toxin" name="biological_agents" value="Biological toxin"/>                   
-                    <label for="biological_toxin">Biological toxin</label>
+                    <strong>Fungi</strong>
                 </div>
-                <div class="form-row">
-                    <input type="checkbox" id="viral_vectors" name="biological_agents" value="Viral vectors"/>                   
-                    <label for="viral_vectors">Viral vectors</label>
+                <div class="sub-form-row">
+                    <input type="checkbox" id="fungi_culture" name="biological_agents" value="Fungi (culturing)"/>                   
+                    <label for="fungi_culture">Culturing</label>
                 </div>
+                <div class="sub-form-row">
+                    <input type="checkbox" id="fungi_bioassay" name="biological_agents" value="Fungi (bioassay/other)"/>                   
+                    <label for="fungi_bioassay">Bioassay/other</label>
+                </div>
+        
+                <!-- Bacteria -->
                 <div class="form-row">
+                    <strong>Bacteria</strong>
+                </div>
+                <div class="sub-form-row">
+                    <input type="checkbox" id="bacteria_culture" name="biological_agents" value="Bacteria (culturing)"/>                   
+                    <label for="bacteria_culture">Culturing</label>
+                </div>
+                <div class="sub-form-row">
+                    <input type="checkbox" id="bacteria_bioassay" name="biological_agents" value="Bacteria (bioassay/other)"/>                   
+                    <label for="bacteria_bioassay">Bioassay/other</label>
+                </div>
+        
+                <!-- Virus -->
+                <div class="form-row">
+                    <strong>Virus</strong>
+                </div>
+                <div class="sub-form-row">
+                    <input type="checkbox" id="virus_culture" name="biological_agents" value="Virus (culturing)"/>                   
+                    <label for="virus_culture">Culturing</label>
+                </div>
+                <div class="sub-form-row">
+                    <input type="checkbox" id="virus_bioassay" name="biological_agents" value="Virus (bioassay/other)"/>                   
+                    <label for="virus_bioassay">Bioassay/other</label>
+                </div>
+        
+                <!-- Recombinant/Synthetic Nucleic Acids -->
+                <div class="form-row">
+                    <strong>Recombinant/Synthetic Nucleic Acids</strong>
+                </div>
+                <div class="sub-form-row">
                     <input type="checkbox" id="plasmids" name="biological_agents" value="Plasmids"/>                   
                     <label for="plasmids">Plasmids</label>
                 </div>
-                <div class="form-row">
+                <div class="sub-form-row">
+                    <input type="checkbox" id="viral_vectors" name="biological_agents" value="Viral vectors"/>                   
+                    <label for="viral_vectors">Viral vectors</label>
+                </div>
+                <div class="sub-form-row">
                     <input type="checkbox" id="recombinant" name="biological_agents" value="Recombinant/synthetic nucleic acids (other)"/>                   
-                    <label for="recombinant">Recombinant/synthetic nucleic acids (other)</label>
+                    <label for="recombinant">Other</label>
                 </div>
+        
+                <!-- Other Biological Agents -->
                 <div class="form-row">
-                    <input type="checkbox" id="bacteria_culture" name="biological_agents" value="Bacteria (culturing)"/>                   
-                    <label for="bacteria_culture">Bacteria (culturing)</label>
+                    <strong>Other Biological Agents</strong>
                 </div>
-                <div class="form-row">
-                    <input type="checkbox" id="bacteria_bioassay" name="biological_agents" value="Bacteria (bioassay/other)"/>                   
-                    <label for="bacteria_bioassay">Bacteria (bioassay/other)</label>
+                <div class="sub-form-row">
+                    <input type="checkbox" id="biological_toxin" name="biological_agents" value="Biological toxin"/>                   
+                    <label for="biological_toxin">Biological toxin</label>
                 </div>
-                <div class="form-row">
-                    <input type="checkbox" id="virus_culture" name="biological_agents" value="Virus (culturing)"/>                   
-                    <label for="virus_culture">Virus (culturing)</label>
-                </div>
-                <div class="form-row">
-                    <input type="checkbox" id="virus_bioassay" name="biological_agents" value="Virus (bioassay/other)"/>                   
-                    <label for="virus_bioassay">Virus (bioassay/other)</label>
-                </div>
-                <div class="form-row">
+                <div class="sub-form-row">
                     <input type="checkbox" id="prions" name="biological_agents" value="Prions"/>                   
                     <label for="prions">Prions</label>
                 </div>
-                <div class="form-row">
+                <div class="sub-form-row">
                     <input type="checkbox" id="other" name="biological_agents" value="Other" onclick="toggleOtherTextBox(this)"/>                   
                     <label for="other">Other</label>
                 </div>
-                <div class="form-row" id="otherTextBox" style="display: none; margin-left: 20px;">
+                <div class="sub-form-row" id="otherTextBox" style="display: none; margin-left: 20px;">
                     <label for="other_specify">Please specify:</label>
                     <input type="text" id="other_specify" name="other_biological_agent"/>
                 </div>
             </fieldset>
         </section>
+        
     
         <section id="vaccines-required" style="display: none;">
             <fieldset>

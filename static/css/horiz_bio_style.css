@@ -87,7 +87,7 @@ body {
 
 .bio-header {
     color: #B50000;
-    text-align: right; /* Align text to the right */
+    text-align: right; 
     font-family: 'Open Sans';
     font-size: 26px;
     font-weight: 700;
@@ -100,10 +100,10 @@ body {
 
 .bio-table {   
     border: 1px solid #56A0D3;
-    width: 5.4in;
+    width: 5.9in;
     height: 1.7in;
     font-family: 'Open Sans';
-    font-size: 11pt;
+    font-size: 10pt;
     position: absolute;
     bottom: 1.1in;
     left: 0.25in;
@@ -123,7 +123,7 @@ body {
 
 .contact-header {
     color: #B50000;
-    text-align: right; /* Align text to the right */
+    text-align: right; 
     font-family: 'Open Sans';
     font-size: 26px;
     font-weight: 700;
@@ -136,7 +136,7 @@ body {
 
 .contact-table {   
     border: 1px solid #56A0D3;
-    width: 5in;
+    width: 4.5in;
     height: 1.7in;
     font-family: 'Open Sans';
     font-size: 11pt;
@@ -151,17 +151,8 @@ body {
     top: 5px;
 }
 
-.contact-phone-column {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-}
-
-
-
-.contact-column div,
-.contact-phone-column div {
-    margin-bottom: 10px;
+.contact-column div {
+    margin-bottom: 5px;
 }
 
 span {
@@ -173,7 +164,7 @@ span {
 
 
 .warning {
-    width: 5.4in;
+    width: 5.9in;
     height: 0.75in;
     flex-shrink: 0;
     background-color: #D0DFF1;
@@ -211,7 +202,7 @@ span {
 .emergency-box {
     background-color: #56A0D3;
     border: 1px solid #56A0D3;
-    width: 5.0in;
+    width: 4.5in;
     height: 0.75in;
     position: absolute; 
     bottom: .25in; 
