@@ -9,11 +9,11 @@
 </head>
 
 <body>
-    <h1>{{ title }}</h1>
+    <h1>EHS Lab Entrance Sign Form</h1>
 
     <form name="form1" method="POST" action="/submit" onsubmit="return labSignValidate(this)">
         <section>
-            <fieldset>
+            <fieldset class="pi_fieldset">
                 <legend>Principal Investigator</legend>
                 <div class="form-row">
                     <label for="PI_first_name">First name:</label>
@@ -35,7 +35,7 @@
         </section>
         
         <section>
-            <fieldset>
+            <fieldset class="primary_fieldset">
                 <legend>Primary Contact</legend>
                 <div class="form-row">
                     <label for="primary_first_name">First name:</label>
@@ -57,7 +57,7 @@
         </section>
         
         <section>
-            <fieldset>
+            <fieldset class="alternate_fieldset">
                 <legend>Alternate Contact (optional)</legend>
                 <div class="form-row">
                     <label for="alternate_first_name">First name:</label>
@@ -79,7 +79,7 @@
         </section>     
 
         <section>
-            <fieldset>
+            <fieldset class="lab_info_fieldset">
                 <legend>Laboratory Information</legend>
                 <div class="form-row">
                     <label for="department">Department:</label>
@@ -102,7 +102,7 @@
         </section>
 
         <section>
-            <fieldset>
+            <fieldset class="lab_hazards_fieldset">
                 <legend>Laboratory Hazards</legend>
                 <p>Indicate the hazards present in your workspace.</p>
                 <div class="grid-container">
@@ -110,7 +110,7 @@
                         <h3>Biohazard</h3>
                         <div class="row-layout">
                             <input type="checkbox" id="biohazard" name="biohazard" value="biohazard" {{ 'checked' if 'biohazard' in request.form else '' }}>
-                            <label for="biohazard"><img src="{{ url_for('static', filename='images/04BSL2.png') }}" alt="Biohazard"></label>
+                            <label for="biohazard"><img src="{{ url_for('static', filename='images/04biohazard.png') }}" alt="Biohazard"></label>
                         </div>
                     </div>
                     <div class="grid-item">
@@ -495,7 +495,7 @@
             <fieldset>
                 <legend>Sign Details</legend>
 
-                <p>Are there sign holders installed at each room/bay entrance?</p>
+                <p>Are sign holders installed at each room or bay entrance?</p>
 
                 <div class="multi-sign-grid-container">
                     <div class="multi-sign-grid-item">
@@ -522,14 +522,14 @@
                         </div>
                     </div>
                     <div class="multi-sign-grid-item">
-                        <p>How many signs do you need?</p>
+                        <p>How many signs do you need? (Count both sides of lab bays.)</p>
                         <input type="number" id="num_signs" name="num_signs" value="{{ request.form.num_signs }}">
                     </div>
                 </div>
         
                 <div id="signFieldsNo" class="multi-sign-follow-up" style="display: none;">
                     <div class="multi-sign-grid-item">
-                        <p>How many entrances does your laboratory have?<p>
+                        <p>How many entrances does your laboratory have? (Count both sides of lab bays.)<p>
                         <input type="number" id="num_entrances" name="num_entrances" value="{{ request.form.num_entrances }}">
                     </div>
                 </div>

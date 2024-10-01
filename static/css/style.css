@@ -25,6 +25,7 @@ fieldset {
     border-radius: 10px;
     padding: 10px;
     background-color: #F5F5F5;
+    width: 100%;
 }
 
 /* Legend styling */
@@ -39,7 +40,17 @@ legend {
 }
 
 /* Label styling */
-label {
+
+label{
+    margin-left: 10px;
+    margin-right: 20px;
+    font-size: 14pt;
+}
+
+.pi_fieldset label,
+.primary_fieldset label,
+.alternate_fieldset label,
+.lab_info_fieldset label {
     display: block;
     width: 200px;
     font-size: 16px;
@@ -48,15 +59,31 @@ label {
     margin-left: 8px;
 }
 
+@media (max-width: 550px){
+    .pi_fieldset label,
+    .primary_fieldset label,
+    .alternate_fieldset label,
+    .lab_info_fieldset label {
+        display: block;
+        width: 110px;
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        margin-left: 8px;
+}
+
+}
+
 /* Form row styling */
 .form-row {
-    margin-bottom: 20px; 
+    margin-bottom: 30px; 
     display: flex;
     align-items: center;
 }
 
 .sub-form-row {
-    margin-left: 20px;
+    margin-left: 30px;
+    display: flex;
 }
 
 
@@ -76,6 +103,18 @@ textarea {
     transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transitions for focus state */
 }
 
+/* Styles for screen widths below 450px */
+@media (max-width: 450px) {
+    input[type="text"],
+    input[type="number"],
+    input[type="tel"],
+    textarea {
+        width: 220px;               /* Make the input fields take up the full width of their container */
+        font-size: 14px;           /* Reduce font size for smaller screens */
+        padding: 8px;              /* Adjust padding for smaller screens */
+    }
+}
+
 /* Style when the input fields are focused */
 input[type="text"]:focus,
 input[type="number"]:focus,
@@ -89,7 +128,7 @@ textarea:focus {
 /* Additional styles specific to textarea fields */
 textarea {
     min-height: 100px;             /* Minimum height for textarea */
-    resize: vertical;              /* Allow vertical resizing */
+    resize: both;              /* Allow vertical resizing */
 }
 
 /* Remove spin buttons from number inputs */
@@ -106,8 +145,8 @@ input[type="radio"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     margin: 0;
     cursor: pointer;
     border: 2px solid #00274C;     /* Dark blue border */
@@ -157,18 +196,6 @@ input[type="radio"]:checked::before {
     transform: translate(-50%, -50%); /* Centered */
 }
 
-/* Clear button styled as a hyperlink */
-.clear-button {
-    background: none;
-    border: none;
-    color: navy;
-    text-decoration: underline;
-    cursor: pointer;
-    font-size: inherit;
-    padding: 0;
-    position: absolute;
-    right: 10px;
-}
 
 /* Styling for grid container and items */
 .grid-container {
@@ -181,7 +208,7 @@ input[type="radio"]:checked::before {
 .grid-item {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 20px;  /* Add some space between each grid item */
 }
 
@@ -222,7 +249,7 @@ input[type="radio"]:checked::before {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 400px) {
     .grid-container {
         grid-template-columns: 1fr;
     }

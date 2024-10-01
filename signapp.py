@@ -14,7 +14,7 @@ buildings = [
 
 @app.route('/')
 def home():
-    return render_template('index.html', title='EHS Sign Form', buildings=buildings)
+    return render_template('index.html', buildings=buildings)
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -75,7 +75,7 @@ def submit():
         'radioactive': '01radioactive.svg',
         'xray': '02xray.svg',
         'laser': '03laser.svg',
-        'biohazard': '04BSL2.svg',
+        'biohazard': '04biohazard.svg',
         'cancer': '05cancer.svg',
         'toxic': '06toxic.svg',
         'reproductive': '07reproductive_toxin.svg',
