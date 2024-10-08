@@ -276,14 +276,14 @@ def submit():
 
     if biohazard_selected:
         if orientation == 'vertical':
-            template = 'vert_bio.html'  # Use your vertical biohazard template
+            template = 'vert_bio.html'  # Use vertical biohazard template
         else:
-            template = 'horiz_bio.html'  # Use your horizontal biohazard template
+            template = 'horiz_bio.html'  # Use horizontal biohazard template
     else:
         if orientation == 'vertical':
-            template = 'vertical.html'  # Use your standard vertical template
+            template = 'vertical.html'  # Use standard vertical template
         else:
-            template = 'horizontal.html'  # Use your standard horizontal template
+            template = 'horizontal.html'  # Use standard horizontal template
 
     html = render_template(template, **context)
 
