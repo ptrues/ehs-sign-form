@@ -3,7 +3,7 @@
 
 ## Overview
 
-The EHS Sign Form application is a web-based tool for generating laboratory hazard information signs. Users can fill out a form to input contact information, select laboratory hazards, and generate a PDF sign in either horizontal or vertical orientation.
+The EHS Sign Form application is intended as a web-based tool for generating laboratory hazard information signs. Users can fill out a form to input contact information, select laboratory hazards, and generate a PDF sign. The application can be integrated with EHS systems for accurate and efficient rollout of required signage.
 
 ## Features
 
@@ -124,30 +124,35 @@ ehs-sign-form/
 │   ├── css/
 │   │   ├── horizontalstyle.css
 │   │   ├── verticalstyle.css
+│   │   ├── horiz_bio_style.html
+│   │   └── vert_bio_style.html
 │   └── images/
 │       ├── 00EMPTY.png
 │       ├── 01radioactive.png
-│       ├── ... (other hazard icons)
+│       ├── 01radioactive.svg
+│       ├── ... (13 other hazard icons)
 │
 ├── templates/
 │   ├── index.html
 │   ├── horizontal.html
-│   └── vertical.html
+│   ├── vertical.html
+│   ├── horiz_bio.html
+│   └── vert_bio.html
 │
 ├── venv/ (virtual environment)
 │
-├── app.py
+├── signapp.py
 ├── requirements.txt
 └── README.md
 ```
 
-## Requirements File
-
-Here’s an example `requirements.txt` file that lists the necessary Python packages:
+## Requirements 
 
 ```
 Flask==3.0.3
 WeasyPrint==62.3
+PyInstaller==6.9.0
+
 ```
 
 ## Contact Information
