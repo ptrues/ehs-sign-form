@@ -23,41 +23,41 @@ def submit():
     # Extract form data for contacts
     PI_first_name = request.form.get('PI_first_name')
     PI_last_name = request.form.get('PI_last_name')
-    PI_after_hours = request.form.get('PI_phone')  # Corrected mapping
-    PI_phone = request.form.get('PI_after_hours')  # Corrected mapping
+    PI_emergency_phone = request.form.get('PI_phone')  # Corrected mapping
+    PI_regular_phone = request.form.get('PI_after_hours')  # Corrected mapping
 
     primary_first_name = request.form.get('primary_first_name')
     primary_last_name = request.form.get('primary_last_name')
-    primary_after_hours = request.form.get('primary_after_hours')
-    primary_phone = request.form.get('primary_phone')
+    primary_emergency_phone = request.form.get('primary_after_hours')
+    primary_regular_phone = request.form.get('primary_phone')
 
     alternate_first_name = request.form.get('alternate_first_name')
     alternate_last_name = request.form.get('alternate_last_name')
-    alternate_after_hours = request.form.get('alternate_phone')  # Corrected mapping
-    alternate_phone = request.form.get('alternate_after_hours')  # Corrected mapping
+    alternate_emergency_phone = request.form.get('alternate_phone')  # Corrected mapping
+    alternate_regular_phone = request.form.get('alternate_after_hours')  # Corrected mapping
 
     # Initialize a set to track unique phone numbers
     unique_phones = set()
 
     # Assign phone numbers, prioritizing emergency phones
-    primary_phone_output = primary_after_hours
-    unique_phones.add(primary_after_hours)
+    primary_phone_output = primary_emergency_phone
+    unique_phones.add(primary_emergency_phone)
 
-    if PI_after_hours and PI_after_hours not in unique_phones:
-        PI_phone_output = PI_after_hours
-        unique_phones.add(PI_after_hours)
+    if PI_emergency_phone and PI_emergency_phone not in unique_phones:
+        PI_phone_output = PI_emergency_phone
+        unique_phones.add(PI_emergency_phone)
     else:
-        PI_phone_output = PI_phone
-        if PI_phone:
-            unique_phones.add(PI_phone)
+        PI_phone_output = PI_regular_phone
+        if PI_regular_phone:
+            unique_phones.add(PI_regular_phone)
 
-    if alternate_after_hours and alternate_after_hours not in unique_phones:
-        alternate_phone_output = alternate_after_hours
-        unique_phones.add(alternate_after_hours)
+    if alternate_emergency_phone and alternate_emergency_phone not in unique_phones:
+        alternate_phone_output = alternate_emergency_phone
+        unique_phones.add(alternate_emergency_phone)
     else:
-        alternate_phone_output = alternate_phone
-        if alternate_phone:
-            unique_phones.add(alternate_phone)
+        alternate_phone_output = alternate_regular_phone
+        if alternate_regular_phone:
+            unique_phones.add(alternate_regular_phone)
 
     # Validate at least two unique contact numbers
     if len(unique_phones) < 2:

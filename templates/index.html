@@ -522,14 +522,14 @@
                         </div>
                     </div>
                     <div class="multi-sign-grid-item">
-                        <p>How many signs do you need? (Count both sides of lab bays.)</p>
+                        <p>How many signs do you need? (If lab bay, count sign holders on both sides of the bay.)</p>
                         <input type="number" id="num_signs" name="num_signs" value="{{ request.form.num_signs }}">
                     </div>
                 </div>
         
                 <div id="signFieldsNo" class="multi-sign-follow-up" style="display: none;">
                     <div class="multi-sign-grid-item">
-                        <p>How many entrances does your laboratory have? (Count both sides of lab bays.)<p>
+                        <p>How many entrances does the room or bay have? (Four entrances for a full lab bay. Two entrances for a half bay.)<p>
                         <input type="number" id="num_entrances" name="num_entrances" value="{{ request.form.num_entrances }}">
                     </div>
                 </div>
