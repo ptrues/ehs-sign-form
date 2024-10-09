@@ -10,7 +10,6 @@ The EHS Sign Form application is intended as a web-based tool for generating lab
 - Input and manage contact information for primary, alternate, and principal investigator contacts.
 - Select laboratory hazards from a predefined list.
 - Generate a PDF of the sign in horizontal or vertical orientation.
-- Automatically adjust text formatting and handle form validation.
 
 ## Dependencies
 
