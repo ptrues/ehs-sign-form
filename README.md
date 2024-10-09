@@ -14,7 +14,7 @@ The EHS Sign Form application is intended as a web-based tool for generating lab
 
 ## Dependencies
 
-The application relies on several Python packages and external libraries to function correctly:
+The application relies on a few Python packages and external libraries to function correctly:
 
 - Flask
 - WeasyPrint
