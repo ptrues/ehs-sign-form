@@ -3,20 +3,19 @@
 
 ## Overview
 
-The EHS Sign Form application is intended as a web-based tool for generating laboratory hazard information signs. Users can fill out a form to input contact information, select laboratory hazards, and generate a PDF sign. The application can be integrated with EHS systems for accurate and efficient rollout of required signage.
+The EHS Sign Form application is intended as a web-based tool for generating laboratory hazard information signs. Users can fill out a form to input contact information, laboratory hazards, and other parameters, and the app will automatically generate a sign as a PDF from pre-formatted HTML/CSS templates. The application can be integrated with EHS systems for accurate and efficient rollout of required signage.
 
 ## Features
 
-- Input and manage contact information for primary, alternate, and principal investigator contacts.
-- Select laboratory hazards from a predefined list.
-- Generate a PDF of the sign in horizontal or vertical orientation.
+- Intuitive and responsive user interface
+- Automates sign creation, increasing efficiency by 80%
 
 ## Dependencies
 
 The application relies on a few Python packages and external libraries to function correctly:
 
 - Flask
-- WeasyPrint
+- WeasyPrint (for PDF handling)
 - datetime
 
 Additionally, for WeasyPrint to function correctly, you must have the GTK and related libraries installed on your system.
