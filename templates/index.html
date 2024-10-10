@@ -586,17 +586,13 @@
             }
         }
     
-        // Function to capitalize the first letter of each word
-        function capitalizeFirstLetter(input) {
-            input.value = input.value.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
-        }
-    
         // Function to toggle the visibility of sign fields
         function toggleSignFields() {
             var yesRadio = document.getElementById('signs_yes');
             var signFieldsYes = document.getElementById('signFieldsYes');
             var signFieldsNo = document.getElementById('signFieldsNo');
     
+            // Toggle visibility based on the "yes" or "no" selection
             if (yesRadio.checked) {
                 signFieldsYes.style.display = 'block';
                 signFieldsNo.style.display = 'none';
@@ -604,52 +600,6 @@
                 signFieldsYes.style.display = 'none';
                 signFieldsNo.style.display = 'block';
             }
-        }
-    
-        // Function to toggle the visibility of custom sign message
-        function toggleCustomSignMessage() {
-            var yesOption = document.getElementById('shared_yes');
-            var message = document.getElementById('customSignMessage');
-            var textarea = document.getElementById('additionalInfo');
-            var submitMessage = document.getElementById('submitMessage');
-
-            if (yesOption.checked) {
-                message.style.display = 'block';
-                textarea.style.display = 'block';
-                submitMessage.style.display = 'block';
-            } else {
-                message.style.display = 'none';
-                textarea.style.display = 'none';
-                submitMessage.style.display = 'none';
-            }
-        }
-
-    
-        // Function to highlight error fields
-        function highlightErrorFields() {
-            const PI_phone = document.getElementById('PI_phone');
-            const PI_after_hours = document.getElementById('PI_after_hours');
-            const primary_phone = document.getElementById('primary_phone');
-            const primary_after_hours = document.getElementById('primary_after_hours');
-    
-            // Remove existing error class
-            PI_phone.classList.remove('error');
-            PI_after_hours.classList.remove('error');
-            primary_phone.classList.remove('error');
-            primary_after_hours.classList.remove('error');
-    
-            // Add error class to fields with duplicate phone numbers
-            let phoneNumbers = {};
-            [PI_phone, PI_after_hours, primary_phone, primary_after_hours].forEach(field => {
-                if (field.value) {
-                    if (phoneNumbers[field.value]) {
-                        phoneNumbers[field.value].forEach(f => f.classList.add('error'));
-                        field.classList.add('error');
-                    } else {
-                        phoneNumbers[field.value] = [field];
-                    }
-                }
-            });
         }
     
         // Function to toggle the visibility of biological sections
@@ -660,6 +610,7 @@
             var vaccinesRequired = document.getElementById('vaccines-required');
             var medicalSurveillance = document.getElementById('medical-surveillance');
     
+            // Show or hide sections based on the biohazard checkbox
             if (biohazardCheckbox.checked) {
                 biolevel.style.display = 'block';
                 bioAgents.style.display = 'block';
@@ -673,16 +624,26 @@
             }
         }
     
+        // Function to toggle the visibility of custom sign message for shared spaces
+        function toggleCustomSignMessage() {
+            var yesOption = document.getElementById('shared_yes');
+            var message = document.getElementById('customSignMessage');
+            var textarea = document.getElementById('additionalInfo');
+            var submitMessage = document.getElementById('submitMessage');
+    
+            // Show or hide the custom sign message based on "shared" option
+            if (yesOption.checked) {
+                message.style.display = 'block';
+                textarea.style.display = 'block';
+                submitMessage.style.display = 'block';
+            } else {
+                message.style.display = 'none';
+                textarea.style.display = 'none';
+                submitMessage.style.display = 'none';
+            }
+        }
+    
         document.addEventListener('DOMContentLoaded', function() {
-            // Add event listeners for name inputs to capitalize first letter
-            document.getElementById('primary_first_name').addEventListener('input', function() {
-                capitalizeFirstLetter(this);
-            });
-    
-            document.getElementById('primary_last_name').addEventListener('input', function() {
-                capitalizeFirstLetter(this);
-            });
-    
             // Add event listeners for phone inputs to format phone numbers
             document.getElementById('PI_phone').addEventListener('input', function() {
                 formatPhoneNumber(this);
@@ -716,9 +677,9 @@
             document.getElementById('signs_no').addEventListener('change', toggleSignFields);
     
             // Call functions on page load to handle pre-checked states
-            toggleSignFields();
-            toggleCustomSignMessage();
-            toggleBiologicalSections();
+            toggleSignFields();  // Ensure sign fields are displayed correctly on page load
+            toggleCustomSignMessage();  // Ensure shared room message is handled correctly on page load
+            toggleBiologicalSections();  // Ensure biological sections are displayed if biohazard is checked
     
             // Handle error messages on page load
             var errorMessage = "{{ error_message }}";
@@ -730,34 +691,11 @@
             // Set placeholder text for additional info textarea
             var textarea = document.getElementById('additionalInfo');
             textarea.placeholder = "Additional PI: Alice Smith (555) 123-4567\nAlternate contact: Bob Johnson (555) 987-6543";
-    
-            // Filtering and highlighting for the building datalist
-            const buildingInput = document.getElementById('building');
-            const dataList = document.getElementById('buildings');
-            const originalOptions = Array.from(dataList.options);
-    
-            buildingInput.addEventListener('input', function() {
-                const inputValue = buildingInput.value.toLowerCase();
-                dataList.innerHTML = ''; // Clear existing options
-    
-                const filteredOptions = originalOptions.filter(option => 
-                    option.value.toLowerCase().startsWith(inputValue)
-                );
-    
-                const maxOptionsToShow = 10;
-                filteredOptions.slice(0, maxOptionsToShow).forEach(option => {
-                    const highlightedText = option.value.replace(
-                        new RegExp(`^${inputValue}`, 'i'),
-                        (match) => `<span class="highlight">${match}</span>`
-                    );
-                    const newOption = document.createElement('option');
-                    newOption.value = option.value;
-                    newOption.innerHTML = highlightedText;
-                    dataList.appendChild(newOption);
-                });
-            });
         });
     </script>
+    
+    
+    
     
     
     
