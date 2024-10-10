@@ -46,7 +46,11 @@
         <div class="contact-table">
             <div class="contact-column">
                 <div>Primary Contact: <span>{{ primary_contact }}, {{ primary_phone }}</span></div>
-                <div>Alternate Contact: <span>{{ alternate_contact }}, {{ alternate_phone }}</span></div>
+                <div>Alternate Contact: 
+                    {% if alternate_contact and alternate_phone %}
+                        <span>{{ alternate_contact }}, {{ alternate_phone }}</span>
+                    {% endif %}
+                </div>
                 <div>Principal Investigator: <span>{{ PI_contact }}, {{ PI_phone }}</span></div>
                 <div>Department: <span>{{ department }}</span></div>
                 <div>Date Updated: <span>{{ date_updated }}</span></div>
