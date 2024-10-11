@@ -310,8 +310,7 @@ input[type="radio"]:checked::before {
 .bsl-container .form-row {
     display: inline-flex; /* Align radio button and label in a single line */
     align-items: center; /* Center the items vertically */
-    margin: 0; /* Remove margin */
-    padding: 0; /* Remove padding */
+    padding: 0; 
 }
 
 .bsl-container .form-row label {
@@ -324,7 +323,9 @@ input[type="radio"]:checked::before {
     text-overflow: ellipsis; /* Add ellipsis if text overflows */
 }
 
-
+#bio-agents .form-row{
+    margin-top: 20px;
+}
 
 .orientation-options {
     margin-left: 0;
@@ -336,10 +337,14 @@ input[type="radio"]:checked::before {
     white-space: nowrap; /* Prevent text wrapping */
 }
 
-/* Container for the shared-space-question to use flexbox */
+.shared-space-fieldset{
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+}
+
 .shared-space-question {
     display: flex;
-    align-items: center;  /* Align items vertically centered */
+    align-items: center;  
     margin-top: 16px;
     gap: 10px;            /* Space between elements */
 }

@@ -94,7 +94,7 @@ span {
     text-align: center;
     width: 100%;
     position: absolute;
-    bottom: 5.4in;
+    bottom: 5.45in;
     left: 50%;
     transform: translateX(-50%);
     text-wrap: nowrap;
@@ -140,7 +140,7 @@ span {
     text-align: center;
     width: 100%;
     position: absolute;
-    bottom: 3.9in;
+    bottom: 3.95in;
     left: 50%;
     transform: translateX(-50%);
     text-wrap: nowrap;
@@ -198,8 +198,8 @@ span {
     font-weight: 800;
     line-height: normal;
     letter-spacing: 0.058px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
     
 }
 
