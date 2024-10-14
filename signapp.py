@@ -23,8 +23,8 @@ def submit():
     # Extract form data for contacts
     PI_first_name = request.form.get('PI_first_name')
     PI_last_name = request.form.get('PI_last_name')
-    PI_emergency_phone = request.form.get('PI_phone')  # Corrected mapping
-    PI_regular_phone = request.form.get('PI_after_hours')  # Corrected mapping
+    PI_emergency_phone = request.form.get('PI_phone')  
+    PI_regular_phone = request.form.get('PI_after_hours') 
 
     primary_first_name = request.form.get('primary_first_name')
     primary_last_name = request.form.get('primary_last_name')
@@ -33,8 +33,8 @@ def submit():
 
     alternate_first_name = request.form.get('alternate_first_name')
     alternate_last_name = request.form.get('alternate_last_name')
-    alternate_emergency_phone = request.form.get('alternate_phone')  # Corrected mapping
-    alternate_regular_phone = request.form.get('alternate_after_hours')  # Corrected mapping
+    alternate_emergency_phone = request.form.get('alternate_phone')  
+    alternate_regular_phone = request.form.get('alternate_after_hours')  
 
     # Initialize a set to track unique phone numbers
     unique_phones = set()
