@@ -9,13 +9,13 @@ The EHS Sign Form application is intended as a web-based tool for generating lab
 
 - Intuitive and responsive user interface
 - Automates sign creation, increasing efficiency by 80%
-- 
+  
 ## Usage
 
 1. **Run the Application**
 
 
-   ```
+   
    Run the application using the `python` command:
 
    ```
